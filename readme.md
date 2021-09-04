@@ -39,6 +39,20 @@ which indicates various types of
 [Program Coverage properties](https://www.eclemma.org/userdoc/coverageproperties.html) for the execution of the test
 your ran.
 
+### Building a jar file
+
+Builds a jar containing **all dependencies** of the project
+
+```
+$ ./gradlew shadowJar
+```
+
+Builds a jar containing **only the application classes** from the project
+
+```
+$ ./gradlew jar
+```
+
 ## Property-Based Testing with [JUnit-Quickcheck](https://github.com/pholser/junit-quickcheck)
 
 Property-Based Testing allows you to test the programs you write by feeding a program randomly generated inputs.

@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
 
-    // Builds fat jat with `./gradlew shadowJar`
+    // Builds fat jar with `./gradlew shadowJar`
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
