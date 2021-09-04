@@ -11,6 +11,8 @@ public interface Graph<T> {
 
   public Edge<T> addEdge(Vertex<T> source, Vertex<T> target);
 
+  public Edge<T> addWeightedEdge(Vertex<T> source, Vertex<T> target, Double weight);
+
   public boolean containsVertex(Vertex<T> vertex);
 
   public boolean containsVertex(String vertexName);

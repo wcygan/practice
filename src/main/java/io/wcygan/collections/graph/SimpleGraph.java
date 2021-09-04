@@ -39,7 +39,16 @@ public class SimpleGraph<T> implements Graph<T> {
       return this.edges.get(source).get(target);
     }
 
-    Edge<T> edge = new Edge<>(source, target, DEFAULT_WEIGHT);
+    return addWeightedEdge(source, target, DEFAULT_WEIGHT);
+  }
+
+  @Override
+  public Edge<T> addWeightedEdge(Vertex<T> source, Vertex<T> target, Double weight) {
+    if (this.edges.containsKey(source) && this.edges.get(source).containsKey(target)) {
+      return this.edges.get(source).get(target);
+    }
+
+    Edge<T> edge = new Edge<>(source, target, weight);
     this.edges.putIfAbsent(source, new HashMap<>());
     this.edges.get(source).put(target, edge);
     return edge;

@@ -18,7 +18,7 @@ public class ShortestPath {
       graph.outgoingEdgesOf(u).forEach(edge -> relax(edge, waiting));
     }
 
-    return extractPredecessors(source, destination);
+    return extractPredecessors(graph, source, destination);
   }
 
   private static <T> void initializeSingleSource(Graph<T> graph, Vertex<T> source) {
@@ -46,14 +46,17 @@ public class ShortestPath {
     }
   }
 
-  private static <T> Graph<T> extractPredecessors(Vertex<T> source, Vertex<T> destination) {
+  private static <T> Graph<T> extractPredecessors(
+      Graph<T> parent, Vertex<T> source, Vertex<T> destination) {
     Graph<T> shortestPath = new SimpleGraph<>();
     Vertex<T> curr = destination;
 
     while (!curr.equals(source)) {
-      Vertex<T> from = shortestPath.addVertex(curr.getPred());
-      Vertex<T> to = shortestPath.addVertex(curr);
-      shortestPath.addEdge(from, to);
+      Vertex<T> u = shortestPath.addVertex(curr.getPred());
+      Vertex<T> v = shortestPath.addVertex(curr);
+      double weight =
+          parent.getEdge(parent.getVertex(u.getName()), parent.getVertex(v.getName())).weight();
+      shortestPath.addWeightedEdge(u, v, weight);
       curr = curr.getPred();
     }
 

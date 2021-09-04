@@ -10,7 +10,7 @@ public class App {
   public static final Integer MAX_VALUE = 1000;
 
   public static void main(String[] args) {
-    System.out.println("Hello World!");
+    LOGGER.info("Hello, World!");
   }
 
   @VisibleForTesting
