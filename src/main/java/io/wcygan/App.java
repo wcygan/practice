@@ -1,35 +1,34 @@
 package io.wcygan;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class App {
-  private static final Integer MAX_VALUE = 1000;
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+  public static final Integer MAX_VALUE = 1000;
 
   public static void main(String[] args) {
     System.out.println("Hello World!");
   }
 
   @VisibleForTesting
-  public static String concat(String... args) {
-    return String.join("", args);
-  }
-
-  @VisibleForTesting
   public static void enterMaze(int v) {
     if (isEqualToOne(v)) {
-      System.out.println("Hello!");
+      LOGGER.debug("Hello!");
     } else {
       if (even(v)) {
         if (greaterThanHalf(v)) {
-          System.out.println("Bonjour!");
+          LOGGER.debug("Bonjour!");
         } else {
-          System.out.println("Aloha!");
+          LOGGER.debug("Aloha!");
         }
       } else {
         if (greaterThanHalf(v)) {
-          System.out.println("Namaste!");
+          LOGGER.debug("Namaste!");
         } else {
-          System.out.println("Guten tag!");
+          LOGGER.debug("Guten tag!");
         }
       }
     }

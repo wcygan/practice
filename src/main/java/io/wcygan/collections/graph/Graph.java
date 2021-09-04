@@ -11,11 +11,17 @@ public interface Graph<T> {
 
   public boolean containsVertex(Vertex<T> vertex);
 
+  public boolean containsVertex(String vertexName);
+
   public boolean containsEdge(Vertex<T> source, Vertex<T> target);
 
   public default boolean containsEdge(Edge<T> edge) {
     return containsEdge(edge.source(), edge.target());
   }
+
+  public Vertex<T> getVertex(String name);
+
+  public Edge<T> getEdge(Vertex<T> source, Vertex<T> target);
 
   public Set<Edge<T>> incomingEdgesOf(Vertex<T> vertex);
 
