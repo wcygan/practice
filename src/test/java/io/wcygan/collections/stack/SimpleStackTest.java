@@ -1,7 +1,5 @@
-package io.wcygan.data_structures.stack;
+package io.wcygan.collections.stack;
 
-import io.wcygan.abstract_data_types.Stack;
-import io.wcygan.data_structures.SimpleStack;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

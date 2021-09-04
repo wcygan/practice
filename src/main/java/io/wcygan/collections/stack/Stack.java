@@ -1,6 +1,7 @@
-package io.wcygan.abstract_data_types;
+package io.wcygan.collections.stack;
 
 public interface Stack<T> {
+
   public void push(T data);
 
   public T pop();
