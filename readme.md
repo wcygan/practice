@@ -27,6 +27,18 @@ with:
 $ ./gradlew test --tests SimpleStackTest
 ```
 
+Further, we can a **single** test by specifying its fully qualified path like so:
+
+```
+$ gradle test --tests io.wcygan.data_structures.stack.SimpleStackTest.addMany
+```
+
+Running any type of test should generate a [JaCoCo](https://github.com/jacoco/jacoco) report file
+at `build/jacocoHtml/index.html`
+which indicates various types of
+[Program Coverage properties](https://www.eclemma.org/userdoc/coverageproperties.html) for the execution of the test
+your ran.
+
 ## References
 
 I'm using the following material as a reference:
