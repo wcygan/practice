@@ -20,6 +20,15 @@ public class SimpleStackTest {
   }
 
   @Test
+  public void peek() {
+    Stack<Integer> stack = new SimpleStack<>();
+    stack.push(1);
+    int val = stack.peek();
+    assertEquals(1, stack.size());
+    assertEquals(1, val);
+  }
+
+  @Test
   public void addOneToStack() {
     Stack<Integer> stack = new SimpleStack<>();
     stack.push(999);
@@ -44,6 +53,6 @@ public class SimpleStackTest {
   }
 
   private static Stream<List<Integer>> provideDataForAddMany() {
-    return Stream.of(List.of(1), List.of(1, 2, 3), List.of(1, 2, 3, 3, 3, 3, 3), List.of());
+    return Stream.of(List.of(), List.of(1), List.of(1, 2, 3), List.of(1, 2, 3, 3, 3, 3, 3));
   }
 }
