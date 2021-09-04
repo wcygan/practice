@@ -20,7 +20,7 @@ $ ./gradlew test --tests <TestClassName>
 ```
 
 For example, I can run the tests
-at [SimpleStackTest](https://github.com/wcygan/Practice/blob/459f16c3e3a942447f58fb5c70772a32d3a6efa9/src/test/java/io/wcygan/data_structures/stack/SimpleStackTest.java#L9)
+at [SimpleStackTest](https://github.com/wcygan/Practice/blob/master/src/test/java/io/wcygan/data_structures/stack/SimpleStackTest.java)
 with:
 
 ```
