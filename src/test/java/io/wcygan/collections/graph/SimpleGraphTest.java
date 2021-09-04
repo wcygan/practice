@@ -29,10 +29,10 @@ public class SimpleGraphTest {
     assertTrue(graph.containsVertex(v3));
     assertTrue(graph.containsEdge(e1));
     assertTrue(graph.containsEdge(e2));
-    assertEquals(e1.getSource(), v1);
-    assertEquals(e1.getTarget(), v2);
-    assertEquals(e2.getSource(), v1);
-    assertEquals(e2.getTarget(), v3);
+    assertEquals(e1.source(), v1);
+    assertEquals(e1.target(), v2);
+    assertEquals(e2.source(), v1);
+    assertEquals(e2.target(), v3);
     assertEquals(Set.of(e1), graph.incomingEdgesOf(v2));
     assertEquals(Set.of(e2), graph.incomingEdgesOf(v3));
     assertEquals(Set.of(e1, e2), graph.outgoingEdgesOf(v1));

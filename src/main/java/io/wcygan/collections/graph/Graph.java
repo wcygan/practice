@@ -5,6 +5,8 @@ import java.util.Set;
 public interface Graph<T> {
   public Vertex<T> addVertex(T data);
 
+  public Vertex<T> addVertex(Vertex<T> vertex);
+
   public Vertex<T> addNamedVertex(T data, String name);
 
   public Edge<T> addEdge(Vertex<T> source, Vertex<T> target);

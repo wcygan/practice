@@ -17,6 +17,11 @@ public class SimpleGraph<T> implements Graph<T> {
   }
 
   @Override
+  public Vertex<T> addVertex(Vertex<T> vertex) {
+    return addNamedVertex(vertex.getData(), vertex.getName());
+  }
+
+  @Override
   public Vertex<T> addNamedVertex(T data, String name) {
     if (vertices.containsKey(name)) {
       return vertices.get(name);
@@ -35,8 +40,8 @@ public class SimpleGraph<T> implements Graph<T> {
     }
 
     Edge<T> edge = new Edge<>(source, target, DEFAULT_WEIGHT);
-    edges.putIfAbsent(source, new HashMap<>());
-    edges.get(source).put(target, edge);
+    this.edges.putIfAbsent(source, new HashMap<>());
+    this.edges.get(source).put(target, edge);
     return edge;
   }
 
