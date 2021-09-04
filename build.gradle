@@ -1,10 +1,14 @@
 plugins {
     id 'java'
     id 'jacoco'
+
+    // Builds fat jat with `./gradlew shadowJar`
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group 'io.wcygan'
 version '1.0-SNAPSHOT'
+
 
 repositories {
     mavenCentral()
