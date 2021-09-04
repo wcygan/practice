@@ -40,20 +40,23 @@ which indicates various types of
 your ran.
 
 ## Property-Based Testing with [JUnit-Quickcheck](https://github.com/pholser/junit-quickcheck)
-Property-Based Testing allows you to test the programs you write by feeding a program randomly generated inputs. 
+
+Property-Based Testing allows you to test the programs you write by feeding a program randomly generated inputs.
 See [Getting Started with JUnit-Quickcheck](https://pholser.github.io/junit-quickcheck/site/1.0/usage/getting-started.html)
 for more details.
 
 Once you've written a property-based test, you can execute it in isolation just as we did before:
+
 ```
-$ gradle test --tests io.wcygan.QuickCheckTest.testConcat
+$ gradle test --tests io.wcygan.QuickCheckTest.testMaze
 ```
 
-Additionally, this will generate a [JaCoCo](https://github.com/jacoco/jacoco) report file which represents the coverage observed
-during the execution of the property-based test.
+Additionally, this will generate a [JaCoCo](https://github.com/jacoco/jacoco) report file which represents the coverage
+observed during the execution of the property-based test.
 
-You can configure the execution of your property-based test using the elements of the [@Property annotation](https://pholser.github.io/junit-quickcheck/site/1.0/junit-quickcheck-core/apidocs/com/pholser/junit/quickcheck/Property.html).
-For example, you can write `@Property(trials = 10)` to have the test execute 10 times.
+You can configure the execution of your property-based test using the elements of
+the [@Property annotation](https://pholser.github.io/junit-quickcheck/site/1.0/junit-quickcheck-core/apidocs/com/pholser/junit/quickcheck/Property.html)
+. For example, you can write `@Property(trials = 10)` to have the test execute 10 times.
 
 ## References
 
