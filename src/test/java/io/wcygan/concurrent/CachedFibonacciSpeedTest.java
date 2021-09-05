@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigInteger;
-import java.time.Instant;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 public class CachedFibonacciSpeedTest {
 
@@ -24,8 +24,10 @@ public class CachedFibonacciSpeedTest {
   @Test
   public void cachedFibIsFaster() {
     AtomicReference<Long> finishLine = new AtomicReference<>(null);
-    Thread fast = new Thread(cachedFib(finishLine));
-    Thread slow = new Thread(regularFib(finishLine));
+    Thread fast =
+        new Thread(fib(() -> new FibonacciSequence().getFibonacciNumberCached(NUMBER), finishLine));
+    Thread slow =
+        new Thread(fib(() -> new FibonacciSequence().getFibonacciNumber(NUMBER), finishLine));
 
     slow.start();
     fast.start();
@@ -40,22 +42,10 @@ public class CachedFibonacciSpeedTest {
     Assertions.assertEquals(fast.getId(), finishLine.get());
   }
 
-
-  private Runnable cachedFib(AtomicReference<Long> finishLine) {
+  private Runnable fib(Supplier<BigInteger> supplier, AtomicReference<Long> finishLine) {
     return () -> {
-      BigInteger answer = new FibonacciSequence().getFibonacciNumberCached(NUMBER);
-      Assertions.assertEquals(ANSWER, answer);
+      Assertions.assertEquals(ANSWER, supplier.get());
       finishLine.compareAndExchange(null, Thread.currentThread().getId());
-      LOGGER.info("Fast done at " + Instant.now());
-    };
-  }
-
-  private Runnable regularFib(AtomicReference<Long> finishLine) {
-    return () -> {
-      BigInteger answer = new FibonacciSequence().getFibonacciNumber(NUMBER);
-      Assertions.assertEquals(ANSWER, answer);
-      finishLine.compareAndExchange(null, Thread.currentThread().getId());
-      LOGGER.info("Slow done at " + Instant.now());
     };
   }
 }

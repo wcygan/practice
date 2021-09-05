@@ -9,6 +9,8 @@ import java.util.function.Supplier;
  *
  * <p>To see this in action, we can compare the result of {@link LazyOptional#lazy()} with the
  * result of {@link LazyOptional#eager()} to verify that they differ
+ *
+ * For more information, see https://www.baeldung.com/java-optional-or-else-vs-or-else-get
  */
 public class LazyOptional {
 
