@@ -1,4 +1,4 @@
-package io.wcygan.helpful;
+package io.wcygan.gotchas;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

@@ -1,4 +1,4 @@
-package io.wcygan.helpful;
+package io.wcygan.gotchas;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  * <p>To see this in action, we can compare the result of {@link LazyOptional#lazy()} with the
  * result of {@link LazyOptional#eager()} to verify that they differ
  *
- * For more information, see https://www.baeldung.com/java-optional-or-else-vs-or-else-get
+ * <p>For more information, see https://www.baeldung.com/java-optional-or-else-vs-or-else-get
  */
 public class LazyOptional {
 
