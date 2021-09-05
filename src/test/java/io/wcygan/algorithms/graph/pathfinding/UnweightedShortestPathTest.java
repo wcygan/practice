@@ -28,7 +28,7 @@ public class UnweightedShortestPathTest {
     assertEquals(expected.vertexSet().size(), actual.vertexSet().size());
     assertEquals(expected.edgeSet().size(), actual.edgeSet().size());
 
-    Helpers.validateGraphs(actual, expected, start, end, expectedEdges.length);
+    Helpers.validateShortestPath(actual, expected, start, end, expectedEdges.length);
   }
 
   private static Stream<Arguments> unweightedShortestPathGraphProvider() {
