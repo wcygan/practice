@@ -39,11 +39,9 @@ public class WeightedShortestPathTest {
             // The ending vertex
             3,
             // The edges in the graph
-            new Integer[][] {
-              {1, 2, 10}, {2, 3, 10},
-            },
+            new Integer[][] {{1, 2, 1}, {2, 3, 1}, {1, 3, 10}},
             // The expected path
-            new Integer[][] {{1, 2, 10}, {2, 3, 10}}),
+            new Integer[][] {{1, 2, 1}, {2, 3, 1}}),
         Arguments.of(
             // The starting vertex
             1,
