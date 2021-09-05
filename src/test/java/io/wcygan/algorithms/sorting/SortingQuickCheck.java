@@ -22,10 +22,6 @@ public class SortingQuickCheck {
   private void verifySort(Sorter<Integer> sorter, List<Integer> expected, List<Integer> actual) {
     Collections.shuffle(actual);
     sorter.sort(actual);
-    verifyEquality(expected, actual);
-  }
-
-  private void verifyEquality(List<Integer> a, List<Integer> b) {
-    Assertions.assertEquals(a, b);
+    Assertions.assertEquals(expected, actual);
   }
 }
