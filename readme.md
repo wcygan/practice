@@ -59,10 +59,12 @@ Property-Based Testing allows you to test the programs you write by feeding a pr
 See [Getting Started with JUnit-Quickcheck](https://pholser.github.io/junit-quickcheck/site/1.0/usage/getting-started.html)
 for more details.
 
-Once you've written a property-based test, you can execute it in isolation just as we did before:
+Once you've written a property-based test (like
+[SortingQuickCheck](https://github.com/wcygan/Practice/blob/master/src/test/java/io/wcygan/algorithms/sorting/SortingQuickCheck.java))
+you can execute it in isolation just as we did before:
 
 ```
-$ ./gradlew test --tests io.wcygan.QuickCheckTest.testMaze
+$ ./gradlew test --tests io.wcygan.algorithms.sorting.SortingQuickCheck.testSortingAlgorithms
 ```
 
 Additionally, this will generate a [JaCoCo](https://github.com/jacoco/jacoco) report file which represents the coverage
