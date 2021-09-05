@@ -22,7 +22,7 @@ public class FibonacciSequence {
     }
   }
 
-  public static BigInteger getFibonacciNumber(int n) {
+  public BigInteger getFibonacciNumber(int n) {
     if (n == 0) {
       return BigInteger.ZERO;
     } else if (n == 1) {

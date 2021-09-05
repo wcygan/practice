@@ -13,9 +13,8 @@ public class FibonacciSequenceTest {
 
   @Property(trials = 25)
   public void testFibonacciSequence(@InRange(minInt = 1, maxInt = 20) int n) {
-    FibonacciSequence fib = new FibonacciSequence();
-    BigInteger a = fib.getFibonacciNumberCached(n);
-    BigInteger b = FibonacciSequence.getFibonacciNumber(n);
+    BigInteger a = new FibonacciSequence().getFibonacciNumberCached(n);
+    BigInteger b = new FibonacciSequence().getFibonacciNumber(n);
     Assertions.assertEquals(a, b);
   }
 }
