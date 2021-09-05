@@ -20,17 +20,17 @@ $ ./gradlew test --tests <TestClassName>
 ```
 
 For example, I can run the tests
-at [SimpleStackTest](https://github.com/wcygan/Practice/blob/master/src/test/java/io/wcygan/data_structures/stack/SimpleStackTest.java)
+at [WeightedShortestPathTest](https://github.com/wcygan/Practice/blob/master/src/test/java/io/wcygan/algorithms/graph/pathfinding/WeightedShortestPathTest.java)
 with:
 
 ```
-$ ./gradlew test --tests SimpleStackTest
+$ ./gradlew test --tests WeightedShortestPathTest
 ```
 
 Further, we can a **single** test by specifying its fully qualified path like so:
 
 ```
-$ gradle test --tests io.wcygan.data_structures.stack.SimpleStackTest.addMany
+$ ./gradlew test --tests io.wcygan.algorithms.graph.pathfinding.WeightedShortestPathTest.testWeightedShortestPath
 ```
 
 Running any type of test should generate a [JaCoCo](https://github.com/jacoco/jacoco) report file
@@ -62,7 +62,7 @@ for more details.
 Once you've written a property-based test, you can execute it in isolation just as we did before:
 
 ```
-$ gradle test --tests io.wcygan.QuickCheckTest.testMaze
+$ ./gradlew test --tests io.wcygan.QuickCheckTest.testMaze
 ```
 
 Additionally, this will generate a [JaCoCo](https://github.com/jacoco/jacoco) report file which represents the coverage
