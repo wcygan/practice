@@ -2,6 +2,13 @@
 
 Practicing Data Structures, Algorithms, Concurrency, and more!
 
+## Table of Contents
+
+- **[Build and Run](#build-and-run)**<br>
+- **[Property-Based Testing with JUnit-Quickcheck](#property-based-testing-with-junit-quickcheckhttpsgithubcompholserjunit-quickcheck)**<br>
+- **[References](#references)**<br>
+- **[Contributing](#contributing)**<br>
+
 ## Build and Run
 
 This project uses [Gradle](https://gradle.org/install/). Make sure that you
