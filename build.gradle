@@ -15,7 +15,10 @@ repositories {
 }
 
 dependencies {
-    // Guava
+    // https://github.com/linkedin/parseq
+    implementation group: 'com.linkedin.parseq', name: 'parseq', version: '3.0.0'
+
+    // https://github.com/google/guava
     implementation("com.google.guava:guava:30.1.1-jre")
 
     // Junit
