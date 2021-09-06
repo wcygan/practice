@@ -5,7 +5,7 @@ Practicing Data Structures, Algorithms, Concurrency, and more!
 ## Table of Contents
 
 - **[Build and Run](#build-and-run)**<br>
-- **[Property-Based Testing with JUnit-Quickcheck](#property-based-testing-with-junit-quickcheckhttpsgithubcompholserjunit-quickcheck)**<br>
+- **[Property-Based Testing with JUnit-Quickcheck](#property-based-testing-with-junit-quickcheck)**<br>
 - **[References](#references)**<br>
 - **[Contributing](#contributing)**<br>
 
@@ -60,7 +60,7 @@ Builds a jar containing **only the application classes** from the project
 $ ./gradlew jar
 ```
 
-## Property-Based Testing with [JUnit-Quickcheck](https://github.com/pholser/junit-quickcheck)
+## Property-Based Testing with JUnit-Quickcheck
 
 Property-Based Testing allows you to test the programs you write by feeding a program randomly generated inputs.
 See [Getting Started with JUnit-Quickcheck](https://pholser.github.io/junit-quickcheck/site/1.0/usage/getting-started.html)
