@@ -19,6 +19,9 @@ public class Helpers {
       int endVertex,
       int expectedPathLength) {
 
+    assertEquals(expectedPath.vertexSet().size(), actualPath.vertexSet().size());
+    assertEquals(expectedPath.edgeSet().size(), actualPath.edgeSet().size());
+
     /* walk the shortest path and verify equality */
     Vertex<Integer> a = actualPath.getVertex(Integer.toString(startVertex));
     Vertex<Integer> b = expectedPath.getVertex(Integer.toString(startVertex));

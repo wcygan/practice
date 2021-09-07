@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class WeightedShortestPathTest {
 
   @ParameterizedTest
@@ -24,9 +22,6 @@ public class WeightedShortestPathTest {
 
     Graph<Integer> actual = ShortestPath.Dijkstra(initial, startingVertex, endingVertex);
     Graph<Integer> expected = buildGraph(expectedEdges);
-
-    assertEquals(expected.vertexSet().size(), actual.vertexSet().size());
-    assertEquals(expected.edgeSet().size(), actual.edgeSet().size());
 
     Helpers.validateShortestPath(actual, expected, start, end, expectedEdges.length);
   }

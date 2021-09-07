@@ -35,10 +35,10 @@ public class ParallelMergeSort<T extends Comparable<T>> implements Sorter<T> {
       List<T> left = new ArrayList<>(lst.subList(0, mid));
       List<T> right = new ArrayList<>(lst.subList(mid, lst.size()));
 
-      var leftTask = new ParallelMergeSortTask<>(left);
-      var rightTask = new ParallelMergeSortTask<>(right);
+      var sortLeft = new ParallelMergeSortTask<>(left);
+      var sortRight = new ParallelMergeSortTask<>(right);
 
-      invokeAll(leftTask, rightTask);
+      invokeAll(sortLeft, sortRight);
 
       SequentialMergeSort.merge(lst, left, right);
     }
