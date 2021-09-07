@@ -17,6 +17,7 @@ public class SortingQuickCheck {
     List<Integer> expected = new ArrayList<>(actual);
     Collections.sort(expected);
     verifySort(new QuickSort<>(), expected, actual);
+    verifySort(new SequentialMergeSort<>(), expected, actual);
   }
 
   private void verifySort(Sorter<Integer> sorter, List<Integer> expected, List<Integer> actual) {
