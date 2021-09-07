@@ -41,12 +41,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    /*
-    * Try enabling this if testing ever becomes a bottleneck
-    * (current builds taking around 4 seconds...)
-    *
-    * `maxParallelForks = Runtime.runtime.availableProcessors()`
-    * */
+    maxParallelForks = Runtime.runtime.availableProcessors()
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
