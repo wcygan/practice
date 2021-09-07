@@ -9,7 +9,7 @@ public class SequentialMergeSort<T extends Comparable<T>> implements Sorter<T> {
     mergeSort(arr);
   }
 
-  public void mergeSort(List<T> arr) {
+  protected static <T extends Comparable<T>> void mergeSort(List<T> arr) {
     if (arr.size() <= 1) {
       return;
     }
@@ -23,7 +23,8 @@ public class SequentialMergeSort<T extends Comparable<T>> implements Sorter<T> {
     merge(arr, left, right);
   }
 
-  public void merge(List<T> original, List<T> left, List<T> right) {
+  protected static <T extends Comparable<T>> void merge(
+      List<T> original, List<T> left, List<T> right) {
     int i = 0;
     int j = 0;
     int k = 0;
