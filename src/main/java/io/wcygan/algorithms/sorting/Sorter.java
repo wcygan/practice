@@ -8,5 +8,5 @@ import java.util.List;
  * @param <T> the type of the values to sort
  */
 public interface Sorter<T extends Comparable<T>> {
-  public void sort(List<T> arr);
+  public void sort(List<T> lst);
 }

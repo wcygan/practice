@@ -5,22 +5,22 @@ import java.util.List;
 
 public class SequentialMergeSort<T extends Comparable<T>> implements Sorter<T> {
   @Override
-  public void sort(List<T> arr) {
-    mergeSort(arr);
+  public void sort(List<T> lst) {
+    mergeSort(lst);
   }
 
-  protected static <T extends Comparable<T>> void mergeSort(List<T> arr) {
-    if (arr.size() <= 1) {
+  protected static <T extends Comparable<T>> void mergeSort(List<T> lst) {
+    if (lst.size() <= 1) {
       return;
     }
 
-    int mid = arr.size() / 2;
-    List<T> left = new ArrayList<>(arr.subList(0, mid));
-    List<T> right = new ArrayList<>(arr.subList(mid, arr.size()));
+    int mid = lst.size() / 2;
+    List<T> left = new ArrayList<>(lst.subList(0, mid));
+    List<T> right = new ArrayList<>(lst.subList(mid, lst.size()));
 
     mergeSort(left);
     mergeSort(right);
-    merge(arr, left, right);
+    merge(lst, left, right);
   }
 
   protected static <T extends Comparable<T>> void merge(

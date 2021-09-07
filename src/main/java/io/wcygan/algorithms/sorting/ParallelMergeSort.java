@@ -10,37 +10,37 @@ public class ParallelMergeSort<T extends Comparable<T>> implements Sorter<T> {
   private static final Integer PARALLELISM = 50;
 
   @Override
-  public void sort(List<T> arr) {
+  public void sort(List<T> lst) {
     ForkJoinPool pool = new ForkJoinPool(PARALLELISM);
-    var task = new ParallelMergeSortTask<>(arr);
+    var task = new ParallelMergeSortTask<>(lst);
     pool.invoke(task);
   }
 
   private static class ParallelMergeSortTask<T extends Comparable<T>> extends RecursiveAction {
 
-    private final List<T> arr;
+    private final List<T> lst;
 
-    public ParallelMergeSortTask(List<T> arr) {
-      this.arr = arr;
+    public ParallelMergeSortTask(List<T> lst) {
+      this.lst = lst;
     }
 
     @Override
     protected void compute() {
-      if (arr.size() <= 10) {
-        new SequentialMergeSort<T>().sort(arr);
+      if (lst.size() <= 10) {
+        new SequentialMergeSort<T>().sort(lst);
         return;
       }
 
-      int mid = arr.size() / 2;
-      List<T> left = new ArrayList<>(arr.subList(0, mid));
-      List<T> right = new ArrayList<>(arr.subList(mid, arr.size()));
+      int mid = lst.size() / 2;
+      List<T> left = new ArrayList<>(lst.subList(0, mid));
+      List<T> right = new ArrayList<>(lst.subList(mid, lst.size()));
 
       var leftTask = new ParallelMergeSortTask<>(left);
       var rightTask = new ParallelMergeSortTask<>(right);
 
       invokeAll(leftTask, rightTask);
 
-      SequentialMergeSort.merge(arr, left, right);
+      SequentialMergeSort.merge(lst, left, right);
     }
   }
 }
