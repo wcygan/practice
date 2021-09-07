@@ -1,4 +1,4 @@
-package io.wcygan.concurrent;
+package io.wcygan.concurrent.executors;
 
 import com.linkedin.parseq.Engine;
 import com.linkedin.parseq.EngineBuilder;

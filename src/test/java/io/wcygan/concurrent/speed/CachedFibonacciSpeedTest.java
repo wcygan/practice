@@ -1,4 +1,4 @@
-package io.wcygan.concurrent;
+package io.wcygan.concurrent.speed;
 
 import io.wcygan.algorithms.numbers.FibonacciSequence;
 import org.junit.jupiter.api.Assertions;

@@ -1,4 +1,4 @@
-package io.wcygan.concurrent;
+package io.wcygan.concurrent.executors;
 
 import com.linkedin.parseq.Task;
 import io.wcygan.algorithms.numbers.PrimeFactorization;
