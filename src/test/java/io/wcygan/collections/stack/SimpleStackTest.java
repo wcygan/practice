@@ -1,9 +1,12 @@
 package io.wcygan.collections.stack;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -40,6 +43,24 @@ public class SimpleStackTest {
     int i = stack.pop();
     assertEquals(0, stack.size());
     assertEquals(999, i);
+  }
+
+  @Test
+  public void pushTwicePopTwice() {
+    Stack<Integer> stack = new SimpleStack<>();
+    stack.push(1);
+    stack.push(2);
+    assertEquals(2, stack.pop());
+    assertEquals(1, stack.pop());
+  }
+
+  @Test
+  public void pushThreeTimesPopThreeTimes() {
+    List<Integer> toAdd = new ArrayList<>(List.of(1, 2, 3));
+    Stack<Integer> stack = new SimpleStack<>();
+    toAdd.forEach(stack::push);
+    Collections.reverse(toAdd);
+    toAdd.forEach(element -> Assertions.assertEquals(element, stack.pop()));
   }
 
   @ParameterizedTest

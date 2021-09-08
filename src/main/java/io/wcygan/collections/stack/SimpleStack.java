@@ -12,7 +12,7 @@ public class SimpleStack<T> implements Stack<T> {
   }
 
   public void push(T data) {
-    list.add(data);
+    list.add(0, data);
   }
 
   public T pop() {
