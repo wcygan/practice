@@ -6,13 +6,17 @@ import com.pholser.junit.quickcheck.generator.Size;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 import io.wcygan.collections.queue.Queue;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.LongStream;
 
 @RunWith(JUnitQuickcheck.class)
 public class NonBlockingQueueTest {
+
+  private static final Integer ONE_HUNDRED = 100;
 
   @Property(trials = 25)
   public void sequentialAddAndRemove(@Size(max = 50) List<Integer> expected) {
@@ -67,5 +71,40 @@ public class NonBlockingQueueTest {
     return () -> {
       while (queue.remove() == null) {}
     };
+  }
+
+  @Test
+  public void testOneHundredThousandAdds() {
+    Queue<Long> queue = new NonblockingQueue<>();
+
+    int numThreads = ONE_HUNDRED;
+    List<Thread> workers = new ArrayList<>();
+    for (int i = 0; i < numThreads; i++) {
+      Thread adder = new Thread(addOneThousandTimes(queue));
+      adder.start();
+      workers.add(adder);
+    }
+
+    workers.forEach(
+        t -> {
+          try {
+            t.join();
+          } catch (InterruptedException e) {
+            Assertions.fail("Couldn't join" + t.getName());
+          }
+        });
+
+    List<Long> queueContents = new ArrayList<>();
+    Long next = queue.remove();
+    while (next != null) {
+      queueContents.add(next);
+      next = queue.remove();
+    }
+
+    Assertions.assertEquals(100000, queueContents.size());
+  }
+
+  private Runnable addOneThousandTimes(Queue<Long> queue) {
+    return () -> LongStream.range(0, 1000).forEach(queue::add);
   }
 }

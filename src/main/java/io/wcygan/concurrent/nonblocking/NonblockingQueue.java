@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @ThreadSafe
 public class NonblockingQueue<T> implements Queue<T> {
+
   static class Node<T> {
     T data;
     AtomicReference<Node<T>> next = new AtomicReference<>();
@@ -44,7 +45,7 @@ public class NonblockingQueue<T> implements Queue<T> {
       Node<T> next = tail.next.get();
       if (tail == this.tail.get()) {
         if (next == null) {
-          if (tail.next.compareAndSet(next, node)) {
+          if (tail.next.compareAndSet(null, node)) {
             break;
           }
         } else {
