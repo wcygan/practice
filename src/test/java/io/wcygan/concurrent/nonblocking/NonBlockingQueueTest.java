@@ -1,11 +1,10 @@
-package io.wcygan.collections.queue;
+package io.wcygan.concurrent.nonblocking;
 
 import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
-import io.wcygan.concurrent.nonblocking.NonblockingQueue;
-import io.wcygan.concurrent.nonblocking.NonblockingRandom;
+import io.wcygan.collections.queue.Queue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 
