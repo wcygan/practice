@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ConcurrentStackTest {
+public class NonblockingStackTest {
 
   private static Integer NUM_THREADS = 10;
 
   @Test
   public void pushThreeTimesPopThreeTimes() {
     List<Integer> toAdd = new ArrayList<>(List.of(1, 2, 3));
-    Stack<Integer> stack = new ConcurrentStack<>();
+    Stack<Integer> stack = new NonblockingStack<>();
     Assertions.assertNull(stack.peek());
 
     toAdd.forEach(stack::push);
@@ -32,11 +32,12 @@ public class ConcurrentStackTest {
   @Test
   public void testMultipleThreads() {
     int range = 25;
-    Stack<Integer> stack = new ConcurrentStack<>();
+    Stack<Integer> stack = new NonblockingStack<>();
 
-    Runnable pushRange = () -> {
-      IntStream.range(0, range).forEach(stack::push);
-    };
+    Runnable pushRange =
+        () -> {
+          IntStream.range(0, range).forEach(stack::push);
+        };
 
     List<Thread> threads = new ArrayList<>();
     for (int i = 0; i < NUM_THREADS; i++) {
@@ -56,6 +57,4 @@ public class ConcurrentStackTest {
     Assertions.assertEquals(range * NUM_THREADS, stack.size());
     Assertions.assertEquals(range - 1, stack.peek());
   }
-
-
 }

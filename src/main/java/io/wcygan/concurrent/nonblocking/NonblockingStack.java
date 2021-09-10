@@ -6,7 +6,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ThreadSafe
-public class ConcurrentStack<T> implements Stack<T> {
+public class NonblockingStack<T> implements Stack<T> {
 
   private static final Integer FIRST_RANK = 1;
 

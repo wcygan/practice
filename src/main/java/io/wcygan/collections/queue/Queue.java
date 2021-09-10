@@ -10,10 +10,9 @@ public interface Queue<T> {
   /**
    * Inserts the specified element into the queue if it was possible to do so
    *
-   * @param t the element to add
-   * @return {@code true} if the element was added, else {@code false}
+   * @param data the element to add
    */
-  boolean add(T t);
+  void add(T data);
 
   /**
    * Attempts to remove the head of the queue
@@ -21,11 +20,4 @@ public interface Queue<T> {
    * @return the element that was removed, else {@code null} if the queue was empty
    */
   T remove();
-
-  /**
-   * Attempts to return the head of the queue
-   *
-   * @return the element at the head of the queue, else {@code null} if the queue was empty
-   */
-  T peek();
 }

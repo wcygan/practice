@@ -11,17 +11,12 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
   }
 
   @Override
-  public boolean add(T t) {
-    return queue.add(t);
+  public void add(T data) {
+    queue.add(data);
   }
 
   @Override
   public T remove() {
     return queue.remove(0);
-  }
-
-  @Override
-  public T peek() {
-    return queue.get(0);
   }
 }
