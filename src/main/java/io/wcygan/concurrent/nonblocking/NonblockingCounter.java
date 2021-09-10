@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /** Adapted from Chapter 15 of Java Concurrency in Practice */
 @ThreadSafe
 public class NonblockingCounter implements Counter {
-  AtomicInteger value = new AtomicInteger(0);
+  AtomicInteger value = new AtomicInteger(STARTING_VALUE);
 
   @Override
   public int getAndIncrement() {
