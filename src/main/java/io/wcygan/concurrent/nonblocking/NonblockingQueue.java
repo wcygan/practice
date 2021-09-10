@@ -5,8 +5,11 @@ import io.wcygan.collections.queue.Queue;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Implementation from: - https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf -
- * https://ycpcs.github.io/cs365-spring2019/lectures/lecture14.html
+ * Implementation from (Michael and Scott, 1996)
+ *
+ * <p>https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf
+ *
+ * <p>https://ycpcs.github.io/cs365-spring2019/lectures/lecture14.html
  *
  * @param <T> the type of the elements in the queue
  */
