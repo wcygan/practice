@@ -52,8 +52,7 @@ public class NonBlockingQueueTest {
       next = queue.remove();
     }
 
-    int expectedRemaining = (numThreads * 2) - (numThreads);
-    Assertions.assertEquals(expectedRemaining, queueContents.size());
+    Assertions.assertEquals(numThreads, queueContents.size());
   }
 
   private Runnable addTwo(Queue<Long> queue, NonblockingRandom random) {
