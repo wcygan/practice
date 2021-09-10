@@ -14,7 +14,7 @@ import java.util.List;
 public class SortingQuickCheck {
 
   @Property(trials = 50)
-  public void testSortingAlgorithms(@Size(max = 5) List<Integer> actual) {
+  public void testSortingAlgorithms(@Size(max = 50) List<Integer> actual) {
     List<Integer> expected = new ArrayList<>(actual);
     Collections.sort(expected);
     verifySort(new QuickSort<>(), expected, actual);
