@@ -2,6 +2,7 @@ package io.wcygan.concurrent.nonblocking;
 
 import io.wcygan.collections.queue.Queue;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @param <T> the type of the elements in the queue
  */
+@ThreadSafe
 public class NonblockingQueue<T> implements Queue<T> {
   static class Node<T> {
     T data;
