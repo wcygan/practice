@@ -20,6 +20,7 @@ public class SortingQuickCheck {
     verifySort(new QuickSort<>(), expected, actual);
     verifySort(new SequentialMergeSort<>(), expected, actual);
     verifySort(new ParallelMergeSort<>(), expected, actual);
+    verifySort(new HeapSort<>(), expected, actual);
   }
 
   private void verifySort(Sorter<Integer> sorter, List<Integer> expected, List<Integer> actual) {
