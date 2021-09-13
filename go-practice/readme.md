@@ -10,18 +10,29 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Go](https://go
 
 ## Build and Run
 
-Within `Practice/go-practice` you can execute these commands:
+From the go-practice root directory, `Practice/go-practice`, you can execute these commands:
 
-#### Execute all tests:
+### Execute all tests:
 
 ```
 $ go test ./...
 ```
 
-#### Execute all tests with coverage:
+### Execute a specific test (with coverage for the entire project):
+
+Adding the `-cover` flag tells the test runner to keep track of program coverage.
+
+Executing this command:
 
 ```
-$ go test ./... -cover
+$ go test ./...  -run TestAdder -cover
+```
+
+Gives the output:
+
+```
+ok      practice/algorithms/numbers/adder               coverage: 100.0% of statements
+ok      practice/algorithms/numbers/counter             coverage: 0.0% of statements [no tests to run]
 ```
 
 ## References

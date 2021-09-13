@@ -1,4 +1,4 @@
-package numbers
+package counter
 
 import (
 	"testing"
@@ -21,7 +21,7 @@ func TestCounter(t *testing.T) {
 		counter := Counter{}
 
 		five := 5
-		
+
 		for i := 0; i < five; i++ {
 			counter.Increment()
 		}
