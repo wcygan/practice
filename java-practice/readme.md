@@ -14,6 +14,8 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 This project uses [Gradle](https://gradle.org/install/). Make sure that you
 have [Java](https://java.com/en/download/help/download_options.html) installed.
 
+#### Make sure you're executing these commands in the folder `Practice/java-practice`.
+
 To run the entire suite of tests:
 
 ```

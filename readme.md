@@ -11,7 +11,7 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 
 ## Repositories
 
-Find example in these folders:
+Find examples in these folders:
 
 1. [Practice with Java](java-practice/readme.md)
 2. [Practice with Go](go-practice/readme.md)
