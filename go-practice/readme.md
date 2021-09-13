@@ -10,7 +10,19 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Go](https://go
 
 ## Build and Run
 
-TBD
+Within `Practice/go-practice` you can execute these commands:
+
+#### Execute all tests:
+
+```
+$ go test ./...
+```
+
+#### Execute all tests with coverage:
+
+```
+$ go test ./... -cover
+```
 
 ## References
 
