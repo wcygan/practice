@@ -23,7 +23,7 @@ Find examples in these folders:
 2. [Practice with Go](go-practice)
 3. [Practice with Rust](rust-practice)
 
-## References:
+## References
 
 ### General
 
