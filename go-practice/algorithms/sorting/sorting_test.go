@@ -8,12 +8,12 @@ import (
 
 func TestSortingAlgorithms(t *testing.T) {
 	sorters := []Sorter{
-		BasicSort{},
+		DefaultSort{},
 		QuickSort{},
 	}
 
 	sortsAreValid := func(given []int) bool {
-		want := BasicSort{}.Sorted(given)
+		want := DefaultSort{}.Sorted(given)
 
 		for _, sorter := range sorters {
 			got := sorter.Sorted(Clone(given))

@@ -1,4 +1,4 @@
-package adder
+package numbers
 
 import (
 	"fmt"

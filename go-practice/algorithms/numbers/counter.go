@@ -1,4 +1,4 @@
-package counter
+package numbers
 
 type Counter struct {
 	count int
