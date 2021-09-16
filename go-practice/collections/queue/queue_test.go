@@ -6,26 +6,31 @@ import (
 )
 
 func TestQueues(t *testing.T) {
-	queues := []Queue{
-		NewBoundedChannelQueue(),
+
+	tests := []struct {
+		name  string
+		queue Queue
+	}{
+		{name: "Bounded Channel Queue", queue: NewBoundedChannelQueue()},
+		{name: "Linked Queue", queue: NewLinkedQueue()},
 	}
 
-	queuesAreValid := func(given []int)  bool {
+	queuesAreValid := func(given []int) bool {
 
 		// test each queue
-		for _, queue := range queues {
+		for _, test := range tests {
 
 			// push all items into queue
 			for _, item := range given {
-				queue.Push(item)
+				test.queue.Push(item)
 			}
 
 			// pop all items from queue & assert equality
 			for i := 0; i < len(given); i++ {
 				want := given[i]
-				got := queue.Pop()
+				got := test.queue.Pop()
 				if want != got {
-					t.Errorf("got %d want %d", got, want)
+					t.Errorf("test: %s: got %d want %d", test.name, got, want)
 				}
 			}
 		}
@@ -33,7 +38,7 @@ func TestQueues(t *testing.T) {
 		return true
 	}
 
-	if err := quick.Check(queuesAreValid, &quick.Config{MaxCount: 10000}); err != nil {
+	if err := quick.Check(queuesAreValid, &quick.Config{MaxCount: 1}); err != nil {
 		t.Error(err)
 	}
 }
