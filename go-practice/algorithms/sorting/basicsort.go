@@ -2,13 +2,12 @@ package sorting
 
 import "sort"
 
-type BasicSort struct {
-}
+type BasicSort struct{}
 
 func (b BasicSort) Sorted(arr []int) []int {
-	new := CopyOf(arr)
-	sort.Ints(new)
-	return new
+	clone := Clone(arr)
+	sort.Ints(clone)
+	return clone
 }
 
 func (b BasicSort) Kind() string {

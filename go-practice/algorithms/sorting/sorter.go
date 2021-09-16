@@ -5,6 +5,6 @@ type Sorter interface {
 	Kind() string
 }
 
-func CopyOf(given []int) []int {
+func Clone(given []int) []int {
 	return append([]int(nil), given...)
 }

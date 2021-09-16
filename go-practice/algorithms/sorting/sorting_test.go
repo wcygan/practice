@@ -9,13 +9,14 @@ import (
 func TestSortingAlgorithms(t *testing.T) {
 	sorters := []Sorter{
 		BasicSort{},
+		QuickSort{},
 	}
 
 	sortsAreValid := func(given []int) bool {
 		want := BasicSort{}.Sorted(given)
 
 		for _, sorter := range sorters {
-			got := sorter.Sorted(CopyOf(given))
+			got := sorter.Sorted(Clone(given))
 			assertEquals(sorter.Kind(), got, want, t)
 		}
 
