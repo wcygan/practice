@@ -2,11 +2,11 @@ package sorting
 
 type MergeSort struct{}
 
-func (b MergeSort) Kind() string {
+func (m MergeSort) Kind() string {
 	return "MergeSort"
 }
 
-func (b MergeSort) Sorted(arr []int) []int {
+func (m MergeSort) Sorted(arr []int) []int {
 	clone := Clone(arr)
 	mergeSort(clone)
 	return clone
