@@ -3,3 +3,7 @@ build
 gradle/
 .idea
 .gradle
+.classpath
+.settings
+bin/
+.project

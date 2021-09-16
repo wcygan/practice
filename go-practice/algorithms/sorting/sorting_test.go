@@ -11,6 +11,7 @@ func TestSortingAlgorithms(t *testing.T) {
 	sorters := []Sorter{
 		DefaultSort{},
 		QuickSort{},
+		MergeSort{},
 	}
 
 	sortsAreValid := func(given []int) bool {
