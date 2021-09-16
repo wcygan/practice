@@ -22,17 +22,17 @@ func quickSort(arr []int, start, end int) {
 
 func partition(arr []int, start, end int) int {
 	x := arr[end]
-	i := start - 1
+	i := start
 
 	for j := start; j < end; j++ {
 		if arr[j] <= x {
-			i += 1
 			swap(arr, i, j)
+			i += 1
 		}
 	}
 
-	swap(arr, i+1, end)
-	return i + 1
+	swap(arr, i, end)
+	return i
 }
 
 func swap(arr []int, fst, snd int) {
