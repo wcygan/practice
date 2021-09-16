@@ -25,7 +25,7 @@ func TestSortingAlgorithms(t *testing.T) {
 		return true
 	}
 
-	if err := quick.Check(sortsAreValid, &quick.Config{MaxCount: 1000}); err != nil {
+	if err := quick.Check(sortsAreValid, &quick.Config{MaxCount: 1}); err != nil {
 		t.Error(err)
 	}
 
