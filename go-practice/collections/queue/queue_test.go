@@ -15,7 +15,8 @@ func TestQueues(t *testing.T) {
 		{name: "Linked Queue", queue: NewLinkedQueue()},
 	}
 
-	queuesAreValid := func(given []int) bool {
+	// Property: all queues should behave the same way in a single-threaded environment (FIFO)
+	queueProperty := func(given []int) bool {
 
 		// test each queue
 		for _, test := range tests {
@@ -38,7 +39,7 @@ func TestQueues(t *testing.T) {
 		return true
 	}
 
-	if err := quick.Check(queuesAreValid, &quick.Config{MaxCount: 1}); err != nil {
+	if err := quick.Check(queueProperty, &quick.Config{MaxCount: 1}); err != nil {
 		t.Error(err)
 	}
 }

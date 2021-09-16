@@ -14,7 +14,8 @@ func TestSortingAlgorithms(t *testing.T) {
 		MergeSort{},
 	}
 
-	sortsAreValid := func(given []int) bool {
+	// Property: all sorting algorithms should result in the same sorted-order
+	sortedProperty := func(given []int) bool {
 		want := DefaultSort{}.Sorted(given)
 
 		for _, sorter := range sorters {
@@ -26,7 +27,7 @@ func TestSortingAlgorithms(t *testing.T) {
 		return true
 	}
 
-	if err := quick.Check(sortsAreValid, &quick.Config{MaxCount: 10000}); err != nil {
+	if err := quick.Check(sortedProperty, &quick.Config{MaxCount: 10000}); err != nil {
 		t.Error(err)
 	}
 
