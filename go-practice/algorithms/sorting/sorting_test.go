@@ -1,6 +1,7 @@
 package sorting
 
 import (
+	"math/rand"
 	"reflect"
 	"testing"
 	"testing/quick"
@@ -16,7 +17,8 @@ func TestSortingAlgorithms(t *testing.T) {
 		want := DefaultSort{}.Sorted(given)
 
 		for _, sorter := range sorters {
-			got := sorter.Sorted(Clone(given))
+			rand.Shuffle(len(given), func(i, j int) { given[i], given[j] = given[j], given[i] })
+			got := sorter.Sorted(given)
 			assertEquals(sorter.Kind(), got, want, t)
 		}
 
