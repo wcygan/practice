@@ -11,7 +11,10 @@ func TestQueues(t *testing.T) {
 	}
 
 	queuesAreValid := func(given []int)  bool {
+
+		// test each queue
 		for _, queue := range queues {
+
 			// push all items into queue
 			for _, item := range given {
 				queue.Push(item)
