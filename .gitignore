@@ -2,3 +2,4 @@ java-practice/.gradle
 build
 gradle/
 .idea
+.gradle

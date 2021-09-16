@@ -20,20 +20,11 @@ $ go test ./...
 
 ### Execute a specific test (with coverage for the entire project):
 
-Adding the `-cover` flag tells the test runner to keep track of program coverage.
-
-Executing this command:
-
 ```
-$ go test ./...  -run TestAdder -cover
+$ go test ./... -run TestName -cover
 ```
 
-Gives the output:
-
-```
-ok      practice/algorithms/numbers/adder               coverage: 100.0% of statements
-ok      practice/algorithms/numbers/counter             coverage: 0.0% of statements [no tests to run]
-```
+Tip: adding the `-cover` flag tells the test runner to keep track of observed program coverage.
 
 ## References
 
