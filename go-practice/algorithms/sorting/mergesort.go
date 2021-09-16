@@ -1,5 +1,7 @@
 package sorting
 
+import "practice/utilities"
+
 type MergeSort struct{}
 
 func (m MergeSort) Kind() string {
@@ -7,7 +9,7 @@ func (m MergeSort) Kind() string {
 }
 
 func (m MergeSort) Sorted(arr []int) []int {
-	clone := Clone(arr)
+	clone := utilities.Clone(arr)
 	mergeSort(clone)
 	return clone
 }
@@ -18,8 +20,8 @@ func mergeSort(arr []int) {
 	}
 
 	mid := len(arr) / 2
-	left := Clone(arr[0:mid])
-	right := Clone(arr[mid:])
+	left := utilities.Clone(arr[0:mid])
+	right := utilities.Clone(arr[mid:])
 
 	mergeSort(left)
 	mergeSort(right)

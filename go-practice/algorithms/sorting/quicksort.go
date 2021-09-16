@@ -1,5 +1,7 @@
 package sorting
 
+import "practice/utilities"
+
 type QuickSort struct{}
 
 func (q QuickSort) Kind() string {
@@ -7,7 +9,7 @@ func (q QuickSort) Kind() string {
 }
 
 func (q QuickSort) Sorted(arr []int) []int {
-	clone := Clone(arr)
+	clone := utilities.Clone(arr)
 	quickSort(clone, 0, len(arr)-1)
 	return clone
 }
