@@ -31,8 +31,10 @@ Tip: adding the `-cover` flag tells the test runner to keep track of observed pr
 I'm using the following material as a reference:
 
 1. [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/)
-2. [Network Programming with Go](https://nostarch.com/networkprogrammingwithgo)
-3. [Distributed Services with Go](https://pragprog.com/titles/tjgo/distributed-services-with-go/)
+2. [The Go Programming Language](https://www.gopl.io/)
+3.  [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/)
+4. [Network Programming with Go](https://nostarch.com/networkprogrammingwithgo)
+5. [Distributed Services with Go](https://pragprog.com/titles/tjgo/distributed-services-with-go/)
 
 ## Contributing
 

@@ -38,6 +38,8 @@ Find examples in these folders:
 ### Go
 
 - [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/)
+- [The Go Programming Language](https://www.gopl.io/)
+- [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/)
 - [Network Programming with Go](https://nostarch.com/networkprogrammingwithgo)
 - [Distributed Services with Go](https://pragprog.com/titles/tjgo/distributed-services-with-go/)
 
