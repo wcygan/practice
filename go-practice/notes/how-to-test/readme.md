@@ -12,6 +12,10 @@ Within `*_test.go` files, three kinds of functions are treated specially:
 3. Lastly, an [**example**](https://pkg.go.dev/testing#hdr-Examples) function, whose name starts with `Example`,
    provides machine-checked documentation.
 
+## Useful Testing Techniques
+
+### Sub-tests
+
 [**Sub-tests**](https://pkg.go.dev/testing#hdr-Subtests_and_Sub_benchmarks) are a convenient way of testing. You can
 share setup & teardown code, test various states of execution, and combine similar tests into one scope.
 
@@ -49,3 +53,15 @@ Further reading:
 
 - [First Class Fuzzing in Go](https://go.googlesource.com/proposal/+/master/design/draft-fuzzing.md)
 - [Fuzzing is Beta Ready](https://go.dev/blog/fuzz-beta)
+
+## Profiling
+
+When we wish to look carefully at the speed of our programs, the best technique for identifying the critical code is
+*profiling*. Profiling is an automated approach to performance measurement based on sampling a number of profile
+*events* during execution, then extrapolating from them during a post-processing step; the resulting statistical summary
+is called a *profile*.
+
+Further reading:
+
+- [Profiling Go Programs](https://go.dev/blog/pprof)
+- [Diagnostics: Profiling](https://golang.org/doc/diagnostics#profiling)
