@@ -1,5 +1,7 @@
 package queue
 
+
+// BoundedChannelQueue WARNING: has the potential to block if a channel send "ch <- x" is attempted on a full queue
 type BoundedChannelQueue struct {
 	queue chan interface{}
 }
