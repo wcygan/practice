@@ -1,7 +1,7 @@
-package concurrent
+package pipelines
 
-// values takes integers and sends them to an output stream
-func values(done <-chan interface{}, integers ...int) <-chan int {
+// Values takes integers and sends them to an output stream
+func Values(done <-chan interface{}, integers ...int) <-chan int {
 	intStream := make(chan int)
 	go func() {
 		defer close(intStream)
@@ -16,8 +16,8 @@ func values(done <-chan interface{}, integers ...int) <-chan int {
 	return intStream
 }
 
-// multiply takes a stream of integers and multiplies them, sending them to an output stream
-func multiply(done <-chan interface{}, intStream <-chan int, multiplier int) <-chan int {
+// Multiply takes a stream of integers and multiplies them, sending them to an output stream
+func Multiply(done <-chan interface{}, intStream <-chan int, multiplier int) <-chan int {
 	multipliedStream := make(chan int)
 	go func() {
 		defer close(multipliedStream)
@@ -32,8 +32,8 @@ func multiply(done <-chan interface{}, intStream <-chan int, multiplier int) <-c
 	return multipliedStream
 }
 
-// add takes a stream of integers and adds an integer to them, sending them to an output stream
-func add(done <-chan interface{}, intStream <-chan int, additive int) <-chan int {
+// Add takes a stream of integers and adds an integer to them, sending them to an output stream
+func Add(done <-chan interface{}, intStream <-chan int, additive int) <-chan int {
 	addedStream := make(chan int)
 	go func() {
 		defer close(addedStream)

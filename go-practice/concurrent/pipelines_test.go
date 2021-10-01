@@ -1,4 +1,4 @@
-package concurrent
+package pipelines
 
 import (
 	"github.com/stretchr/testify/require"
@@ -13,9 +13,9 @@ func TestAddMultiply(t *testing.T) {
 	done := make(chan interface{})
 	defer close(done)
 
-	// add 1 then multiply by 2
-	values := values(done, 1, 2, 3, 4)
-	pipeline := multiply(done, add(done, values, 1), 2)
+	// Add 1 then Multiply by 2
+	values := Values(done, 1, 2, 3, 4)
+	pipeline := Multiply(done, Add(done, values, 1), 2)
 
 	for _, want := range expected {
 		got := <-pipeline
@@ -23,13 +23,13 @@ func TestAddMultiply(t *testing.T) {
 	}
 }
 
-// TestValues asserts the identity property of the given values
+// TestValues asserts the identity property of the given Values
 func TestValues(t *testing.T) {
 	expected := []int{1, 2, 3, 4}
 
 	done := make(chan interface{})
 	defer close(done)
-	values := values(done, expected...)
+	values := Values(done, expected...)
 
 	for _, want := range expected {
 		got := <-values
