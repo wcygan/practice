@@ -47,3 +47,39 @@ func Add(done <-chan interface{}, intStream <-chan int, additive int) <-chan int
 	}()
 	return addedStream
 }
+
+// Repeat continuously repeats the values provided to it
+func Repeat(done <-chan interface{}, values ...interface{}) <-chan interface{} {
+	valueStream := make(chan interface{})
+	go func() {
+		defer close(valueStream)
+		// repeat infinitely
+		for {
+			// send values
+			for _, v := range values {
+				select {
+				case <-done:
+					return
+				case valueStream <- v:
+				}
+			}
+		}
+	}()
+	return valueStream
+}
+
+// Take retrieves n items from the given value stream
+func Take(done <-chan interface{}, valueStream <-chan interface{}, n int) <-chan interface{} {
+	takeStream := make(chan interface{})
+	go func() {
+		defer close(takeStream)
+		for i := 0; i < n; i++ {
+			select {
+			case <-done:
+				return
+			case takeStream <- <-valueStream:
+			}
+		}
+	}()
+	return takeStream
+}
