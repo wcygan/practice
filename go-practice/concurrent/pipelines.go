@@ -130,3 +130,57 @@ func CombineIntStreams(done <-chan interface{}, intStreams ...<-chan int) <-chan
 
 	return multiplexedStream
 }
+
+// OrDone takes values from a given stream until a message from "done" is received
+func OrDone(done, c <-chan interface{}) <-chan interface{} {
+	valueStream := make(chan interface{})
+	go func() {
+		defer close(valueStream)
+		for {
+			select {
+			case <-done:
+				return
+			case v, ok := <-c:
+				if !ok {
+					return
+				}
+				select {
+				case valueStream <- v:
+				case <-done:
+				}
+			}
+		}
+	}()
+	return valueStream
+}
+
+// Tee splits a stream of incoming values into two channels
+// WARNING: values must be pulled from BOTH outgoing channels in stride, else the program blocks forever
+// This means that every call to <-out1 must have another call to <-out2 in order to become unblocked.
+func Tee(done, incoming <-chan interface{}) (_, _ <-chan interface{}) {
+	out1 := make(chan interface{})
+	out2 := make(chan interface{})
+
+	go func() {
+		defer close(out1)
+		defer close(out2)
+		for val := range OrDone(done, incoming) {
+			// set out1 and out2 to the original channels
+			var out1, out2 = out1, out2
+			// send the value to each channel
+			for i := 0; i < 2; i++ {
+				select {
+				case <-done:
+				case out1 <- val:
+					// out1 should yield to out2, so we set out1 to nil
+					out1 = nil
+				case out2 <- val:
+					// out2 should yield to ou1, so we set out2 to nil
+					out2 = nil
+				}
+			}
+		}
+	}()
+
+	return out1, out2
+}

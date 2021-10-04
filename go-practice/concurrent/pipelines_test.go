@@ -59,3 +59,14 @@ func TestTakeFromRepeatedStream(t *testing.T) {
 		require.Equal(t, want, got)
 	}
 }
+
+func TestTee(t *testing.T) {
+	done := make(chan interface{})
+	defer close(done)
+
+	out1, out2 := Tee(done, Take(done, Repeat(done, 1, 2), 4))
+
+	for val := range out1 {
+		require.Equal(t, val, <-out2)
+	}
+}
