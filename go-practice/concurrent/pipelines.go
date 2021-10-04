@@ -1,5 +1,7 @@
 package pipelines
 
+import "sync"
+
 // Values takes integers and sends them to an output stream
 func Values(done <-chan interface{}, integers ...int) <-chan int {
 	intStream := make(chan int)
@@ -68,6 +70,22 @@ func Repeat(done <-chan interface{}, values ...interface{}) <-chan interface{} {
 	return valueStream
 }
 
+// RepeatFn continuously repeats the given function and sends its results over a stream
+func RepeatFn(done <-chan interface{}, fn func() interface{}) <-chan interface{} {
+	valueStream := make(chan interface{})
+	go func() {
+		defer close(valueStream)
+		for {
+			select {
+			case <-done:
+				return
+			case valueStream <- fn():
+			}
+		}
+	}()
+	return valueStream
+}
+
 // Take retrieves n items from the given value stream
 func Take(done <-chan interface{}, valueStream <-chan interface{}, n int) <-chan interface{} {
 	takeStream := make(chan interface{})
@@ -82,4 +100,33 @@ func Take(done <-chan interface{}, valueStream <-chan interface{}, n int) <-chan
 		}
 	}()
 	return takeStream
+}
+
+// CombineIntStreams takes multiple integer streams and combines them into a single integer stream
+func CombineIntStreams(done <-chan interface{}, intStreams ...<-chan int) <-chan int {
+	var wg sync.WaitGroup
+	multiplexedStream := make(chan int)
+
+	multiplex := func(c <-chan int) {
+		defer wg.Done()
+		for i := range c {
+			select {
+			case <-done:
+				return
+			case multiplexedStream <- i:
+			}
+		}
+	}
+
+	wg.Add(len(intStreams))
+	for _, intStream := range intStreams {
+		go multiplex(intStream)
+	}
+
+	go func() {
+		wg.Wait()
+		close(multiplexedStream)
+	}()
+
+	return multiplexedStream
 }
