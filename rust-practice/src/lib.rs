@@ -1,3 +1,5 @@
+mod concurrent;
+
 #[cfg(test)]
 mod tests {
     #[test]
