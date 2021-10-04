@@ -1,6 +1,7 @@
 package pipelines
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -68,5 +69,35 @@ func TestTee(t *testing.T) {
 
 	for val := range out1 {
 		require.Equal(t, val, <-out2)
+	}
+}
+
+func TestBridge(t *testing.T) {
+	max := 5
+	expected := make(map[interface{}]bool)
+	for i := 0; i < max; i++ {
+		expected[i] = true
+	}
+
+	done := make(chan interface{})
+	defer close(done)
+
+	values := func() chan (<-chan interface{}) {
+		channelStream := make(chan (<-chan interface{}))
+		go func() {
+			defer close(channelStream)
+			for i := 0; i < max; i++ {
+				stream := make(chan interface{}, 1)
+				stream <- i
+				close(stream)
+				channelStream <- stream
+			}
+		}()
+		return channelStream
+	}
+
+	for val := range Bridge(nil, values()) {
+		_, ok := expected[val]
+		require.Truef(t, ok, fmt.Sprintf("failed for %d", val))
 	}
 }

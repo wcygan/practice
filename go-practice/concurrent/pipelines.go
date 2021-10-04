@@ -184,3 +184,34 @@ func Tee(done, incoming <-chan interface{}) (_, _ <-chan interface{}) {
 
 	return out1, out2
 }
+
+// Bridge flattens a stream of channels into one channel streaming all elements received from the channels
+func Bridge(done <-chan interface{}, channelStream <-chan <-chan interface{}) <-chan interface{} {
+	valueStream := make(chan interface{})
+	go func() {
+		defer close(valueStream)
+		for {
+			var stream <-chan interface{}
+
+			// receive a new stream
+			select {
+			case maybeStream, ok := <-channelStream:
+				if !ok {
+					return
+				}
+				stream = maybeStream
+			case <-done:
+				return
+			}
+
+			// "flatten" or redirect all values from a stream
+			for val := range OrDone(done, stream) {
+				select {
+				case valueStream <- val:
+				case <-done:
+				}
+			}
+		}
+	}()
+	return valueStream
+}
