@@ -10,7 +10,11 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Rust](https://
 
 ## Build and Run
 
-TBD
+From `/Practice/rust-practice/`, execute:
+
+```
+$ cargo test
+```
 
 ## References
 
