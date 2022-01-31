@@ -10,14 +10,14 @@ import java.util.stream.LongStream;
 
 public class SumTaskTest {
 
-  public static Integer LEFT_BOUND = 0;
-  public static Integer RIGHT_BOUND = 1000;
+    public static Integer LEFT_BOUND = 0;
+    public static Integer RIGHT_BOUND = 1000;
 
-  @Test
-  public void itWorks() {
-    ForkJoinPool pool = new ForkJoinPool(10);
-    List<Integer> lst = IntStream.range(LEFT_BOUND, RIGHT_BOUND).boxed().toList();
-    Long expectedValue = LongStream.range(LEFT_BOUND, RIGHT_BOUND).sum();
-    Assertions.assertEquals(expectedValue, pool.invoke(new SumTask(lst, 0, lst.size())));
-  }
+    @Test
+    public void itWorks() {
+        ForkJoinPool pool = new ForkJoinPool(10);
+        List<Integer> lst = IntStream.range(LEFT_BOUND, RIGHT_BOUND).boxed().toList();
+        Long expectedValue = LongStream.range(LEFT_BOUND, RIGHT_BOUND).sum();
+        Assertions.assertEquals(expectedValue, pool.invoke(new SumTask(lst, 0, lst.size())));
+    }
 }

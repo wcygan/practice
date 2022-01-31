@@ -11,68 +11,69 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class LockTest {
 
-  private static final Integer NUM_THREADS = 20;
-  private static final Integer ITERATIONS = NUM_THREADS * 2;
+    private static final Integer NUM_THREADS = 20;
+    private static final Integer ITERATIONS = NUM_THREADS * 2;
 
-  @Test
-  public void testLocks() {
-    exercise(new ReentrantLock());
-  }
-
-  public void exercise(Lock lock) {
-    Counter counter = new Counter();
-    ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
-    List<Future<Boolean>> futures = new ArrayList<>();
-
-    for (int i = 0; i < ITERATIONS; i++) {
-      futures.add(executor.submit(run(lock, counter)));
+    @Test
+    public void testLocks() {
+        exercise(new ReentrantLock());
     }
 
-    executor.shutdown();
-    while (!executor.isTerminated()) {}
+    public void exercise(Lock lock) {
+        Counter counter = new Counter();
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
+        List<Future<Boolean>> futures = new ArrayList<>();
 
-    for (var future : futures) {
-      try {
-        Assertions.assertTrue(future.get());
-      } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
-      }
-    }
-  }
+        for (int i = 0; i < ITERATIONS; i++) {
+            futures.add(executor.submit(run(lock, counter)));
+        }
 
-  Callable<Boolean> run(Lock lock, Counter counter) {
-    return () -> {
-      try {
-        /* lock */
-        lock.lock();
+        executor.shutdown();
+        while (!executor.isTerminated()) {
+        }
 
-        /* start critical section */
-        counter.up();
-        int ct = counter.count();
-        counter.down();
-        /* end critical section */
-
-        return 1 == ct;
-      } finally {
-        /* unlock */
-        lock.unlock();
-      }
-    };
-  }
-
-  private static class Counter {
-    int ct = 0;
-
-    public void up() {
-      ct += 1;
+        for (var future : futures) {
+            try {
+                Assertions.assertTrue(future.get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void down() {
-      ct -= 1;
+    Callable<Boolean> run(Lock lock, Counter counter) {
+        return () -> {
+            try {
+                /* lock */
+                lock.lock();
+
+                /* start critical section */
+                counter.up();
+                int ct = counter.count();
+                counter.down();
+                /* end critical section */
+
+                return 1 == ct;
+            } finally {
+                /* unlock */
+                lock.unlock();
+            }
+        };
     }
 
-    public int count() {
-      return ct;
+    private static class Counter {
+        int ct = 0;
+
+        public void up() {
+            ct += 1;
+        }
+
+        public void down() {
+            ct -= 1;
+        }
+
+        public int count() {
+            return ct;
+        }
     }
-  }
 }

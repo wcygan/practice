@@ -8,18 +8,18 @@ import java.util.List;
  * @param <T> the type of the values to sort
  */
 public interface Sorter<T extends Comparable<T>> {
-  void sort(List<T> lst);
+    static <T extends Comparable<T>> boolean isSorted(List<T> lst, boolean ascending) {
+        for (int currentIndex = 0; currentIndex < lst.size() - 1; currentIndex++) {
+            int nextIndex = currentIndex + 1;
 
-  static <T extends Comparable<T>> boolean isSorted(List<T> lst, boolean ascending) {
-    for (int currentIndex = 0; currentIndex < lst.size() - 1; currentIndex++) {
-      int nextIndex = currentIndex + 1;
+            if ((ascending && lst.get(currentIndex).compareTo(lst.get(nextIndex)) > 0)
+                    || (!ascending && lst.get(currentIndex).compareTo(lst.get(nextIndex)) < 0)) {
+                return false;
+            }
+        }
 
-      if ((ascending && lst.get(currentIndex).compareTo(lst.get(nextIndex)) > 0)
-          || (!ascending && lst.get(currentIndex).compareTo(lst.get(nextIndex)) < 0)) {
-        return false;
-      }
+        return true;
     }
 
-    return true;
-  }
+    void sort(List<T> lst);
 }

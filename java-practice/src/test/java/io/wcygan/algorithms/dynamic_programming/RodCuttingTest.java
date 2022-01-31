@@ -9,17 +9,17 @@ import java.util.stream.Stream;
 
 public class RodCuttingTest {
 
-  @ParameterizedTest
-  @MethodSource("rodCuttingData")
-  public void testSolution(int[] prices, int expectedValue) {
-    int n = prices.length;
-    Assertions.assertEquals(expectedValue, RodCutting.cutRodSlow(prices, n));
-    Assertions.assertEquals(expectedValue, RodCutting.cutRodFast(prices, n));
-  }
+    private static Stream<Arguments> rodCuttingData() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 5, 8, 9, 10, 17, 17, 20}, 22),
+                Arguments.of(new int[]{1, 5, 8, 9, 10, 17, 17, 20}, 22));
+    }
 
-  private static Stream<Arguments> rodCuttingData() {
-    return Stream.of(
-        Arguments.of(new int[] {1, 5, 8, 9, 10, 17, 17, 20}, 22),
-        Arguments.of(new int[] {1, 5, 8, 9, 10, 17, 17, 20}, 22));
-  }
+    @ParameterizedTest
+    @MethodSource("rodCuttingData")
+    public void testSolution(int[] prices, int expectedValue) {
+        int n = prices.length;
+        Assertions.assertEquals(expectedValue, RodCutting.cutRodSlow(prices, n));
+        Assertions.assertEquals(expectedValue, RodCutting.cutRodFast(prices, n));
+    }
 }

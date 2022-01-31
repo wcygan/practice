@@ -17,65 +17,65 @@ import java.util.concurrent.atomic.AtomicReference;
 @ThreadSafe
 public class NonblockingQueue<T> implements Queue<T> {
 
-  static class Node<T> {
-    T data;
-    AtomicReference<Node<T>> next = new AtomicReference<>();
-  }
+    private final AtomicReference<Node<T>> head;
+    private final AtomicReference<Node<T>> tail;
 
-  private final AtomicReference<Node<T>> head;
-  private final AtomicReference<Node<T>> tail;
-
-  public NonblockingQueue() {
-    Node<T> node = new Node<T>();
-    head = new AtomicReference<>();
-    tail = new AtomicReference<>();
-    head.set(node);
-    tail.set(node);
-  }
-
-  @Override
-  public void add(T data) {
-    Node<T> node = new Node<T>();
-    node.data = data;
-    node.next.set(null);
-    Node<T> tail;
-
-    while (true) {
-      tail = this.tail.get();
-      Node<T> next = tail.next.get();
-      if (tail == this.tail.get()) {
-        if (next == null) {
-          if (tail.next.compareAndSet(null, node)) {
-            break;
-          }
-        } else {
-          this.tail.compareAndSet(tail, next);
-        }
-      }
+    public NonblockingQueue() {
+        Node<T> node = new Node<T>();
+        head = new AtomicReference<>();
+        tail = new AtomicReference<>();
+        head.set(node);
+        tail.set(node);
     }
-    this.tail.compareAndSet(tail, node);
-  }
 
-  @Override
-  public T remove() {
-    while (true) {
-      Node<T> head = this.head.get();
-      Node<T> tail = this.tail.get();
-      Node<T> next = head.next.get();
-      if (head == this.head.get()) {
-        if (head == tail) {
-          if (next == null) {
-            return null;
-          }
-          this.tail.compareAndSet(tail, next);
-        } else {
-          T value = next.data;
-          if (this.head.compareAndSet(head, next)) {
-            next.data = null;
-            return value;
-          }
+    @Override
+    public void add(T data) {
+        Node<T> node = new Node<T>();
+        node.data = data;
+        node.next.set(null);
+        Node<T> tail;
+
+        while (true) {
+            tail = this.tail.get();
+            Node<T> next = tail.next.get();
+            if (tail == this.tail.get()) {
+                if (next == null) {
+                    if (tail.next.compareAndSet(null, node)) {
+                        break;
+                    }
+                } else {
+                    this.tail.compareAndSet(tail, next);
+                }
+            }
         }
-      }
+        this.tail.compareAndSet(tail, node);
     }
-  }
+
+    @Override
+    public T remove() {
+        while (true) {
+            Node<T> head = this.head.get();
+            Node<T> tail = this.tail.get();
+            Node<T> next = head.next.get();
+            if (head == this.head.get()) {
+                if (head == tail) {
+                    if (next == null) {
+                        return null;
+                    }
+                    this.tail.compareAndSet(tail, next);
+                } else {
+                    T value = next.data;
+                    if (this.head.compareAndSet(head, next)) {
+                        next.data = null;
+                        return value;
+                    }
+                }
+            }
+        }
+    }
+
+    static class Node<T> {
+        T data;
+        AtomicReference<Node<T>> next = new AtomicReference<>();
+    }
 }

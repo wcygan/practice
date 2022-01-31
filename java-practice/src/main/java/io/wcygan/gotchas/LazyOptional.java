@@ -14,30 +14,30 @@ import java.util.function.Supplier;
  */
 public class LazyOptional {
 
-  /* eagerly evaluate the "orElse" branch */
-  public Integer eager() {
-    Counter counter = new Counter();
-    Optional.of(1).orElse(counter.countUp());
-    return counter.count();
-  }
-
-  /* lazily evaluate the "orElseGet" branch */
-  public Integer lazy() {
-    Counter counter = new Counter();
-    Optional.of(1).orElseGet(counter::countUp);
-    return counter.count();
-  }
-
-  private static class Counter {
-    private int ct = 0;
-
-    public int countUp() {
-      ct += 1;
-      return ct;
+    /* eagerly evaluate the "orElse" branch */
+    public Integer eager() {
+        Counter counter = new Counter();
+        Optional.of(1).orElse(counter.countUp());
+        return counter.count();
     }
 
-    public int count() {
-      return ct;
+    /* lazily evaluate the "orElseGet" branch */
+    public Integer lazy() {
+        Counter counter = new Counter();
+        Optional.of(1).orElseGet(counter::countUp);
+        return counter.count();
     }
-  }
+
+    private static class Counter {
+        private int ct = 0;
+
+        public int countUp() {
+            ct += 1;
+            return ct;
+        }
+
+        public int count() {
+            return ct;
+        }
+    }
 }

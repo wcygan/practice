@@ -11,10 +11,10 @@ import java.math.BigInteger;
 @RunWith(JUnitQuickcheck.class)
 public class FibonacciSequenceTest {
 
-  @Property(trials = 25)
-  public void testFibonacciSequence(@InRange(minInt = 1, maxInt = 20) int n) {
-    BigInteger a = new FibonacciSequence().getFibonacciNumberCached(n);
-    BigInteger b = new FibonacciSequence().getFibonacciNumber(n);
-    Assertions.assertEquals(a, b);
-  }
+    @Property(trials = 25)
+    public void testFibonacciSequence(@InRange(minInt = 1, maxInt = 20) int n) {
+        BigInteger a = new FibonacciSequence().getFibonacciNumberCached(n);
+        BigInteger b = new FibonacciSequence().getFibonacciNumber(n);
+        Assertions.assertEquals(a, b);
+    }
 }

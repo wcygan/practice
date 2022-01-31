@@ -11,17 +11,17 @@ import java.util.stream.Stream;
 
 public class StreamUtilsTest {
 
-  @ParameterizedTest
-  @MethodSource("listDataProvider")
-  public void testFilter(
-      List<Integer> given, List<Integer> expected, Predicate<Integer> predicate) {
-    List<Integer> result = StreamUtils.filter(given, predicate);
-    Assertions.assertEquals(expected, result);
-  }
+    private static Stream<Arguments> listDataProvider() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3), List.of(2), PredicateUtils.IS_EVEN),
+                Arguments.of(List.of(1, 2, 3), List.of(1, 3), PredicateUtils.IS_ODD));
+    }
 
-  private static Stream<Arguments> listDataProvider() {
-    return Stream.of(
-        Arguments.of(List.of(1, 2, 3), List.of(2), PredicateUtils.IS_EVEN),
-        Arguments.of(List.of(1, 2, 3), List.of(1, 3), PredicateUtils.IS_ODD));
-  }
+    @ParameterizedTest
+    @MethodSource("listDataProvider")
+    public void testFilter(
+            List<Integer> given, List<Integer> expected, Predicate<Integer> predicate) {
+        List<Integer> result = StreamUtils.filter(given, predicate);
+        Assertions.assertEquals(expected, result);
+    }
 }

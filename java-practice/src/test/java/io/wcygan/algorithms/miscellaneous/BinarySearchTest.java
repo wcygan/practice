@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class BinarySearchTest {
-  @ParameterizedTest
-  @MethodSource("binarySearchData")
-  public void itWorks(List<Integer> data, Integer toFind, Integer expectedIndex) {
-    Integer actualIndex = BinarySearch.search(data, toFind);
-    Assertions.assertEquals(actualIndex, expectedIndex);
-  }
+    private static Stream<Arguments> binarySearchData() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3), 1, 0),
+                Arguments.of(List.of(1, 2, 3), 2, 1),
+                Arguments.of(List.of(1, 2, 3), 3, 2),
+                Arguments.of(List.of(-10, -9, -8, 1, 2, 3, 4, 5, 6), -9, 1));
+    }
 
-  private static Stream<Arguments> binarySearchData() {
-    return Stream.of(
-        Arguments.of(List.of(1, 2, 3), 1, 0),
-        Arguments.of(List.of(1, 2, 3), 2, 1),
-        Arguments.of(List.of(1, 2, 3), 3, 2),
-        Arguments.of(List.of(-10, -9, -8, 1, 2, 3, 4, 5, 6), -9, 1));
-  }
+    @ParameterizedTest
+    @MethodSource("binarySearchData")
+    public void itWorks(List<Integer> data, Integer toFind, Integer expectedIndex) {
+        Integer actualIndex = BinarySearch.search(data, toFind);
+        Assertions.assertEquals(actualIndex, expectedIndex);
+    }
 }
