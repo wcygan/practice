@@ -1,4 +1,5 @@
 mod concurrent;
+mod collections;
 
 #[cfg(test)]
 mod tests {
