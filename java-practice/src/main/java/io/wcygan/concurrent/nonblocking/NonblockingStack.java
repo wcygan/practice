@@ -3,6 +3,7 @@ package io.wcygan.concurrent.nonblocking;
 import io.wcygan.collections.stack.Stack;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ThreadSafe
@@ -37,14 +38,12 @@ public class NonblockingStack<T> implements Stack<T> {
 
     @Override
     public T peek() {
-        Node<T> n = top.get();
-        return (n == null) ? null : n.item;
+        return Optional.ofNullable(top.get()).map(node -> node.item).orElse(null);
     }
 
     @Override
     public int size() {
-        Node<T> n = top.get();
-        return (n == null) ? 0 : n.rank;
+        return Optional.ofNullable(top.get()).map(node -> node.rank).orElse(0);
     }
 
     private static class Node<T> {
