@@ -16,7 +16,7 @@ public class LockTest {
 
     @Test
     public void testLocks() {
-        exercise(new ReentrantLock());
+        List.of(new ReentrantLock(), new TTASLock()).forEach(this::exercise);
     }
 
     public void exercise(Lock lock) {
