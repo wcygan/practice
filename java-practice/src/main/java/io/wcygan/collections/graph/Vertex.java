@@ -4,7 +4,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     private final T data;
     private final String name;
     private Color color;
-    private double cost = Double.POSITIVE_INFINITY;
+    private double cost = 1.0;
     private Vertex<T> pred = null;
 
     public Vertex(T data, String name) {
