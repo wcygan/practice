@@ -106,7 +106,7 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
                 return deleteNodeOneChild(parent, toDelete);
             }
             case 2 -> {
-                return deleteNodeTwoChildren(parent, toDelete);
+                return deleteNodeTwoChildren(toDelete);
             }
             default -> {
                 throw new Error("unreachable");
@@ -147,7 +147,7 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
         return true;
     }
 
-    private boolean deleteNodeTwoChildren(Node<T> parent, Node<T> toDelete) {
+    private boolean deleteNodeTwoChildren(Node<T> toDelete) {
         var replacerNode = smallestNodeInRightSubtree(toDelete.right);
 
         if (Optional.ofNullable(replacerNode).isEmpty()) {
