@@ -24,6 +24,53 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
         return search(root, data);
     }
 
+    @Override
+    public boolean insert(T data) {
+        Node<T> toAdd = new Node<>(data);
+
+        if (Optional.ofNullable(this.root).isEmpty()) {
+            this.root = toAdd;
+            return true;
+        }
+
+        return insert(null, this.root, toAdd);
+    }
+
+    @Override
+    public boolean delete(T data) {
+        return delete(null, this.root, data);
+    }
+
+    @Override
+    public T minimum() {
+        if (root == null) {
+            return null;
+        }
+
+        var curr = root;
+
+        while (Optional.ofNullable(curr.left).isPresent()) {
+            curr = curr.left;
+        }
+
+        return curr.data;
+    }
+
+    @Override
+    public T maximum() {
+        if (root == null) {
+            return null;
+        }
+
+        var curr = root;
+
+        while (Optional.ofNullable(curr.right).isPresent()) {
+            curr = curr.right;
+        }
+
+        return curr.data;
+    }
+
     private boolean search(Node<T> root, T data) {
         if (Optional.ofNullable(root).isEmpty()) {
             return false;
@@ -35,18 +82,6 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
 
         Node<T> next = is(data).lessThan(root.data) ? root.left : root.right;
         return search(next, data);
-    }
-
-    @Override
-    public boolean insert(T data) {
-        Node<T> toAdd = new Node<>(data);
-
-        if (Optional.ofNullable(this.root).isEmpty()) {
-            this.root = toAdd;
-            return true;
-        }
-
-        return insert(null, this.root, toAdd);
     }
 
     private boolean insert(Node<T> parent, Node<T> current, Node<T> toAdd) {
@@ -68,10 +103,6 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
         return insert(current, next, toAdd);
     }
 
-    @Override
-    public boolean delete(T data) {
-        return delete(null, this.root, data);
-    }
 
     private boolean delete(Node<T> parent, Node<T> current, T data) {
         if (Optional.ofNullable(current).isEmpty()) {
@@ -170,36 +201,6 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
         }
 
         return curr;
-    }
-
-    @Override
-    public T minimum() {
-        if (root == null) {
-            return null;
-        }
-
-        var curr = root;
-
-        while (Optional.ofNullable(curr.left).isPresent()) {
-            curr = curr.left;
-        }
-
-        return curr.data;
-    }
-
-    @Override
-    public T maximum() {
-        if (root == null) {
-            return null;
-        }
-
-        var curr = root;
-
-        while (Optional.ofNullable(curr.right).isPresent()) {
-            curr = curr.right;
-        }
-
-        return curr.data;
     }
 
     private static class Node<T extends Comparable<T>> {
