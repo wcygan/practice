@@ -1,7 +1,7 @@
 package io.wcygan.algorithms.graph.pathfinding;
 
 import io.wcygan.collections.graph.Graph;
-import io.wcygan.collections.graph.SimpleGraph;
+import io.wcygan.collections.graph.GraphBuilder;
 import io.wcygan.collections.graph.Vertex;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -42,30 +42,14 @@ public class UnweightedShortestPathTest {
     @MethodSource("unweightedShortestPathGraphProvider")
     public void testUnweightedShortestPath(
             int start, int end, Integer[][] edges, Integer[][] expectedEdges) {
-        Graph<Integer> initial = buildGraph(edges);
+        Graph<Integer> initial = GraphBuilder.unweightedGraph(edges);
 
         Vertex<Integer> startingVertex = initial.getVertex(Integer.toString(start));
         Vertex<Integer> endingVertex = initial.getVertex(Integer.toString(end));
 
         Graph<Integer> actual = ShortestPath.Dijkstra(initial, startingVertex, endingVertex);
-        Graph<Integer> expected = buildGraph(expectedEdges);
+        Graph<Integer> expected = GraphBuilder.unweightedGraph(expectedEdges);
 
         Helpers.validateShortestPath(actual, expected, start, end, expectedEdges.length);
-    }
-
-    private <T> Graph<T> buildGraph(T[][] edges) {
-        Graph<T> graph = new SimpleGraph<>();
-
-        for (T[] edge : edges) {
-            T first = edge[0];
-            T second = edge[1];
-
-            Vertex<T> from = graph.addNamedVertex(first, first.toString());
-            Vertex<T> to = graph.addNamedVertex(second, second.toString());
-
-            graph.addEdge(from, to);
-        }
-
-        return graph;
     }
 }

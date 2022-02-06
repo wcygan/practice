@@ -6,6 +6,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     private Color color;
     private double cost = 1.0;
     private Vertex<T> pred = null;
+    private boolean visited = false;
 
     public Vertex(T data, String name) {
         this.data = data;
@@ -43,6 +44,14 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
 
     public void setPred(Vertex<T> pred) {
         this.pred = pred;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     @Override
