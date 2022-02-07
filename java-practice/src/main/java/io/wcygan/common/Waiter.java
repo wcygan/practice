@@ -1,4 +1,4 @@
-package io.wcygan.utilities;
+package io.wcygan.common;
 
 public class Waiter {
     public static void sleepMs(long ms) {
