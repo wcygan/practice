@@ -39,13 +39,18 @@ public class LinkedList<T> implements List<T> {
     public T remove(int index) {
         Node<T> prev = head;
         Node<T> curr = head;
+
         for (int i = 0; i < index; i++) {
             prev = curr;
             curr = curr.next;
         }
 
-        prev.link(curr.next);
-        curr.unlink();
+        if (curr == head) {
+            head = curr.next;
+        } else {
+            prev.link(curr.next);
+        }
+
         size--;
 
         return curr.data;
@@ -74,10 +79,6 @@ public class LinkedList<T> implements List<T> {
 
         void link(Node<T> other) {
             this.next = other;
-        }
-
-        void unlink() {
-            this.next = null;
         }
     }
 }

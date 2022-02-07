@@ -1,6 +1,7 @@
 package io.wcygan.collections.queue;
 
-import java.util.LinkedList;
+
+import io.wcygan.collections.list.LinkedList;
 
 public class SimpleUnboundedQueue<T> implements Queue<T> {
 
@@ -17,6 +18,7 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
 
     @Override
     public T remove() {
+
         return queue.remove(0);
     }
 }
