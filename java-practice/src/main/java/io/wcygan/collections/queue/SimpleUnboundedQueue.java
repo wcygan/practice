@@ -18,7 +18,6 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
 
     @Override
     public T remove() {
-
         return queue.remove(0);
     }
 }
