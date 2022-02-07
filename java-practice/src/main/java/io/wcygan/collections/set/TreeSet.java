@@ -1,6 +1,4 @@
-package io.wcygan.collections.tree;
-
-import io.wcygan.collections.set.Set;
+package io.wcygan.collections.set;
 
 import java.util.Optional;
 

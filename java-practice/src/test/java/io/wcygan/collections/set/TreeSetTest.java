@@ -1,6 +1,5 @@
 package io.wcygan.collections.set;
 
-import io.wcygan.collections.tree.TreeSet;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
