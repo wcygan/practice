@@ -3,14 +3,10 @@ package io.wcygan.collections.dictionary;
 import java.util.Collection;
 import java.util.Set;
 
-import static org.apache.commons.lang3.compare.ComparableUtils.is;
+import static io.wcygan.common.Utilities.isLessThan;
 
 public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     Tree<K, V> root;
-
-    private static <T extends Comparable<T>> boolean isLessThan(T left, T right) {
-        return is(left).lessThan(right);
-    }
 
     @Override
     public int size() {

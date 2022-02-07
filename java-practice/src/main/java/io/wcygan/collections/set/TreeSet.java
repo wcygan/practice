@@ -1,9 +1,10 @@
 package io.wcygan.collections.set;
 
+import io.wcygan.common.Utilities;
+
 import java.util.Optional;
 
-import static org.apache.commons.lang3.compare.ComparableUtils.is;
-
+import static io.wcygan.common.Utilities.isLessThan;
 
 public class TreeSet<T extends Comparable<T>> implements Set<T> {
 
@@ -11,10 +12,6 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
 
     public TreeSet() {
         this.root = null;
-    }
-
-    private static <T extends Comparable<T>> boolean isLessThan(T left, T right) {
-        return is(left).lessThan(right);
     }
 
     @Override
@@ -78,7 +75,7 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
             return true;
         }
 
-        Node<T> next = is(data).lessThan(root.data) ? root.left : root.right;
+        Node<T> next = isLessThan(data, root.data) ? root.left : root.right;
         return search(next, data);
     }
 
@@ -216,7 +213,7 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
         }
 
         public boolean isLessThan(T data) {
-            return TreeSet.isLessThan(this.data, data);
+            return Utilities.isLessThan(this.data, data);
         }
 
     }
