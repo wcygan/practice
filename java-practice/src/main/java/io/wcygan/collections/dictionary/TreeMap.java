@@ -1,7 +1,9 @@
 package io.wcygan.collections.dictionary;
 
-import java.util.Collection;
-import java.util.Set;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.wcygan.common.Utilities.isLessThan;
 
@@ -43,7 +45,11 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public V remove(K key) {
-        throw new Error("Not Implemented");
+        if (key == null) {
+            throw new NullPointerException("key is null");
+        }
+
+        return remove(null, this.root, key);
     }
 
     @Override
@@ -53,12 +59,31 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        throw new Error("Not Implemented");
+        return entrySet().stream().map(Pair::getKey).collect(Collectors.toSet());
     }
 
     @Override
     public Collection<V> values() {
-        throw new Error("Not Implemented");
+        return entrySet().stream().map(Pair::getValue).collect(Collectors.toList());
+    }
+
+    @Override
+    public Set<Pair<K, V>> entrySet() {
+        Set<Pair<K, V>> s = new HashSet<>();
+        Queue<Tree<K, V>> nodes = new ArrayDeque<>();
+
+        if (this.root != null) {
+            nodes.add(this.root);
+        }
+
+        while (!nodes.isEmpty()) {
+            var curr = nodes.remove();
+            s.add(Pair.of(curr.key, curr.value));
+            Optional.ofNullable(curr.left).ifPresent(nodes::add);
+            Optional.ofNullable(curr.right).ifPresent(nodes::add);
+        }
+
+        return s;
     }
 
     private int size(Tree<K, V> root) {
@@ -111,6 +136,10 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
         boolean smaller = isLessThan(tree.key, key);
         var subtree = smaller ? tree.left : tree.right;
         return get(subtree, key);
+    }
+
+    private V remove(Tree<K, V> parent, Tree<K, V> current, K key) {
+        throw new Error("Not Implemented");
     }
 
     private static class Tree<K extends Comparable<K>, V> {

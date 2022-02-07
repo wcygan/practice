@@ -4,6 +4,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +33,8 @@ public class DictionaryTest {
         assertNull(map.put(k2, v1));
         assertEquals(v1, map.get(k2));
         assertEquals(2, map.size());
+        assertEquals(List.of(v1, v2), map.values());
+        assertEquals(Set.of(k1, k2), map.keySet());
         map.clear();
         assertEquals(0, map.size());
         assertNull(map.get(k1));

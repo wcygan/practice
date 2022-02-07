@@ -1,5 +1,7 @@
 package io.wcygan.collections.dictionary;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -161,6 +163,7 @@ public interface Map<K, V> {
      */
     Collection<V> values();
 
+    Set<Pair<K, V>> entrySet();
 
     /**
      * If the specified key is not already associated with a value (or is mapped

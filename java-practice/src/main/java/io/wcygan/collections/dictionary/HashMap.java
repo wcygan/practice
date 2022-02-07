@@ -1,5 +1,7 @@
 package io.wcygan.collections.dictionary;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -46,6 +48,11 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public Collection<V> values() {
+        throw new Error("Not Implemented");
+    }
+
+    @Override
+    public Set<Pair<K, V>> entrySet() {
         throw new Error("Not Implemented");
     }
 }
