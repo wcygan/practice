@@ -20,7 +20,7 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        throw new Error("Not Implemented");
+        return get(key) != null;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-        throw new Error("Not Implemented");
+        this.root = null;
     }
 
     @Override
