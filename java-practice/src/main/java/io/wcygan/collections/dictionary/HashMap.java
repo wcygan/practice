@@ -15,12 +15,12 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(K key) {
         throw new Error("Not Implemented");
     }
 
     @Override
-    public V get(Object key) {
+    public V get(K key) {
         throw new Error("Not Implemented");
     }
 
@@ -30,7 +30,7 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     @Override
-    public V remove(Object key) {
+    public V remove(K key) {
         throw new Error("Not Implemented");
     }
 

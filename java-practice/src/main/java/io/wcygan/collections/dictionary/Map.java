@@ -32,14 +32,11 @@ public interface Map<K, V> {
      * @param key key whose presence in this map is to be tested
      * @return {@code true} if this map contains a mapping for the specified
      * key
-     * @throws ClassCastException   if the key is of an inappropriate type for
-     *                              this map
-     *                              (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
      * @throws NullPointerException if the specified key is null and this map
      *                              does not permit null keys
      *                              (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    boolean containsKey(Object key);
+    boolean containsKey(K key);
 
     /**
      * Returns the value to which the specified key is mapped,
@@ -60,14 +57,11 @@ public interface Map<K, V> {
      * @param key the key whose associated value is to be returned
      * @return the value to which the specified key is mapped, or
      * {@code null} if this map contains no mapping for the key
-     * @throws ClassCastException   if the key is of an inappropriate type for
-     *                              this map
-     *                              (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
-     * @throws NullPointerException if the specified key is null and this map
-     *                              does not permit null keys
-     *                              (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
+     * * @throws NullPointerException if the specified key is null and this map
+     * does not permit null keys
+     * (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    V get(Object key);
+    V get(K key);
 
     /**
      * Associates the specified value with the specified key in this map
@@ -118,14 +112,11 @@ public interface Map<K, V> {
      * {@code null} if there was no mapping for {@code key}.
      * @throws UnsupportedOperationException if the {@code remove} operation
      *                                       is not supported by this map
-     * @throws ClassCastException            if the key is of an inappropriate type for
-     *                                       this map
-     *                                       (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
      * @throws NullPointerException          if the specified key is null and this
      *                                       map does not permit null keys
      *                                       (<a href="{@docRoot}/java.base/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    V remove(Object key);
+    V remove(K key);
 
     /**
      * Removes all of the mappings from this map (optional operation).
