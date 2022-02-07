@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @param <T> the type of the values to sort
  */
-public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
+public class QuickSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
 
     @Override
     public void sort(List<T> lst) {

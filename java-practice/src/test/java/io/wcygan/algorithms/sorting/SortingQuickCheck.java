@@ -6,14 +6,13 @@ import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(JUnitQuickcheck.class)
 public class SortingQuickCheck {
 
-    private static final List<Sorter<Integer>> sorters = List.of(
+    private static final List<SortingAlgorithm<Integer>> ALGORITHMS = List.of(
             new QuickSort<>(),
             new SequentialMergeSort<>(),
             new ParallelMergeSort<>(),
@@ -21,15 +20,14 @@ public class SortingQuickCheck {
     );
 
     @Property(trials = 50)
-    public void testSortingAlgorithms(@Size(max = 50) List<Integer> actual) {
-        List<Integer> expected = new ArrayList<>(actual);
-        Collections.sort(expected);
-        sorters.forEach(sorter -> verifySort(sorter, expected, actual));
+    public void testSortingAlgorithms(@Size(max = 100) List<Integer> actual) {
+        List<Integer> expected = actual.stream().sorted().toList();
+        ALGORITHMS.forEach(algorithm -> verifySort(algorithm, expected, actual));
     }
 
-    private void verifySort(Sorter<Integer> sorter, List<Integer> expected, List<Integer> actual) {
+    private void verifySort(SortingAlgorithm<Integer> algorithm, List<Integer> expected, List<Integer> actual) {
         Collections.shuffle(actual);
-        sorter.sort(actual);
-        Assertions.assertEquals(expected, actual);
+        algorithm.sort(actual);
+        Assertions.assertEquals(expected, actual, "Testing " + algorithm.getClass().getName());
     }
 }

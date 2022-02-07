@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @param <T> the type of the values to sort
  */
-public interface Sorter<T extends Comparable<T>> {
+public interface SortingAlgorithm<T extends Comparable<T>> {
     static <T extends Comparable<T>> boolean isSorted(List<T> lst, boolean ascending) {
         for (int currentIndex = 0; currentIndex < lst.size() - 1; currentIndex++) {
             int nextIndex = currentIndex + 1;

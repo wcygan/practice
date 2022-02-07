@@ -3,7 +3,7 @@ package io.wcygan.algorithms.sorting;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SequentialMergeSort<T extends Comparable<T>> implements Sorter<T> {
+public class SequentialMergeSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
     protected static <T extends Comparable<T>> void mergeSort(List<T> lst) {
         if (lst.size() <= 1) {
             return;

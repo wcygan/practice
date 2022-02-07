@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
-public class ParallelMergeSort<T extends Comparable<T>> implements Sorter<T> {
+public class ParallelMergeSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
 
     private static final Integer PARALLELISM = 50;
 

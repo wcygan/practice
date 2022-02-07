@@ -1,12 +1,12 @@
 package io.wcygan.algorithms.miscellaneous;
 
-import io.wcygan.algorithms.sorting.Sorter;
+import io.wcygan.algorithms.sorting.SortingAlgorithm;
 
 import java.util.List;
 
 public class BinarySearch {
     public static <T extends Comparable<T>> int search(List<T> list, T toFind) {
-        if (!Sorter.isSorted(list, true)) {
+        if (!SortingAlgorithm.isSorted(list, true)) {
             return -1;
         }
 

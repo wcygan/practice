@@ -3,7 +3,7 @@ package io.wcygan.algorithms.sorting;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
+public class HeapSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
     @Override
     public void sort(List<T> lst) {
         /* make heap */
