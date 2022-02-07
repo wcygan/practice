@@ -179,15 +179,13 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             toDeleteParent = toDelete;
             toDelete = toDelete.left;
         }
-
-        var kv = Pair.of(toDelete.key, toDelete.value);
+        
+        // replace key and value with minimum of right subtree
+        toReplace.key = toDelete.key;
+        toReplace.value = toDelete.value;
 
         // delete minimum of right subtree
         delete(toDeleteParent, toDelete);
-
-        // replace key and value with minimum of right subtree
-        toReplace.key = kv.getKey();
-        toReplace.value = kv.getValue();
 
         return oldValue;
     }
