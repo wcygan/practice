@@ -10,11 +10,14 @@ public class DictionaryTest {
     @Test
     public void testHappyPath() {
         var map = new TreeMap<String, String>();
-        var k = "Hello";
+        var k1 = "Hello";
+        var k2 = "Bonjour";
         var v1 = "World";
-        var v2 = "Test";
-        assertNull(map.put(k, v1));
-        assertEquals(v1, map.put(k, v2));
-        assertEquals(v2, map.get(k));
+        var v2 = "Universe";
+        assertNull(map.put(k1, v1));
+        assertEquals(v1, map.put(k1, v2));
+        assertEquals(v2, map.get(k1));
+        assertNull(map.put(k2, v1));
+        assertEquals(v1, map.get(k2));
     }
 }
