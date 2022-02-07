@@ -13,7 +13,7 @@ import java.util.List;
 @RunWith(JUnitQuickcheck.class)
 public class SortingQuickCheck {
 
-    private static List<Sorter<Integer>> sorters = List.of(
+    private static final List<Sorter<Integer>> sorters = List.of(
             new QuickSort<>(),
             new SequentialMergeSort<>(),
             new ParallelMergeSort<>(),

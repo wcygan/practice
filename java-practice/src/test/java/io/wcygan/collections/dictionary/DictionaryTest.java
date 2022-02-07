@@ -1,16 +1,21 @@
 package io.wcygan.collections.dictionary;
 
+import com.pholser.junit.quickcheck.Property;
+import com.pholser.junit.quickcheck.generator.Size;
+import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.runner.RunWith;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
+@RunWith(JUnitQuickcheck.class)
 public class DictionaryTest {
 
     private static Stream<Arguments> mapProvider() {
@@ -35,9 +40,45 @@ public class DictionaryTest {
         assertEquals(2, map.size());
         assertEquals(List.of(v1, v2), map.values());
         assertEquals(Set.of(k1, k2), map.keySet());
-        map.clear();
+        assertEquals(v2, map.remove(k1));
+        assertEquals(v1, map.remove(k2));
+        assertFalse(map.containsKey(k1));
+        assertFalse(map.containsKey(k2));
         assertEquals(0, map.size());
         assertNull(map.get(k1));
         assertNull(map.get(k2));
+    }
+
+    @Property(trials = 25)
+    public void testTreeMapProperties(@Size(min = 10, max = 100) List<Integer> items) {
+        var uniques = new HashSet<>(items).stream().toList();
+        var map = new TreeMap<Integer, String>();
+        var v = "Hello World";
+
+        for (var k : uniques) {
+            assertNull(map.put(k, v));
+            assertTrue(map.containsKey(k));
+        }
+
+        assertEquals(uniques.size(), map.size());
+        assertFalse(map.isEmpty());
+
+        for (var k : uniques) {
+            assertEquals(v, map.get(k));
+            assertTrue(map.containsKey(k));
+        }
+
+        assertEquals(uniques.size(), map.size());
+        assertFalse(map.isEmpty());
+
+        for (var k : uniques) {
+            var res = map.remove(k);
+            assertNotNull(res);
+            assertEquals(v, res);
+            assertFalse(map.containsKey(k));
+        }
+
+        assertEquals(0, map.size());
+        assertTrue(map.isEmpty());
     }
 }

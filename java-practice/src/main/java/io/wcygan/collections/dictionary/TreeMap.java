@@ -49,7 +49,7 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             throw new NullPointerException("key is null");
         }
 
-        return remove(null, this.root, key);
+        return attemptDelete(null, this.root, key);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             return oldValue;
         }
 
-        boolean smaller = isLessThan(tree.key, key);
+        boolean smaller = isLessThan(key, tree.key);
         if (smaller && tree.left == null) {
             // Place the new root in the left subtree
             tree.left = Tree.root(key, value);
@@ -133,13 +133,89 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             return tree.value;
         }
 
-        boolean smaller = isLessThan(tree.key, key);
+        boolean smaller = isLessThan(key, tree.key);
         var subtree = smaller ? tree.left : tree.right;
         return get(subtree, key);
     }
 
-    private V remove(Tree<K, V> parent, Tree<K, V> current, K key) {
-        throw new Error("Not Implemented");
+    private V attemptDelete(Tree<K, V> parent, Tree<K, V> current, K key) {
+        if (current == null) {
+            return null;
+        }
+
+        if (current.key.equals(key)) {
+            return delete(parent, current);
+        }
+
+        var next = isLessThan(key, current.key) ? current.left : current.right;
+        return attemptDelete(current, next, key);
+    }
+
+    private V delete(Tree<K, V> parent, Tree<K, V> toDelete) {
+        if (toDelete == null) {
+            return null;
+        }
+
+        var hasLeft = toDelete.left != null;
+        var hasRight = toDelete.right != null;
+
+        if (hasLeft && hasRight) {
+            return deleteTreeWithTwoChildren(toDelete);
+        } else if (hasLeft || hasRight) {
+            return deleteTreeWithOneChild(parent, toDelete);
+        } else {
+            return deleteTreeWithNoChildren(parent, toDelete);
+        }
+    }
+
+    private V deleteTreeWithTwoChildren(Tree<K, V> toReplace) {
+        var oldValue = toReplace.value;
+
+        // find minimum of right subtree
+        var toDelete = toReplace.right;
+        var toDeleteParent = toReplace;
+
+        while (toDelete.left != null) {
+            toDeleteParent = toDelete;
+            toDelete = toDelete.left;
+        }
+
+        var kv = Pair.of(toDelete.key, toDelete.value);
+
+        // delete minimum of right subtree
+        delete(toDeleteParent, toDelete);
+
+        // replace key and value with minimum of right subtree
+        toReplace.key = kv.getKey();
+        toReplace.value = kv.getValue();
+
+        return oldValue;
+    }
+
+    private V deleteTreeWithOneChild(Tree<K, V> parent, Tree<K, V> toDelete) {
+        var child = Optional.ofNullable(toDelete.left).orElse(toDelete.right);
+
+        if (toDelete == this.root) {
+            this.root = child;
+        } else if (isLessThan(toDelete.key, parent.key)) {
+            parent.left = child;
+        } else {
+            parent.right = child;
+        }
+
+        return toDelete.value;
+    }
+
+    private V deleteTreeWithNoChildren(Tree<K, V> parent, Tree<K, V> toDelete) {
+        if (toDelete == this.root) {
+            this.root = null;
+        } else if (isLessThan(toDelete.key, parent.key)) {
+            parent.left = null;
+        } else {
+            parent.right = null;
+        }
+
+        return toDelete.value;
     }
 
     private static class Tree<K extends Comparable<K>, V> {
