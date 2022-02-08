@@ -20,7 +20,8 @@ public class DictionaryTest {
 
     private static Stream<Arguments> mapProvider() {
         return Stream.of(
-                Arguments.of(new TreeMap<String, String>())
+            Arguments.of(new TreeMap<String, String>()),
+            Arguments.of(new HashMap<String, String>())
         );
     }
 
@@ -52,33 +53,34 @@ public class DictionaryTest {
     @Property(trials = 25)
     public void testTreeMapProperties(@Size(min = 10, max = 100) List<Integer> items) {
         var uniques = new HashSet<>(items).stream().toList();
-        var map = new TreeMap<Integer, String>();
         var v = "Hello World";
 
-        for (var k : uniques) {
-            assertNull(map.put(k, v));
-            assertTrue(map.containsKey(k));
-        }
+        List.of(new HashMap<Integer, String>(), new TreeMap<Integer, String>()).forEach(map -> {
+            for (var k : uniques) {
+                assertNull(map.put(k, v));
+                assertTrue(map.containsKey(k));
+            }
 
-        assertEquals(uniques.size(), map.size());
-        assertFalse(map.isEmpty());
+            assertEquals(uniques.size(), map.size());
+            assertFalse(map.isEmpty());
 
-        for (var k : uniques) {
-            assertEquals(v, map.get(k));
-            assertTrue(map.containsKey(k));
-        }
+            for (var k : uniques) {
+                assertEquals(v, map.get(k));
+                assertTrue(map.containsKey(k));
+            }
 
-        assertEquals(uniques.size(), map.size());
-        assertFalse(map.isEmpty());
+            assertEquals(uniques.size(), map.size());
+            assertFalse(map.isEmpty());
 
-        for (var k : uniques) {
-            var res = map.remove(k);
-            assertNotNull(res);
-            assertEquals(v, res);
-            assertFalse(map.containsKey(k));
-        }
+            for (var k : uniques) {
+                var res = map.remove(k);
+                assertNotNull(res);
+                assertEquals(v, res);
+                assertFalse(map.containsKey(k));
+            }
 
-        assertEquals(0, map.size());
-        assertTrue(map.isEmpty());
+            assertEquals(0, map.size());
+            assertTrue(map.isEmpty());
+        });
     }
 }

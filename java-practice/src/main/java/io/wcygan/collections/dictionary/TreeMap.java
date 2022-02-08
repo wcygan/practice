@@ -113,10 +113,13 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             // Place the new root in the left subtree
             tree.left = Tree.root(key, value);
             return null;
+
         } else if (!smaller && tree.right == null) {
             // Place the new root in the right subtree
             tree.right = Tree.root(key, value);
             return null;
+
+
         } else {
             // Recurse down to the next subtree
             var subtree = smaller ? tree.left : tree.right;
@@ -179,7 +182,7 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
             toDeleteParent = toDelete;
             toDelete = toDelete.left;
         }
-        
+
         // replace key and value with minimum of right subtree
         toReplace.key = toDelete.key;
         toReplace.value = toDelete.value;

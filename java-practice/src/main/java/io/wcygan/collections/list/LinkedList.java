@@ -1,6 +1,5 @@
 package io.wcygan.collections.list;
 
-
 import java.util.Optional;
 
 public class LinkedList<T> implements List<T> {
