@@ -27,19 +27,25 @@ Find examples in these folders:
 
 ### General
 
+- [The Algorithm Design Manual](https://www.algorist.com/)
 - [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)
+- [Advanced Algorithms and Data Structures](https://www.oreilly.com/library/view/advanced-algorithms-and/9781617295485VE/)
 - [The Art of Multiprocessor Programming](https://www.oreilly.com/library/view/the-art-of/9780123705914/)
 
 ### Java
 
 - [Java Concurrency in Practice](https://jcip.net/)
 - [Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)
+- [Java Coding Problems](https://www.packtpub.com/product/java-coding-problems/9781789801415)
+- [Java Performance](https://www.oreilly.com/library/view/java-performance-2nd/9781492056102/)
+- [Optimizing Java](https://www.oreilly.com/library/view/optimizing-java/9781492039259/)
 
 ### Go
 
 - [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/)
 - [The Go Programming Language](https://www.gopl.io/)
 - [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/)
+- [Powerful Command-Line Applications in Go](https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/)
 - [Network Programming with Go](https://nostarch.com/networkprogrammingwithgo)
 - [Distributed Services with Go](https://pragprog.com/titles/tjgo/distributed-services-with-go/)
 
@@ -49,6 +55,7 @@ Find examples in these folders:
 - [Rust in Action](https://www.manning.com/books/rust-in-action)
 - [Rust for Rustaceans](https://nostarch.com/rust-rustaceans)
 - [Creative Projects for Rust Programmers](https://www.oreilly.com/library/view/creative-projects-for/9781789346220/)
+- [Command-Line Rust](https://www.oreilly.com/library/view/command-line-rust/9781098109424/)
 
 ## Directory Tree
 
