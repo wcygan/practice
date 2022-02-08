@@ -51,7 +51,7 @@ public class DictionaryTest {
     }
 
     @Property(trials = 25)
-    public void testTreeMapProperties(@Size(min = 10, max = 100) List<Integer> items) {
+    public void testMapProperties(@Size(min = 10, max = 100) List<Integer> items) {
         var uniques = new HashSet<>(items).stream().toList();
         var v = "Hello World";
 
