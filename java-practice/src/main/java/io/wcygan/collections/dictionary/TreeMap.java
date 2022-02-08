@@ -95,33 +95,32 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     private V put(Tree<K, V> tree, K key, V value) {
+        // if the tree is empty
         if (this.root == null) {
-            // The tree is empty
             this.root = Tree.root(key, value);
             return null;
         }
 
+        // If we've found the existing key
         if (tree.key.equals(key)) {
-            // We've found the existing key
             var oldValue = tree.value;
             tree.value = value;
             return oldValue;
         }
 
+        // Is the given key smaller than the key of the current tree root?
         boolean smaller = isLessThan(key, tree.key);
+
+        // if:       Place the new root in the left subtree
+        // else if:  Place the new root in the right subtree
+        // else:     Recurse down to the next subtree
         if (smaller && tree.left == null) {
-            // Place the new root in the left subtree
             tree.left = Tree.root(key, value);
             return null;
-
         } else if (!smaller && tree.right == null) {
-            // Place the new root in the right subtree
             tree.right = Tree.root(key, value);
             return null;
-
-
         } else {
-            // Recurse down to the next subtree
             var subtree = smaller ? tree.left : tree.right;
             return put(subtree, key, value);
         }
