@@ -1,4 +1,4 @@
-package io.wcygan.bits;
+package io.wcygan.common;
 
 import org.junit.jupiter.api.Test;
 

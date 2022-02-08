@@ -1,4 +1,4 @@
-package io.wcygan.bits;
+package io.wcygan.common;
 
 public class Bits {
     public static int multiplyByTwo(int n) {
