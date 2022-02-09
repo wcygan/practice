@@ -7,7 +7,7 @@ import java.util.*;
 import static io.wcygan.common.Utilities.isLessThan;
 
 public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
-    Tree<K, V> root;
+    Tree root;
 
     @Override
     public int size() {
@@ -54,7 +54,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
     @Override
     public Set<Pair<K, V>> entrySet() {
         Set<Pair<K, V>> s = new HashSet<>();
-        Queue<Tree<K, V>> nodes = new ArrayDeque<>();
+        Queue<Tree> nodes = new ArrayDeque<>();
 
         if (this.root != null) {
             nodes.add(this.root);
@@ -80,17 +80,17 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return max(root);
     }
 
-    private K min(Tree<K, V> x) {
+    private K min(Tree x) {
         if (x.left == null) return x.key;
         else return min(x.left);
     }
 
-    private K max(Tree<K, V> x) {
+    private K max(Tree x) {
         if (x.right == null) return x.key;
         else return max(x.right);
     }
 
-    private int size(Tree<K, V> root) {
+    private int size(Tree root) {
         if (root == null) {
             return 0;
         }
@@ -98,10 +98,10 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return 1 + size(root.left) + size(root.right);
     }
 
-    private V put(Tree<K, V> tree, K key, V value) {
+    private V put(Tree tree, K key, V value) {
         // if the tree is empty
         if (this.root == null) {
-            this.root = Tree.root(key, value);
+            this.root = new Tree(key, value);
             return null;
         }
 
@@ -119,10 +119,10 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         // else if:  Place the new root in the right subtree
         // else:     Recurse down to the next subtree
         if (smaller && tree.left == null) {
-            tree.left = Tree.root(key, value);
+            tree.left = new Tree(key, value);
             return null;
         } else if (!smaller && tree.right == null) {
-            tree.right = Tree.root(key, value);
+            tree.right = new Tree(key, value);
             return null;
         } else {
             var subtree = smaller ? tree.left : tree.right;
@@ -130,7 +130,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         }
     }
 
-    private V get(Tree<K, V> tree, K key) {
+    private V get(Tree tree, K key) {
         if (tree == null) {
             return null;
         }
@@ -144,7 +144,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return get(subtree, key);
     }
 
-    private V attemptDelete(Tree<K, V> parent, Tree<K, V> current, K key) {
+    private V attemptDelete(Tree parent, Tree current, K key) {
         if (current == null) {
             return null;
         }
@@ -157,7 +157,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return attemptDelete(current, next, key);
     }
 
-    private V delete(Tree<K, V> parent, Tree<K, V> toDelete) {
+    private V delete(Tree parent, Tree toDelete) {
         if (toDelete == null) {
             return null;
         }
@@ -174,7 +174,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         }
     }
 
-    private V deleteTreeWithTwoChildren(Tree<K, V> toReplace) {
+    private V deleteTreeWithTwoChildren(Tree toReplace) {
         var oldValue = toReplace.value;
 
         // find minimum of right subtree
@@ -196,7 +196,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return oldValue;
     }
 
-    private V deleteTreeWithOneChild(Tree<K, V> parent, Tree<K, V> toDelete) {
+    private V deleteTreeWithOneChild(Tree parent, Tree toDelete) {
         var child = Optional.ofNullable(toDelete.left).orElse(toDelete.right);
 
         if (toDelete == this.root) {
@@ -210,7 +210,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return toDelete.value;
     }
 
-    private V deleteTreeWithNoChildren(Tree<K, V> parent, Tree<K, V> toDelete) {
+    private V deleteTreeWithNoChildren(Tree parent, Tree toDelete) {
         if (toDelete == this.root) {
             this.root = null;
         } else if (isLessThan(toDelete.key, parent.key)) {
@@ -222,19 +222,15 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return toDelete.value;
     }
 
-    private static class Tree<K extends Comparable<K>, V> {
+    private class Tree {
         K key;
         V value;
-        Tree<K, V> left;
-        Tree<K, V> right;
+        Tree left;
+        Tree right;
 
         private Tree(K key, V value) {
             this.key = key;
             this.value = value;
-        }
-
-        public static <K extends Comparable<K>, V> Tree<K, V> root(K key, V value) {
-            return new Tree<>(key, value);
         }
     }
 }
