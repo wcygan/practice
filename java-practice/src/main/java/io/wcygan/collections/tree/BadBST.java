@@ -70,6 +70,26 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return s;
     }
 
+    @Override
+    public K smallestKey() {
+        return min(root);
+    }
+
+    @Override
+    public K largestKey() {
+        return max(root);
+    }
+
+    private K min(Tree<K, V> x) {
+        if (x.left == null) return x.key;
+        else return min(x.left);
+    }
+
+    private K max(Tree<K, V> x) {
+        if (x.right == null) return x.key;
+        else return max(x.right);
+    }
+
     private int size(Tree<K, V> root) {
         if (root == null) {
             return 0;

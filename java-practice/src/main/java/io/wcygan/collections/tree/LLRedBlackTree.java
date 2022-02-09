@@ -63,6 +63,16 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
         return s;
     }
 
+    @Override
+    public K smallestKey() {
+        return min(root);
+    }
+
+    @Override
+    public K largestKey() {
+        return max(root);
+    }
+
     private int size(Node x) {
         if (x == null) return 0;
         else return 1 + size(x.left) + size(x.right);
@@ -84,8 +94,15 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
     }
 
     private K min(Node x) {
+        if (x == null) return null;
         if (x.left == null) return x.key;
         else return min(x.left);
+    }
+
+    private K max(Node x) {
+        if (x == null) return null;
+        if (x.right == null) return x.key;
+        else return max(x.right);
     }
 
     private void put(K key, V value) {
