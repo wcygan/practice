@@ -12,7 +12,7 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
 
     @Override
     public V search(K key) {
-        return get(key);
+        return get(root, key);
     }
 
     @Override
@@ -82,16 +82,20 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
         return (get(key) != null);
     }
 
-    public V get(K key) {
+    private V get(K key) {
         return get(root, key);
     }
 
     private V get(Node x, K key) {
-        if (x == null) return null;
-        if (eq(key, x.key)) return x.value;
-        if (less(key, x.key)) return get(x.left, key);
-        else return get(x.right, key);
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+            if (cmp == 0) return x.value;
+            else if (cmp < 0) x = x.left;
+            else x = x.right;
+        }
+        return null;
     }
+
 
     private K min(Node x) {
         if (x == null) return null;
