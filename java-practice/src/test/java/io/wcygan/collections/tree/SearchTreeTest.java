@@ -1,6 +1,7 @@
 package io.wcygan.collections.tree;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -18,20 +19,24 @@ public class SearchTreeTest {
 
     private static Stream<Arguments> treeProvider() {
         return Stream.of(
-            Arguments.of(new LLRedBlackTree<String, String>())
+                Arguments.of(new LLRedBlackTree<>())
         );
     }
 
-    //    @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("treeProvider")
     public void testSingleNode(SearchTree<String, String> tree) {
         assertFalse(tree.containsKey(K));
         assertNull(tree.insert(K, V));
         assertTrue(tree.containsKey(K));
         assertEquals(V, tree.search(K));
+        var removed = tree.remove(K);
+        assertNotNull(removed);
+        assertEquals(V, removed);
+        assertFalse(tree.containsKey(K));
     }
 
-    //    @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("treeProvider")
     public void testManyNodes(SearchTree<String, String> tree) {
         var uniques = randomUniqueStrings();
@@ -50,10 +55,8 @@ public class SearchTreeTest {
         for (int i = 0; i < count; i++) {
             var k = uniques.get(i);
             var v = uniques.get(count - i - 1);
-
             assertTrue(tree.containsKey(k));
             var removed = tree.remove(k);
-
             assertNotNull(removed);
             assertEquals(v, removed);
             assertFalse(tree.containsKey(k));
@@ -62,10 +65,10 @@ public class SearchTreeTest {
     }
 
     private List<String> randomUniqueStrings() {
-        return IntStream.range(0, 100)
-            .mapToObj(idx -> RandomStringUtils.random(25, true, true))
-            .collect(Collectors.toSet())
-            .stream()
-            .toList();
+        return IntStream.range(0, 100_000)
+                .mapToObj(idx -> RandomStringUtils.random(25, true, true))
+                .collect(Collectors.toSet())
+                .stream()
+                .toList();
     }
 }
