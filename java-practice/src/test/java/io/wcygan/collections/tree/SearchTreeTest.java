@@ -19,7 +19,8 @@ public class SearchTreeTest {
 
     private static Stream<Arguments> treeProvider() {
         return Stream.of(
-                Arguments.of(new LLRedBlackTree<>())
+                Arguments.of(new LLRedBlackTree<>()),
+                Arguments.of(new BadBST<>())
         );
     }
 
@@ -30,6 +31,12 @@ public class SearchTreeTest {
         assertNull(tree.insert(K, V));
         assertTrue(tree.containsKey(K));
         assertEquals(V, tree.search(K));
+        var es = tree.entrySet();
+        assertEquals(1, es.size());
+        var fst = es.stream().findFirst();
+        assertFalse(fst.isEmpty());
+        assertEquals(K, fst.get().getKey());
+        assertEquals(V, fst.get().getValue());
         var removed = tree.remove(K);
         assertNotNull(removed);
         assertEquals(V, removed);

@@ -1,37 +1,66 @@
 package io.wcygan.collections.tree;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+
 // Adapted from https://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
-public class LLRedBlackTree<Key extends Comparable<Key>, Value> implements SearchTree<Key, Value> {
+public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K, V> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
     private Node root;
 
     @Override
-    public Value search(Key key) {
+    public V search(K key) {
         return get(key);
     }
 
     @Override
-    public Value insert(Key key, Value value) {
+    public V insert(K key, V value) {
         var old = get(key);
         put(key, value);
         return old;
     }
 
     @Override
-    public Value remove(Key key) {
+    public V remove(K key) {
         var old = get(key);
         delete(key);
         return old;
     }
 
     @Override
-    public boolean containsKey(Key key) {
+    public boolean containsKey(K key) {
         return contains(key);
     }
 
+    @Override
     public int size() {
         return size(root);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    @Override
+    public Set<Pair<K, V>> entrySet() {
+        Set<Pair<K, V>> s = new HashSet<>();
+        Queue<Node> nodes = new ArrayDeque<>();
+
+        if (this.root != null) {
+            nodes.add(this.root);
+        }
+
+        while (!nodes.isEmpty()) {
+            var curr = nodes.remove();
+            s.add(Pair.of(curr.key, curr.value));
+            Optional.ofNullable(curr.left).ifPresent(nodes::add);
+            Optional.ofNullable(curr.right).ifPresent(nodes::add);
+        }
+
+        return s;
     }
 
     private int size(Node x) {
@@ -39,32 +68,32 @@ public class LLRedBlackTree<Key extends Comparable<Key>, Value> implements Searc
         else return 1 + size(x.left) + size(x.right);
     }
 
-    private boolean contains(Key key) {
+    private boolean contains(K key) {
         return (get(key) != null);
     }
 
-    public Value get(Key key) {
+    public V get(K key) {
         return get(root, key);
     }
 
-    private Value get(Node x, Key key) {
+    private V get(Node x, K key) {
         if (x == null) return null;
         if (eq(key, x.key)) return x.value;
         if (less(key, x.key)) return get(x.left, key);
         else return get(x.right, key);
     }
 
-    private Key min(Node x) {
+    private K min(Node x) {
         if (x.left == null) return x.key;
         else return min(x.left);
     }
 
-    private void put(Key key, Value value) {
+    private void put(K key, V value) {
         root = insert(root, key, value);
         root.color = BLACK;
     }
 
-    private Node insert(Node h, Key key, Value value) {
+    private Node insert(Node h, K key, V value) {
         if (h == null)
             return new Node(key, value);
 
@@ -99,14 +128,14 @@ public class LLRedBlackTree<Key extends Comparable<Key>, Value> implements Searc
         return fixUp(h);
     }
 
-    public void delete(Key key) {
+    public void delete(K key) {
         root = delete(root, key);
         if (root != null) {
             root.color = BLACK;
         }
     }
 
-    private Node delete(Node h, Key key) {
+    private Node delete(Node h, K key) {
         if (less(key, h.key)) {
             if (!isRed(h.left) && !isRed(h.left.left))
                 h = moveRedLeft(h);
@@ -137,11 +166,11 @@ public class LLRedBlackTree<Key extends Comparable<Key>, Value> implements Searc
         return fixUp(h);
     }
 
-    private boolean less(Key a, Key b) {
+    private boolean less(K a, K b) {
         return a.compareTo(b) < 0;
     }
 
-    private boolean eq(Key a, Key b) {
+    private boolean eq(K a, K b) {
         return a.compareTo(b) == 0;
     }
 
@@ -207,12 +236,12 @@ public class LLRedBlackTree<Key extends Comparable<Key>, Value> implements Searc
     }
 
     private class Node {
-        Key key;
-        Value value;
+        K key;
+        V value;
         Node left, right;
         boolean color;
 
-        Node(Key key, Value value) {
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.color = RED;

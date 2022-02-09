@@ -13,8 +13,8 @@ import java.util.function.Supplier;
 public class CachedFibonacciSpeedTest {
 
     // from https://www.math.net/list-of-fibonacci-numbers
-    private static final Integer NUMBER = 42;
-    private static final BigInteger ANSWER = new BigInteger("267914296");
+    private static final Integer NUMBER = 33;
+    private static final BigInteger ANSWER = new BigInteger("3524578");
     private final Logger LOGGER = LoggerFactory.getLogger(CachedFibonacciSpeedTest.class);
 
     /**

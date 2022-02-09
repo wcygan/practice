@@ -1,6 +1,17 @@
 package io.wcygan.collections.tree;
 
-public interface SearchTree<Key extends Comparable<Key>, Value> {
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Set;
+
+public interface SearchTree<K extends Comparable<K>, V> {
+
+    int size();
+
+    boolean isEmpty();
+
+    Set<Pair<K, V>> entrySet();
+
     /**
      * Searches the tree for a given key
      *
@@ -8,7 +19,7 @@ public interface SearchTree<Key extends Comparable<Key>, Value> {
      * @return the value to which the specified key is currently associated with,
      * or {@code null} if this map contains no mapping for the key
      */
-    Value search(Key key);
+    V search(K key);
 
     /**
      * Inserts the key, value pair into the tree. If the specified key already exists,
@@ -19,7 +30,7 @@ public interface SearchTree<Key extends Comparable<Key>, Value> {
      * @return the value to which the specified key is currently associated with,
      * or {@code null} if this map contains no mapping for the key
      */
-    Value insert(Key key, Value value);
+    V insert(K key, V value);
 
     /**
      * Removes the key, value pair from the tree if the specified key exists
@@ -28,7 +39,7 @@ public interface SearchTree<Key extends Comparable<Key>, Value> {
      * @return the value to which the specified key is currently associated with,
      * or {@code null} if this map contains no mapping for the key
      */
-    Value remove(Key key);
+    V remove(K key);
 
     /**
      * Determines if the tree contains the specified key
@@ -37,5 +48,5 @@ public interface SearchTree<Key extends Comparable<Key>, Value> {
      *            Returns {@code true} if and only if the tree contains a mapping
      *            for a key {@code k} such that {@code Objects.equals(key, k)}.
      */
-    boolean containsKey(Key key);
+    boolean containsKey(K key);
 }
