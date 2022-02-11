@@ -26,8 +26,8 @@ public class PriorityQueue<T> implements Queue<T> {
 
         int i = n - 1;
 
-        while (i != 0 && comesBefore(getParent(i), (T) heap[i])) {
-            T temp = (T) heap[i];
+        while (i != 0 && comesBefore(getParent(i), get(i))) {
+            T temp = get(i);
             heap[i] = heap[parent(i)];
             heap[parent(i)] = temp;
             i = parent(i);
@@ -36,7 +36,7 @@ public class PriorityQueue<T> implements Queue<T> {
 
     @Override
     public T remove() {
-        T maxItem = (T) heap[0];
+        T maxItem = get(0);
         heap[0] = heap[n - 1];
         n -= 1;
         heapify(0);
@@ -54,32 +54,28 @@ public class PriorityQueue<T> implements Queue<T> {
 
         int largest = i;
 
-        if (left <= n && comparator.compare((T) heap[left], (T) heap[largest]) > 0) {
+        if (left <= n && comparator.compare(get(left), get(largest)) > 0) {
             largest = left;
         }
 
-        if (right <= n && comparator.compare((T) heap[right], (T) heap[largest]) > 0) {
+        if (right <= n && comparator.compare(get(right), get(largest)) > 0) {
             largest = right;
         }
 
         if (largest != i) {
-            T temp = (T) heap[i];
+            T temp = get(i);
             heap[i] = heap[largest];
             heap[largest] = temp;
             heapify(largest);
         }
     }
 
+    private T get(int i) {
+        return (T) heap[i];
+    }
+
     private T getParent(int i) {
-        return (T) heap[parent(i)];
-    }
-
-    private T getLeftChild(int i) {
-        return (T) heap[leftChild(i)];
-    }
-
-    private T getRightChild(int i) {
-        return (T) heap[rightChild(i)];
+        return get(parent(i));
     }
 
     private int parent(int i) {
