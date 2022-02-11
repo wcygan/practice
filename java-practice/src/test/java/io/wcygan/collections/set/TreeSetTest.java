@@ -16,7 +16,7 @@ public class TreeSetTest {
         assertNull(s.minimum());
         assertNull(s.maximum());
         for (int i = 0; i < 10; i++) {
-            assertNull(s.insert(i));
+            assertTrue(s.insert(i));
             assertTrue(s.contains(i));
         }
         assertEquals(s.minimum(), 0);
@@ -30,7 +30,7 @@ public class TreeSetTest {
             assertFalse(s.contains(i));
         }
     }
-    
+
     @Test
     public void randomInsertions() {
         Random random = new Random();
@@ -41,8 +41,8 @@ public class TreeSetTest {
 
         Set<Integer> s = new TreeSet<>();
         for (var key : keys) {
-            assertNull(s.insert(key));
-            assertNotNull(s.insert(key));
+            assertTrue(s.insert(key));
+            assertFalse(s.insert(key));
             assertTrue(s.contains(key));
         }
 
@@ -54,9 +54,9 @@ public class TreeSetTest {
     public void insertAndDeleteSequentially() {
         Set<Integer> s = new TreeSet<>();
         for (int i = 0; i < 10; i++) {
-            assertNull(s.insert(i));
+            assertTrue(s.insert(i));
             assertTrue(s.contains(i));
-            assertNotNull(s.delete(i));
+            assertTrue(s.delete(i));
             assertFalse(s.contains(i));
         }
     }
@@ -65,12 +65,12 @@ public class TreeSetTest {
     public void insertAllThenDeleteAll() {
         Set<Integer> s = new TreeSet<>();
         for (int i = 0; i < 10; i++) {
-            assertNull(s.insert(i));
+            assertTrue(s.insert(i));
             assertTrue(s.contains(i));
         }
 
         for (int i = 0; i < 10; i++) {
-            assertNotNull(s.delete(i));
+            assertTrue(s.delete(i));
             assertFalse(s.contains(i));
         }
     }
@@ -82,10 +82,10 @@ public class TreeSetTest {
 
         Set<Integer> s = new TreeSet<>();
         for (var key : keys) {
-            assertNull(s.insert(key));
-            assertNotNull(s.insert(key));
+            assertTrue(s.insert(key));
+            assertFalse(s.insert(key));
             assertTrue(s.contains(key));
-            assertNotNull(s.delete(key));
+            assertTrue(s.delete(key));
             assertFalse(s.contains(key));
         }
     }
@@ -97,14 +97,14 @@ public class TreeSetTest {
 
         Set<Integer> s = new TreeSet<>();
         for (var key : keys) {
-            assertNull(s.insert(key));
-            assertNotNull(s.insert(key));
+            assertTrue(s.insert(key));
+            assertFalse(s.insert(key));
             assertTrue(s.contains(key));
         }
 
         for (var key : keys) {
             assertTrue(s.contains(key));
-            assertNotNull(s.delete(key));
+            assertTrue(s.delete(key));
             assertFalse(s.contains(key));
         }
     }

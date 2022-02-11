@@ -5,8 +5,8 @@ import io.wcygan.collections.tree.SearchTree;
 
 public class TreeSet<T extends Comparable<T>> implements Set<T> {
 
-    SearchTree<T, T> tree = new LLRedBlackTree<>();
-    ;
+    private static final Object PRESENT = new Object();
+    private final SearchTree<T, Object> tree = new LLRedBlackTree<>();
 
     @Override
     public boolean contains(T data) {
@@ -14,13 +14,18 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
     }
 
     @Override
-    public T insert(T data) {
-        return tree.insert(data, data);
+    public boolean insert(T data) {
+        if (tree.containsKey(data)) {
+            return false;
+        } else {
+            tree.insert(data, PRESENT);
+            return true;
+        }
     }
 
     @Override
-    public T delete(T data) {
-        return tree.remove(data);
+    public boolean delete(T data) {
+        return tree.remove(data) != null;
     }
 
     @Override
