@@ -25,4 +25,9 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
     public T peek() {
         return queue.get(0);
     }
+
+    @Override
+    public boolean isEmpty() {
+        return peek() == null;
+    }
 }

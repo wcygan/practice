@@ -22,4 +22,6 @@ public interface Queue<T> {
     T remove();
 
     T peek();
+
+    boolean isEmpty();
 }

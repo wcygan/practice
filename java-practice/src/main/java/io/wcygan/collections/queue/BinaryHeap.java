@@ -47,6 +47,11 @@ public class BinaryHeap<T> implements Queue<T> {
         return get(0);
     }
 
+    @Override
+    public boolean isEmpty() {
+        return n == 0;
+    }
+
     private void growHeap() {
         maxHeapSize *= 2;
         heap = Arrays.copyOf(heap, maxHeapSize);

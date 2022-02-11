@@ -25,10 +25,10 @@ public class IntegerListGenerator extends ComponentizedGenerator<List> {
         int listSize = 0;
         if (rng >= 0 && rng <= 16) {
             listSize = sourceOfRandomness.nextInt(0, 100);
-        } else if (rng >= 17 && rng <= 18) {
-            listSize = sourceOfRandomness.nextInt(1000, 10_000);
-        } else if (rng >= 19 && rng <= 20) {
-            listSize = sourceOfRandomness.nextInt(10_000, 100_000);
+        } else if (rng >= 17 && rng <= 19) {
+            listSize = sourceOfRandomness.nextInt(100, 1000);
+        } else if (rng == 20) {
+            listSize = sourceOfRandomness.nextInt(1000, 10000);
         }
 
         return IntStream.range(0, listSize)

@@ -65,6 +65,11 @@ public class DWayHeap<T> implements Queue<T> {
         return get(0);
     }
 
+    @Override
+    public boolean isEmpty() {
+        return n == 0;
+    }
+
     @SuppressWarnings("unchecked")
     private T get(int i) {
         return (T) heap[i];

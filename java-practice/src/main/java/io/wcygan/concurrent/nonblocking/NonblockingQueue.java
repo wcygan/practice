@@ -79,6 +79,11 @@ public class NonblockingQueue<T> implements Queue<T> {
         return head.get().data;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return head.get() == null;
+    }
+
     static class Node<T> {
         T data;
         AtomicReference<Node<T>> next = new AtomicReference<>();
