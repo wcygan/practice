@@ -1,25 +1,33 @@
 package io.wcygan.concurrent.locks;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Stream;
 
 public class LockTest {
 
     private static final Integer NUM_THREADS = 20;
     private static final Integer ITERATIONS = NUM_THREADS * 2;
 
-    @Test
-    public void testLocks() {
-        List.of(new ReentrantLock(), new TTASLock()).forEach(this::exercise);
+    private static Stream<Arguments> lockProvider() {
+        return Stream.of(
+                Arguments.of(new ReentrantLock()),
+                Arguments.of(new TTASLock()),
+                Arguments.of(new TIDLock())
+        );
     }
 
-    public void exercise(Lock lock) {
+    @ParameterizedTest
+    @MethodSource("lockProvider")
+    public void testLocks(Lock lock) {
         Counter counter = new Counter();
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
         List<Future<Boolean>> futures = new ArrayList<>();
