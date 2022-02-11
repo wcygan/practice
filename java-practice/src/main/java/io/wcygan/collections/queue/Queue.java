@@ -12,7 +12,7 @@ public interface Queue<T> {
      *
      * @param data the element to add
      */
-    void add(T data);
+    boolean add(T data);
 
     /**
      * Attempts to remove the head of the queue

@@ -12,8 +12,8 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
     }
 
     @Override
-    public void add(T data) {
-        queue.add(data);
+    public boolean add(T data) {
+        return queue.add(data);
     }
 
     @Override

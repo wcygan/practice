@@ -1,7 +1,7 @@
 package io.wcygan.collections.list;
 
 public interface List<T> {
-    void add(T data);
+    boolean add(T data);
 
     T get(int index);
 

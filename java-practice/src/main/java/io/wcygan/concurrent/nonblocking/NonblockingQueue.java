@@ -29,7 +29,7 @@ public class NonblockingQueue<T> implements Queue<T> {
     }
 
     @Override
-    public void add(T data) {
+    public boolean add(T data) {
         Node<T> node = new Node<T>();
         node.data = data;
         node.next.set(null);
@@ -48,7 +48,7 @@ public class NonblockingQueue<T> implements Queue<T> {
                 }
             }
         }
-        this.tail.compareAndSet(tail, node);
+        return this.tail.compareAndSet(tail, node);
     }
 
     @Override

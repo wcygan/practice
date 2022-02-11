@@ -16,7 +16,7 @@ public class PriorityQueue<T> implements Queue<T> {
     }
 
     @Override
-    public void add(T data) {
+    public boolean add(T data) {
         if (n >= maxHeapSize) {
             growHeap();
         }
@@ -29,6 +29,8 @@ public class PriorityQueue<T> implements Queue<T> {
             swap(i, parent(i));
             i = parent(i);
         }
+
+        return true;
     }
 
     @Override

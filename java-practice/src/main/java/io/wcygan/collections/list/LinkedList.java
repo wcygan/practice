@@ -8,7 +8,7 @@ public class LinkedList<T> implements List<T> {
     Node<T> head = null;
 
     @Override
-    public void add(T data) {
+    public boolean add(T data) {
         Node<T> toAdd = new Node<>(data);
 
         if (head == null) {
@@ -18,6 +18,7 @@ public class LinkedList<T> implements List<T> {
         }
 
         size++;
+        return true;
     }
 
     @Override
