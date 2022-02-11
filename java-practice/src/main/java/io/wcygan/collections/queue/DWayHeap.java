@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
  */
 public class DWayHeap<T> implements Queue<T> {
 
-    private static final Integer DEFAULT_BRANCHING_FACTOR = 3;
+    private static final Integer DEFAULT_BRANCHING_FACTOR = 4;
 
     private final int branchingFactor;
     private final Comparator<T> comparator;
