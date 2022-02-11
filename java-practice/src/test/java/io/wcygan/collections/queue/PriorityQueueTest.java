@@ -23,14 +23,14 @@ public class PriorityQueueTest {
     private List<Queue<Integer>> intPriorityQueueProvider() {
         return List.of(
                 new DWayHeap<>(Integer::compare),
-                new PriorityQueue<>(Integer::compare)
+                new BinaryHeap<>(Integer::compare)
         );
     }
 
     @Test
     public void priorityByInstant() {
         List.of(
-                new PriorityQueue<>(compareByInstant),
+                new BinaryHeap<>(compareByInstant),
                 new DWayHeap<>(compareByInstant)
         ).forEach(q -> {
             var now = Instant.now();

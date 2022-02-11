@@ -5,6 +5,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * A D-Way Heap
+ * <p>
+ * Provides more flexibility than {@link BinaryHeap} because this allows
+ * the specification of a branching factor (e.g., how many children each node can have).
+ *
+ * @param <T>
+ */
 public class DWayHeap<T> implements Queue<T> {
 
     private static final Integer DEFAULT_BRANCHING_FACTOR = 3;

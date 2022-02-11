@@ -3,14 +3,14 @@ package io.wcygan.collections.queue;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class PriorityQueue<T> implements Queue<T> {
+public class BinaryHeap<T> implements Queue<T> {
 
     private final Comparator<T> comparator;
     private Object[] heap;
     private int n = 0;
     private int maxHeapSize = 16;
 
-    public PriorityQueue(Comparator<T> comparator) {
+    public BinaryHeap(Comparator<T> comparator) {
         this.heap = new Object[maxHeapSize];
         this.comparator = comparator;
     }
