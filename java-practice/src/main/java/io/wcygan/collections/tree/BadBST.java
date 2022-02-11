@@ -71,12 +71,12 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
     }
 
     @Override
-    public K smallestKey() {
+    public K minimum() {
         return min(root);
     }
 
     @Override
-    public K largestKey() {
+    public K maximum() {
         return max(root);
     }
 

@@ -30,11 +30,11 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
 
     @Override
     public T minimum() {
-        return tree.smallestKey();
+        return tree.minimum();
     }
 
     @Override
     public T maximum() {
-        return tree.largestKey();
+        return tree.maximum();
     }
 }

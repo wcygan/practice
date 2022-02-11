@@ -12,9 +12,9 @@ public interface SearchTree<K extends Comparable<K>, V> {
 
     Set<Pair<K, V>> entrySet();
 
-    K smallestKey();
+    K minimum();
 
-    K largestKey();
+    K maximum();
 
     /**
      * Searches the tree for a given key
