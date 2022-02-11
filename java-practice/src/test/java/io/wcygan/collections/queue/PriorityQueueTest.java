@@ -53,12 +53,13 @@ public class PriorityQueueTest {
 
     @Property(trials = 25)
     public void halfAndQuarter(@From(IntegerListGenerator.class) List<Integer> items) {
+        int size = items.size();
         var q = new PriorityQueue<>(Integer::compare);
         var uniques = Utilities.uniques(items);
         var sorted = uniques.stream().sorted().toList();
         uniques.forEach(q::add);
 
-        int size = items.size();
+        // remove half
         int half = size / 2;
         for (int i = half; i < size; i++) {
             var want = sorted.get(i - half);
@@ -66,11 +67,13 @@ public class PriorityQueueTest {
             assertEquals(want, got);
         }
 
+        // add a quarter
         int quarter = half / 2;
         for (int i = 0; i < quarter; i++) {
             q.add(sorted.get(i));
         }
 
+        // remove the quarter
         for (int i = 0; i < quarter; i++) {
             assertEquals(sorted.get(i), q.remove());
         }
