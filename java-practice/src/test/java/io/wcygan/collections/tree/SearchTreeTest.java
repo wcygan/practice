@@ -20,7 +20,7 @@ public class SearchTreeTest {
     private static Stream<Arguments> treeProvider() {
         return Stream.of(
                 Arguments.of(new LLRedBlackTree<>()),
-                Arguments.of(new BadBST<>())
+                Arguments.of(new BST<>())
         );
     }
 

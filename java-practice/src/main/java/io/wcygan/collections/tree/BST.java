@@ -6,7 +6,7 @@ import java.util.*;
 
 import static io.wcygan.common.Utilities.isLessThan;
 
-public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
+public class BST<K extends Comparable<K>, V> implements SearchTree<K, V> {
     Tree root;
 
     @Override
@@ -225,8 +225,7 @@ public class BadBST<K extends Comparable<K>, V> implements SearchTree<K, V> {
     private class Tree {
         K key;
         V value;
-        Tree left;
-        Tree right;
+        Tree left, right;
 
         private Tree(K key, V value) {
             this.key = key;
