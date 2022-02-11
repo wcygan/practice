@@ -25,11 +25,8 @@ public class PriorityQueue<T> implements Queue<T> {
         n += 1;
 
         int i = n - 1;
-
-        while (i != 0 && comesBefore(getParent(i), get(i))) {
-            T temp = get(i);
-            heap[i] = heap[parent(i)];
-            heap[parent(i)] = temp;
+        while (i != 0 && comesBefore(get(i), getParent(i))) {
+            swap(i, parent(i));
             i = parent(i);
         }
     }
@@ -52,24 +49,23 @@ public class PriorityQueue<T> implements Queue<T> {
         int left = leftChild(i);
         int right = rightChild(i);
 
-        int largest = i;
+        int smallest = i;
 
-        if (left <= n && comparator.compare(get(left), get(largest)) > 0) {
-            largest = left;
+        if (left <= n && comparator.compare(get(left), get(smallest)) < 0) {
+            smallest = left;
         }
 
-        if (right <= n && comparator.compare(get(right), get(largest)) > 0) {
-            largest = right;
+        if (right <= n && comparator.compare(get(right), get(smallest)) < 0) {
+            smallest = right;
         }
 
-        if (largest != i) {
-            T temp = get(i);
-            heap[i] = heap[largest];
-            heap[largest] = temp;
-            heapify(largest);
+        if (smallest != i) {
+            swap(i, smallest);
+            heapify(smallest);
         }
     }
 
+    @SuppressWarnings("unchecked")
     private T get(int i) {
         return (T) heap[i];
     }
@@ -88,6 +84,12 @@ public class PriorityQueue<T> implements Queue<T> {
 
     private int rightChild(int i) {
         return 2 * i + 2;
+    }
+
+    private void swap(int x, int y) {
+        T t = get(x);
+        heap[x] = get(y);
+        heap[y] = t;
     }
 
     private boolean comesBefore(T first, T second) {

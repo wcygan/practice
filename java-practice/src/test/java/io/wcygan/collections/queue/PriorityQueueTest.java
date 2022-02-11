@@ -5,6 +5,7 @@ import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 import io.wcygan.common.Utilities;
 import io.wcygan.testutils.IntegerListGenerator;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import java.time.Instant;
@@ -17,27 +18,65 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(JUnitQuickcheck.class)
 public class PriorityQueueTest {
-    public final Comparator<Event> orderByDate = Comparator.comparing(o -> o.date);
+    Comparator<Event> compareByInstant = Comparator.comparing(e -> e.date);
 
-    @Property(trials = 25)
-    public void exercisePriorityQueue(@From(IntegerListGenerator.class) List<Integer> items) {
-        var q = new PriorityQueue<>(orderByDate);
-        var uniques = Utilities.uniques(items);
-
+    @Test
+    public void priorityByInstant() {
+        var q = new PriorityQueue<>(compareByInstant);
         var now = Instant.now();
-        var events = uniques.stream().map(x ->
-                new Event(Date.from(now.minusSeconds(x)), x)
-        ).toList();
-
-        events.forEach(q::add);
-
-        uniques.stream().sorted().forEach(x -> {
-            var top = q.remove();
-            assertEquals(x, top.descriptor);
-        });
+        var e1 = new Event(Date.from(now.minusSeconds(100)), 1);
+        var e2 = new Event(Date.from(now.minusSeconds(200)), 2);
+        var e3 = new Event(Date.from(now.minusSeconds(300)), 3);
+        var e4 = new Event(Date.from(now.minusSeconds(50)), 4);
+        var e5 = new Event(Date.from(now.minusSeconds(5000)), 5);
+        List.of(e3, e1, e2).forEach(q::add);
+        assertEquals(e3, q.remove());
+        assertEquals(e2, q.remove());
+        q.add(e4);
+        q.add(e5);
+        assertEquals(e5, q.remove());
+        assertEquals(e1, q.remove());
+        assertEquals(e4, q.remove());
     }
 
-    private static class Event {
+    @Property(trials = 25)
+    public void addAllRemoveAllThreeTimes(@From(IntegerListGenerator.class) List<Integer> items) {
+        var q = new PriorityQueue<>(Integer::compare);
+        var uniques = Utilities.uniques(items);
+        for (int i = 0; i < 3; i++) {
+            uniques.forEach(q::add);
+            uniques.stream().sorted(Integer::compare).forEach(x -> {
+                assertEquals(x, q.remove());
+            });
+        }
+    }
+
+    @Property(trials = 25)
+    public void halfAndQuarter(@From(IntegerListGenerator.class) List<Integer> items) {
+        var q = new PriorityQueue<>(Integer::compare);
+        var uniques = Utilities.uniques(items);
+        var sorted = uniques.stream().sorted().toList();
+        uniques.forEach(q::add);
+
+        int size = items.size();
+        int half = size / 2;
+        for (int i = half; i < size; i++) {
+            var want = sorted.get(i - half);
+            var got = q.remove();
+            assertEquals(want, got);
+        }
+
+        int quarter = half / 2;
+        for (int i = 0; i < quarter; i++) {
+            q.add(sorted.get(i));
+        }
+
+        for (int i = 0; i < quarter; i++) {
+            assertEquals(sorted.get(i), q.remove());
+        }
+    }
+
+    public static class Event {
         Date date;
         int descriptor;
 
@@ -45,6 +84,5 @@ public class PriorityQueueTest {
             this.date = date;
             this.descriptor = descriptor;
         }
-
     }
 }
