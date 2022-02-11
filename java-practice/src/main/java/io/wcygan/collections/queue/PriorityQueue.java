@@ -42,6 +42,11 @@ public class PriorityQueue<T> implements Queue<T> {
         return maxItem;
     }
 
+    @Override
+    public T peek() {
+        return get(0);
+    }
+
     private void growHeap() {
         maxHeapSize *= 2;
         heap = Arrays.copyOf(heap, maxHeapSize);

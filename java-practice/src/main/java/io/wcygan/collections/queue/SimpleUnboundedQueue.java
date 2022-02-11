@@ -20,4 +20,9 @@ public class SimpleUnboundedQueue<T> implements Queue<T> {
     public T remove() {
         return queue.remove(0);
     }
+
+    @Override
+    public T peek() {
+        return queue.get(0);
+    }
 }

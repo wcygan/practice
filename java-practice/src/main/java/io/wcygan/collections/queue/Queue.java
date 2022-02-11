@@ -20,4 +20,6 @@ public interface Queue<T> {
      * @return the element that was removed, else {@code null} if the queue was empty
      */
     T remove();
+
+    T peek();
 }
