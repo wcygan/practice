@@ -3,6 +3,7 @@ package io.wcygan.collections.queue;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.IntStream;
 
 /**
@@ -23,6 +24,9 @@ public class DWayHeap<T> implements Queue<T> {
     private int n = 0;
     private int maxHeapSize = 16;
 
+    private ReentrantReadWriteLock.ReadLock readLock;
+    private ReentrantReadWriteLock.WriteLock writeLock;
+
     public DWayHeap(Comparator<T> comparator) {
         this(comparator, DEFAULT_BRANCHING_FACTOR);
     }
@@ -31,51 +35,74 @@ public class DWayHeap<T> implements Queue<T> {
         this.heap = new Object[maxHeapSize];
         this.branchingFactor = branchingFactor;
         this.comparator = comparator;
+        var lock = new ReentrantReadWriteLock();
+        this.readLock = lock.readLock();
+        this.writeLock = lock.writeLock();
     }
 
     @Override
     public boolean add(T data) {
-        if (data == null) {
-            return false;
+        writeLock.lock();
+        try {
+            if (data == null) {
+                return false;
+            }
+
+            if (n >= maxHeapSize) {
+                growHeap();
+            }
+
+            heap[n] = data;
+            n += 1;
+
+            int i = n - 1;
+            while (i != 0 && comesBefore(get(i), get(parent(i)))) {
+                swap(i, parent(i));
+                i = parent(i);
+            }
+
+            return true;
+        } finally {
+            writeLock.unlock();
         }
-
-        if (n >= maxHeapSize) {
-            growHeap();
-        }
-
-        heap[n] = data;
-        n += 1;
-
-        int i = n - 1;
-        while (i != 0 && comesBefore(get(i), get(parent(i)))) {
-            swap(i, parent(i));
-            i = parent(i);
-        }
-
-        return true;
     }
 
     @Override
     public T remove() {
-        if (heap[0] == null) {
-            return null;
-        }
+        writeLock.lock();
+        try {
+            if (heap[0] == null) {
+                return null;
+            }
 
-        T maxItem = get(0);
-        heap[0] = heap[n - 1];
-        n -= 1;
-        heapify(0);
-        return maxItem;
+            T maxItem = get(0);
+            heap[0] = heap[n - 1];
+            n -= 1;
+            heapify(0);
+            return maxItem;
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     @Override
     public T peek() {
-        return get(0);
+        readLock.lock();
+        try {
+            return get(0);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        return n == 0;
+        readLock.lock();
+        try {
+            return n == 0;
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @SuppressWarnings("unchecked")
