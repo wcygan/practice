@@ -256,7 +256,7 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
         return h;
     }
 
-    private class Node {
+    public class Node {
         K key;
         V value;
         Node left, right;
