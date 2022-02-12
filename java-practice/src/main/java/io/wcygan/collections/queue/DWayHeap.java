@@ -20,12 +20,11 @@ public class DWayHeap<T> implements Queue<T> {
 
     private final int branchingFactor;
     private final Comparator<T> comparator;
+    private final ReentrantReadWriteLock.ReadLock readLock;
+    private final ReentrantReadWriteLock.WriteLock writeLock;
     private Object[] heap;
     private int n = 0;
     private int maxHeapSize = 16;
-
-    private ReentrantReadWriteLock.ReadLock readLock;
-    private ReentrantReadWriteLock.WriteLock writeLock;
 
     public DWayHeap(Comparator<T> comparator) {
         this(comparator, DEFAULT_BRANCHING_FACTOR);
