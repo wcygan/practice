@@ -35,6 +35,10 @@ public class DWayHeap<T> implements Queue<T> {
 
     @Override
     public boolean add(T data) {
+        if (data == null) {
+            return false;
+        }
+
         if (n >= maxHeapSize) {
             growHeap();
         }
@@ -53,6 +57,10 @@ public class DWayHeap<T> implements Queue<T> {
 
     @Override
     public T remove() {
+        if (heap[0] == null) {
+            return null;
+        }
+
         T maxItem = get(0);
         heap[0] = heap[n - 1];
         n -= 1;
