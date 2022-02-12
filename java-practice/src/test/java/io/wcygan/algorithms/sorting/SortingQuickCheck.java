@@ -14,7 +14,7 @@ public class SortingQuickCheck {
 
     private static final List<SortingAlgorithm<Integer>> ALGORITHMS = List.of(
             new QuickSort<>(),
-            new SequentialMergeSort<>(),
+            new MergeSort<>(),
             new ParallelMergeSort<>(),
             new HeapSort<>()
     );
