@@ -1,15 +1,12 @@
 package io.wcygan.collections.tree;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static io.wcygan.common.Utilities.randomUniqueStrings;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchTreeTest {
@@ -46,7 +43,7 @@ public class SearchTreeTest {
     @ParameterizedTest
     @MethodSource("treeProvider")
     public void testManyNodes(SearchTree<String, String> tree) {
-        var uniques = randomUniqueStrings();
+        var uniques = randomUniqueStrings(10000);
         int count = uniques.size();
 
         for (int i = 0; i < count; i++) {
@@ -69,13 +66,5 @@ public class SearchTreeTest {
             assertFalse(tree.containsKey(k));
             assertNull(tree.search(k));
         }
-    }
-
-    private List<String> randomUniqueStrings() {
-        return IntStream.range(0, 100_000)
-                .mapToObj(idx -> RandomStringUtils.random(25, true, true))
-                .collect(Collectors.toSet())
-                .stream()
-                .toList();
     }
 }
