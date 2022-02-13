@@ -39,8 +39,8 @@ public class DisjointSetTest {
         assertEquals(one, dj.find(three));
     }
 
-    @Property(trials = 25)
-    public void exerciseDisjointSet(@Size(min = 10, max = 50) List<Integer> items) {
+    @Property
+    public void exerciseDisjointSet(@Size(min = 100, max = 1000) List<Integer> items) {
         var dj = new DisjointSet<Integer>();
         var first = items.get(0);
 

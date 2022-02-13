@@ -38,7 +38,6 @@ public class DisjointSet<E> {
             }
 
             node.parent = find(node.parent);
-
             return node.parent.element;
         } finally {
             lock.unlock();
@@ -46,11 +45,13 @@ public class DisjointSet<E> {
     }
 
     private Node find(Node node) {
-        while (node != node.parent) {
-            node = node.parent;
+        if (node == node.parent) {
+            return node;
         }
 
-        return node;
+        var sentinel = find(node.parent);
+        node.parent = sentinel;
+        return sentinel;
     }
 
     private Node get(E element) {
