@@ -87,7 +87,6 @@ public class DWayHeap<T> implements Queue<T> {
             heap[ROOT] = heap[nextFreeIndex];
             heapify(ROOT);
 
-            // return the extracted value
             return extracted;
         } finally {
             writeLock.unlock();
