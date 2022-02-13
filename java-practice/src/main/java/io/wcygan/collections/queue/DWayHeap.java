@@ -18,6 +18,7 @@ import java.util.stream.IntStream;
 @ThreadSafe
 public class DWayHeap<T> implements Queue<T> {
 
+    private static final Integer ROOT = 0;
     private static final Integer DEFAULT_BRANCHING_FACTOR = 4;
 
     private final int branchingFactor;
@@ -25,15 +26,15 @@ public class DWayHeap<T> implements Queue<T> {
     private final ReentrantReadWriteLock.ReadLock readLock;
     private final ReentrantReadWriteLock.WriteLock writeLock;
     private Object[] heap;
-    private int n = 0;
-    private int maxHeapSize = 16;
+    private int nextFreeIndex = 0;
+    private int heapSize = 16;
 
     public DWayHeap(Comparator<T> comparator) {
         this(comparator, DEFAULT_BRANCHING_FACTOR);
     }
 
     public DWayHeap(Comparator<T> comparator, int branchingFactor) {
-        this.heap = new Object[maxHeapSize];
+        this.heap = new Object[heapSize];
         this.branchingFactor = branchingFactor;
         this.comparator = comparator;
         var lock = new ReentrantReadWriteLock();
@@ -49,17 +50,19 @@ public class DWayHeap<T> implements Queue<T> {
                 return false;
             }
 
-            if (n >= maxHeapSize) {
+            if (nextFreeIndex >= heapSize) {
                 growHeap();
             }
 
-            heap[n] = data;
-            n += 1;
+            // bind data to the heap
+            heap[nextFreeIndex] = data;
+            nextFreeIndex += 1;
 
-            int i = n - 1;
-            while (i != 0 && comesBefore(get(i), get(parent(i)))) {
-                swap(i, parent(i));
-                i = parent(i);
+            // percolate the data up the heap until it's in the right position
+            int position = nextFreeIndex - 1;
+            while (position != ROOT && comesBefore(get(position), get(parent(position)))) {
+                swap(position, parent(position));
+                position = parent(position);
             }
 
             return true;
@@ -72,15 +75,20 @@ public class DWayHeap<T> implements Queue<T> {
     public T remove() {
         writeLock.lock();
         try {
-            if (heap[0] == null) {
+            if (heap[ROOT] == null) {
                 return null;
             }
 
-            T maxItem = get(0);
-            heap[0] = heap[n - 1];
-            n -= 1;
-            heapify(0);
-            return maxItem;
+            // extract the minimum
+            T extracted = get(ROOT);
+            nextFreeIndex -= 1;
+
+            // put a leaf node into the root and then push it down to the proper space via heapify
+            heap[ROOT] = heap[nextFreeIndex];
+            heapify(ROOT);
+
+            // return the extracted value
+            return extracted;
         } finally {
             writeLock.unlock();
         }
@@ -90,7 +98,7 @@ public class DWayHeap<T> implements Queue<T> {
     public T peek() {
         readLock.lock();
         try {
-            return get(0);
+            return get(ROOT);
         } finally {
             readLock.unlock();
         }
@@ -100,7 +108,7 @@ public class DWayHeap<T> implements Queue<T> {
     public boolean isEmpty() {
         readLock.lock();
         try {
-            return n == 0;
+            return nextFreeIndex == ROOT;
         } finally {
             readLock.unlock();
         }
@@ -112,13 +120,15 @@ public class DWayHeap<T> implements Queue<T> {
     }
 
     private void heapify(int i) {
+        // find the smallest position
         int smallest = i;
         for (int child : children(i)) {
-            if (child <= n && comesBefore(get(child), get(smallest))) {
+            if (child <= nextFreeIndex && comesBefore(get(child), get(smallest))) {
                 smallest = child;
             }
         }
 
+        // if needed, swap the elements at the parent and (smallest) child positions
         if (smallest != i) {
             swap(i, smallest);
             heapify(smallest);
@@ -126,8 +136,9 @@ public class DWayHeap<T> implements Queue<T> {
     }
 
     private void growHeap() {
-        maxHeapSize *= 2;
-        heap = Arrays.copyOf(heap, maxHeapSize);
+        // dynamically resize the heap
+        heapSize *= 2;
+        heap = Arrays.copyOf(heap, heapSize);
     }
 
     private List<Integer> children(int i) {
