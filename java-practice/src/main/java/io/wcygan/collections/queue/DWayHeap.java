@@ -1,5 +1,6 @@
 package io.wcygan.collections.queue;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.IntStream;
  *
  * @param <T>
  */
+@ThreadSafe
 public class DWayHeap<T> implements Queue<T> {
 
     private static final Integer DEFAULT_BRANCHING_FACTOR = 4;

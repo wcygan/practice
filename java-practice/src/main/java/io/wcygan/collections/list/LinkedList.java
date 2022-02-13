@@ -1,10 +1,12 @@
 package io.wcygan.collections.list;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 // adapted from https://github.com/mlarocca/AlgorithmsAndDataStructuresInAction
+@ThreadSafe
 public class LinkedList<T> {
     private final Guard guard;
     private final ReentrantReadWriteLock.ReadLock readLock;
