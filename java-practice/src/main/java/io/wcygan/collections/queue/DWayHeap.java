@@ -158,6 +158,7 @@ public class DWayHeap<T> implements Queue<T> {
     }
 
     private boolean comesBefore(T first, T second) {
+        // return true if the first element is smaller than the second (according to the given comparator)
         return comparator.compare(first, second) < 0;
     }
 }
