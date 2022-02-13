@@ -55,11 +55,10 @@ public class DWayHeap<T> implements Queue<T> {
             }
 
             // bind data to the heap
-            heap[nextFreeIndex] = data;
-            nextFreeIndex += 1;
+            int position = nextFreeIndex++;
+            heap[position] = data;
 
             // percolate the data up the heap until it's in the right position
-            int position = nextFreeIndex - 1;
             while (position != ROOT && comesBefore(get(position), get(parent(position)))) {
                 swap(position, parent(position));
                 position = parent(position);
@@ -81,7 +80,7 @@ public class DWayHeap<T> implements Queue<T> {
 
             // extract the minimum
             T extracted = get(ROOT);
-            nextFreeIndex -= 1;
+            nextFreeIndex--;
 
             // put a leaf node into the root and then push it down to the proper space via heapify
             heap[ROOT] = heap[nextFreeIndex];
