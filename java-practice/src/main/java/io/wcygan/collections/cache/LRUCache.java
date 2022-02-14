@@ -3,11 +3,13 @@ package io.wcygan.collections.cache;
 import com.google.common.annotations.VisibleForTesting;
 import io.wcygan.collections.list.LinkedList;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 // adapted from https://github.com/mlarocca/AlgorithmsAndDataStructuresInAction
+@ThreadSafe
 public class LRUCache<Key, Value> implements Cache<Key, Value> {
 
     private final int maxSize;

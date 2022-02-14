@@ -3,74 +3,128 @@ package io.wcygan.collections.tree;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 // Adapted from https://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
 public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K, V> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
     private Node root;
+    private final ReentrantReadWriteLock.ReadLock readLock;
+    private final ReentrantReadWriteLock.WriteLock writeLock;
+
+    public LLRedBlackTree() {
+        var lock = new ReentrantReadWriteLock();
+        this.readLock = lock.readLock();
+        this.writeLock = lock.writeLock();
+    }
 
     @Override
     public V search(K key) {
-        return get(root, key);
+        readLock.lock();
+        try {
+            return get(root, key);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public V insert(K key, V value) {
-        var old = get(key);
-        put(key, value);
-        return old;
+        writeLock.lock();
+        try {
+            var old = get(key);
+            put(key, value);
+            return old;
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     @Override
     public V remove(K key) {
-        var old = get(key);
-        delete(key);
-        return old;
+        writeLock.lock();
+        try {
+            var old = get(key);
+            delete(key);
+            return old;
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     @Override
     public boolean containsKey(K key) {
-        return contains(key);
+        readLock.lock();
+        try {
+            return contains(key);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public int size() {
-        return size(root);
+        readLock.lock();
+        try {
+            return size(root);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        readLock.lock();
+        try {
+            return size() == 0;
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public Set<Pair<K, V>> entrySet() {
-        Set<Pair<K, V>> s = new HashSet<>();
-        Queue<Node> nodes = new ArrayDeque<>();
+        readLock.lock();
+        try {
+            Set<Pair<K, V>> s = new HashSet<>();
+            Queue<Node> nodes = new ArrayDeque<>();
 
-        if (this.root != null) {
-            nodes.add(this.root);
+            if (this.root != null) {
+                nodes.add(this.root);
+            }
+
+            while (!nodes.isEmpty()) {
+                var curr = nodes.remove();
+                s.add(Pair.of(curr.key, curr.value));
+                Optional.ofNullable(curr.left).ifPresent(nodes::add);
+                Optional.ofNullable(curr.right).ifPresent(nodes::add);
+            }
+
+            return s;
+        } finally {
+            readLock.unlock();
         }
-
-        while (!nodes.isEmpty()) {
-            var curr = nodes.remove();
-            s.add(Pair.of(curr.key, curr.value));
-            Optional.ofNullable(curr.left).ifPresent(nodes::add);
-            Optional.ofNullable(curr.right).ifPresent(nodes::add);
-        }
-
-        return s;
     }
 
     @Override
     public K minimum() {
-        return min(root);
+        readLock.lock();
+        try {
+            return min(root);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public K maximum() {
-        return max(root);
+        readLock.lock();
+        try {
+            return max(root);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     private int size(Node x) {
