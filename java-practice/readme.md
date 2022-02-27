@@ -9,6 +9,16 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 - **[References](#references)**<br>
 - **[Contributing](#contributing)**<br>
 
+## Benchmarking
+
+Using [jmh](https://github.com/openjdk/jmh) you are able to benchmark java code.
+
+To execute the benchmarks in `src/jmh`, run the following command:
+
+```
+$ gradle jmh
+```
+
 ## Build and Run
 
 This project uses [Gradle](https://gradle.org/install/). Make sure that you
