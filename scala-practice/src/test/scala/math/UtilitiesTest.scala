@@ -14,4 +14,10 @@ class MathUtilsTests extends AnyFunSuite:
     assert(result == 2)
   }
 
+  test("'double' should handle 2") {
+    val result = Utilities.double(2)
+    assert(result == 4)
+  }
+
+
 end MathUtilsTests

@@ -12,6 +12,13 @@ This project uses [sbt](https://www.scala-sbt.org/).
 $ sbt test
 ```
 
+As a helpful tip, you can enter the sbt console (`$ sbt`) and continuously run the tests with incremental compilation by running `~test` from within the sbt console:
+
+```
+$ sbt
+> ~test
+```
+ 
 ## References
 
 I'm using the following material as a reference:
