@@ -10,3 +10,4 @@ bin/
 rust-practice/target
 .DS_Store
 .vscode
+.metals
