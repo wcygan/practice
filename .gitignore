@@ -11,3 +11,4 @@ rust-practice/target
 .DS_Store
 .vscode
 .metals
+scala-practice/target
