@@ -1,5 +1,5 @@
 package io.wcygan.math
 
-object Utilities {
+object MathUtils {
   def double(i: Int) = i * 2
 }
