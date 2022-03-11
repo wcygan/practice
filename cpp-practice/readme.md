@@ -4,6 +4,10 @@ Following https://raymii.org/s/tutorials/Cpp_project_setup_with_cmake_and_unit_t
 
 I should probably read this https://google.github.io/googletest/
 
+## TODO
+1. Read this https://www.jetbrains.com/help/clion/unit-testing-tutorial.html
+2. Put googletest into CMake
+
 ## Build
 
 1. Install googletest
