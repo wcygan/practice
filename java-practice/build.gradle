@@ -60,7 +60,7 @@ jacocoTestReport {
 jmh {
     timeOnIteration = '250ms'
     warmup = '250ms'
-    warmupIterations = 10
+    warmupIterations = 50
     iterations = 50
     fork = 2
     benchmarkMode = ["ss"]

@@ -17,12 +17,12 @@ public class SortingBenchmark {
     /**
      * <pre>
      * Benchmark                                            Mode  Cnt   Score   Error  Units
-     * i.w.a.sorting.SortingBenchmark.classicSort             ss  100  11.941 ± 0.165  ms/op
-     * i.w.a.sorting.SortingBenchmark.heapsort                ss  100  13.568 ± 0.186  ms/op
-     * i.w.a.sorting.SortingBenchmark.mergesort               ss  100  16.951 ± 0.171  ms/op
-     * i.w.a.sorting.SortingBenchmark.parallelStandardSort    ss  100   2.631 ± 0.147  ms/op
-     * i.w.a.sorting.SortingBenchmark.quicksort               ss  100  12.552 ± 0.110  ms/op
-     * i.w.a.sorting.SortingBenchmark.standardSort            ss  100  13.613 ± 0.145  ms/op
+     * i.w.a.sorting.SortingBenchmark.classicSort             ss  100  11.862 ± 0.078  ms/op
+     * i.w.a.sorting.SortingBenchmark.heapsort                ss  100  13.471 ± 0.053  ms/op
+     * i.w.a.sorting.SortingBenchmark.mergesort               ss  100  16.587 ± 0.115  ms/op
+     * i.w.a.sorting.SortingBenchmark.parallelStandardSort    ss  100   2.506 ± 0.086  ms/op
+     * i.w.a.sorting.SortingBenchmark.quicksort               ss  100  12.454 ± 0.184  ms/op
+     * i.w.a.sorting.SortingBenchmark.standardSort            ss  100  13.430 ± 0.053  ms/op
      *
      * parallelMergeSort usually runs out of memory :(
      * </pre>
