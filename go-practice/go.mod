@@ -1,6 +1,6 @@
 module practice
 
-go 1.17
+go 1.18
 
 require (
 	github.com/gyuho/goraph v0.0.0-20171001060514-a7a4454fd3eb
