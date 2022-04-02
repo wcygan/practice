@@ -9,6 +9,24 @@ import static io.wcygan.common.Utilities.isLessThan;
 public class BST<K extends Comparable<K>, V> implements SearchTree<K, V> {
     private Node root;
 
+    @SafeVarargs
+    public static <K extends Comparable<K>, V> BST<K, V> of(Pair<K, V>... pairs) {
+        BST<K, V> bst = new BST<>();
+        for (Pair<K, V> pair : pairs) {
+            bst.insert(pair.getKey(), pair.getValue());
+        }
+        return bst;
+    }
+
+    @SafeVarargs
+    public static <K extends Comparable<K>> BST<K, K> of(K... keys) {
+        BST<K, K> bst = new BST<>();
+        for (K key : keys) {
+            bst.insert(key, key);
+        }
+        return bst;
+    }
+
     @Override
     public int size() {
         return size(this.root);
@@ -222,7 +240,7 @@ public class BST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return toDelete.value;
     }
 
-    public Node getRoot() {
+    public Node root() {
         return root;
     }
 
@@ -234,6 +252,22 @@ public class BST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         private Node(K key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        public K key() {
+            return key;
+        }
+
+        public V value() {
+            return value;
+        }
+
+        public Node left() {
+            return left;
+        }
+
+        public Node right() {
+            return right;
         }
     }
 }
