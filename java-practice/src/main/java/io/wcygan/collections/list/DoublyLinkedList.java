@@ -97,12 +97,70 @@ public class DoublyLinkedList<T> implements List<T> {
 
     @Override
     public Optional<T> remove(T t) {
-        throw new UnsupportedOperationException();
+        Iterator<Node> nodes = nodes();
+
+        Node node = null;
+        for (int i = 0; i < size(); i++) {
+            if (!nodes.hasNext()) {
+                return Optional.empty();
+            }
+
+            node = nodes.next();
+            if (node.value.equals(t)) {
+                break;
+            }
+        }
+
+        if (node != null) {
+            return remove(node);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<T> remove(int index) {
-        throw new UnsupportedOperationException();
+        Iterator<Node> nodes = nodes();
+
+        Node node = null;
+        for (int i = 0; i <= index; i++) {
+            if (!nodes.hasNext()) {
+                return Optional.empty();
+            }
+
+            node = nodes.next();
+        }
+
+        if (node != null) {
+            return remove(node);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<T> remove(Node node) {
+        size--;
+        if (head == null && tail == null) {
+            // empty list
+            return Optional.empty();
+        } else if (node == head && node == tail) {
+            // singleton list
+            head = null;
+            tail = null;
+            return Optional.of(node.value);
+        } else if (node == head) {
+            head = head.next;
+            head.prev = null;
+            return Optional.of(node.value);
+        } else if (node == tail) {
+            tail = tail.prev;
+            tail.next = null;
+            return Optional.of(node.value);
+        } else {
+            node.prev.next = node.next;
+            node.next.prev = node.prev;
+            return Optional.of(node.value);
+        }
     }
 
     @Override

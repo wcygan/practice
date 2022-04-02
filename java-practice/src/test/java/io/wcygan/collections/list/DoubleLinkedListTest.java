@@ -67,4 +67,37 @@ public class DoubleLinkedListTest {
         assertTrue(got.isPresent());
         assertEquals(40, got.get());
     }
+
+    @Test
+    public void removeByIndex() {
+        DoublyLinkedList<String> values = DoublyLinkedList.of("a", "b", "c");
+        assertEquals(3, values.size());
+        Optional<String> got;
+
+        got = values.remove(1);
+        assertTrue(got.isPresent());
+        assertEquals("b", got.get());
+
+        got = values.get(1);
+        assertTrue(got.isPresent());
+        assertEquals("c", got.get());
+        assertEquals(2, values.size());
+    }
+
+    @Test
+    public void removeByValue() {
+        DoublyLinkedList<String> values = DoublyLinkedList.of("a", "b", "c");
+        assertEquals(3, values.size());
+
+        Optional<String> got;
+        got = values.remove("b");
+        assertTrue(got.isPresent());
+        assertEquals("b", got.get());
+
+        got = values.get(1);
+        assertTrue(got.isPresent());
+        assertEquals("c", got.get());
+
+        assertEquals(2, values.size());
+    }
 }
