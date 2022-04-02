@@ -94,7 +94,7 @@ public class LFUCache<Key, Value> implements Cache<Key, Value> {
         writeLock.lock();
         try {
             items.clear();
-            keyPriorities = new PriorityQueue<>(CacheItem::compareTo);
+            keyPriorities.clear();
         } finally {
             writeLock.unlock();
         }

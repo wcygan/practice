@@ -54,4 +54,31 @@ public class LFUCacheTest {
         assertTrue(cache.set("goodbye", "world"));
         assertFalse(cache.get("hello").isPresent());
     }
+
+    @Test
+    public void evictOnEverySet() {
+        LFUCache<String, String> cache = new LFUCache<>(1);
+        assertTrue(cache.set("hello", "world"));
+        assertTrue(cache.set("goodbye", "world"));
+        assertFalse(cache.get("hello").isPresent());
+        assertTrue(cache.set("hello", "world"));
+        assertFalse(cache.get("goodbye").isPresent());
+        assertTrue(cache.set("bonjour", "world"));
+        assertFalse(cache.get("hello").isPresent());
+    }
+
+    @Test
+    public void entriesAreNotEvictedWithEnoughCapacity() {
+        LFUCache<String, String> cache = new LFUCache<>(10);
+        assertTrue(cache.set("hello", "world"));
+        assertTrue(cache.set("goodbye", "world"));
+        assertTrue(cache.get("hello").isPresent());
+        assertTrue(cache.set("hello", "world"));
+        assertTrue(cache.get("hello").isPresent());
+        assertTrue(cache.get("goodbye").isPresent());
+        assertTrue(cache.set("bonjour", "world"));
+        assertTrue(cache.get("hello").isPresent());
+        assertTrue(cache.get("goodbye").isPresent());
+        assertTrue(cache.get("bonjour").isPresent());
+    }
 }
