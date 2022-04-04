@@ -1,6 +1,5 @@
 package io.wcygan.algorithms.sort
 
 trait Sorter {
-  // TODO @wcygan: generic sorting
-  def sort(arr: Array[Int]): Array[Int]
+  def sort[T: Ordering](arr: IndexedSeq[T]): IndexedSeq[T]
 }
