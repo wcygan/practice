@@ -5,7 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class TrieSuite extends AnyFunSuite {
+class TrieTest extends AnyFunSuite {
 
   test("Trie example 1") {
     val t = new Trie()
