@@ -44,6 +44,30 @@ To execute the benchmarks in `src/jmh`, run the following command:
 $ gradle jmh
 ```
 
+For example, you can see this in action in 
+[CacheLinesBenchmark.java](src/jmh/java/io/wcygan/algorithms/gotchas/CacheLinesBenchmark.java) where we obtain
+the following results:
+
+```
+(Run on 2021 M1 Max Macbook Pro)
+Benchmark                                          Mode  Cnt  Score   Error  Units
+i.w.a.gotchas.CacheLinesBenchmark.touchEveryItem     ss  100  0.171 ± 0.004  ms/op
+i.w.a.gotchas.CacheLinesBenchmark.touchEveryLine     ss  100  0.143 ± 0.006  ms/op
+```
+
+Another example is [SortingBenchmark.java](src/jmh/java/io/wcygan/algorithms/gotchas/CacheLinesBenchmark.java) where we 
+compare the benchmark running time of different sorting algorithms:
+
+```
+ Benchmark                                            Mode  Cnt   Score   Error  Units
+ i.w.a.sorting.SortingBenchmark.classicSort             ss  100  11.862 ± 0.078  ms/op
+ i.w.a.sorting.SortingBenchmark.heapsort                ss  100  13.471 ± 0.053  ms/op
+ i.w.a.sorting.SortingBenchmark.mergesort               ss  100  16.587 ± 0.115  ms/op
+ i.w.a.sorting.SortingBenchmark.parallelStandardSort    ss  100   2.506 ± 0.086  ms/op
+ i.w.a.sorting.SortingBenchmark.quicksort               ss  100  12.454 ± 0.184  ms/op
+ i.w.a.sorting.SortingBenchmark.standardSort            ss  100  13.430 ± 0.053  ms/op
+```
+
 ## Build and Run
 
 This project uses [Gradle](https://gradle.org/install/). Make sure that you
