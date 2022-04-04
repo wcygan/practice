@@ -4,10 +4,35 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 
 ## Table of Contents
 
+- **[Cool Stuff](#cool-stuff)**<br>
+  - **[Data Structures](#data-structures)**<br>
+  - **[Algorithms](#algorithms)**<br>
 - **[Build and Run](#build-and-run)**<br>
 - **[Property-Based Testing with JUnit-Quickcheck](#property-based-testing-with-junit-quickcheck)**<br>
 - **[References](#references)**<br>
 - **[Contributing](#contributing)**<br>
+
+## Cool Stuff
+
+### Data Structures
+
+1. [LRU Cache](src/main/java/io/wcygan/collections/cache/LRUCache.java)
+2. [Red Black Tree](src/main/java/io/wcygan/collections/tree/LLRedBlackTree.java)
+3. [Disjoint Set](src/main/java/io/wcygan/collections/set/DisjointSet.java)
+4. [D-Way Heap](src/main/java/io/wcygan/collections/queue/DWayHeap.java)
+5. [Graph](src/main/java/io/wcygan/collections/graph/SimpleGraph.java)
+6. [Non-blocking Queue](src/main/java/io/wcygan/concurrent/nonblocking/NonblockingQueue.java)
+7. [Non-blocking Stack](src/main/java/io/wcygan/concurrent/nonblocking/NonblockingStack.java)
+8. [Thread-ID based Lock](src/main/java/io/wcygan/concurrent/locks/TIDLock.java)
+
+### Algorithms
+
+1. [Quick Sort](src/main/java/io/wcygan/algorithms/sorting/QuickSort.java)
+2. [Merge Sort](src/main/java/io/wcygan/algorithms/sorting/MergeSort.java)
+3. [Parallel Merge Sort](src/main/java/io/wcygan/algorithms/sorting/ParallelMergeSort.java)
+4. [Shortest Path](src/main/java/io/wcygan/algorithms/graph/pathfinding/ShortestPath.java) (Graph)
+5. [Breadth-First Search](src/main/java/io/wcygan/algorithms/graph/traversal/BreadthFirstSearch.java) (Graph)
+6. [Depth-First Search](src/main/java/io/wcygan/algorithms/graph/traversal/DepthFirstSearch.java) (Graph)
 
 ## Benchmarking
 

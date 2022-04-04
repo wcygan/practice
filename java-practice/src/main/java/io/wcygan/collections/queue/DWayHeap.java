@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -143,7 +144,7 @@ public class DWayHeap<T> implements Queue<T> {
         return IntStream.range(1, branchingFactor + 1)
                 .map(x -> (branchingFactor * i) + x)
                 .boxed()
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private Integer parent(int i) {
