@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class AppSuite extends AnyFunSuite {
+class AppTest extends AnyFunSuite {
   test("App has a greeting") {
     assert(App.greeting() != null)
   }

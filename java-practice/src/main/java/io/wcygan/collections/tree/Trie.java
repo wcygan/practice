@@ -24,7 +24,6 @@ public class Trie {
      */
     public Trie() {
         root = new TrieNode();
-
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();

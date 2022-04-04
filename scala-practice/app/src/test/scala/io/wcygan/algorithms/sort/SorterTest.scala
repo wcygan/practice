@@ -5,7 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class SorterSuite extends AnyFunSuite {
+class SorterTest extends AnyFunSuite {
 
   val sorters: Array[Sorter] = Array(MergeSort, HeapSort)
 
