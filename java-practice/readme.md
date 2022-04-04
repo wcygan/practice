@@ -55,7 +55,7 @@ i.w.a.gotchas.CacheLinesBenchmark.touchEveryItem     ss  100  0.171 ± 0.004  ms
 i.w.a.gotchas.CacheLinesBenchmark.touchEveryLine     ss  100  0.143 ± 0.006  ms/op
 ```
 
-Another example is [SortingBenchmark.java](src/jmh/java/io/wcygan/algorithms/gotchas/CacheLinesBenchmark.java) where we 
+Another example is [SortingBenchmark.java](src/jmh/java/io/wcygan/algorithms/sorting/SortingBenchmark.java) where we 
 compare the benchmark running time of different sorting algorithms:
 
 ```
