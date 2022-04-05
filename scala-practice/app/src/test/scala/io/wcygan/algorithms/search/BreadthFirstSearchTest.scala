@@ -1,4 +1,4 @@
-package io.wcygan.algorithms.graph
+package io.wcygan.algorithms.search
 
 import io.wcygan.collections.tree.Trie
 import org.junit.runner.RunWith

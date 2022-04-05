@@ -1,4 +1,4 @@
-package io.wcygan.algorithms.graph
+package io.wcygan.algorithms.search
 
 object BreadthFirstSearch {
   def search[T](start: T, graph: Map[T, Seq[T]]): Set[T] = {

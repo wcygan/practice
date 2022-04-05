@@ -1,4 +1,4 @@
-package io.wcygan.algorithms.graph
+package io.wcygan.algorithms.search
 
 import org.junit.runner.RunWith
 import org.scalatest.funsuite.AnyFunSuite

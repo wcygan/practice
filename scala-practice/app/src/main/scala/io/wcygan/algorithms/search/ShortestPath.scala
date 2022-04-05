@@ -1,4 +1,4 @@
-package io.wcygan.algorithms.graph
+package io.wcygan.algorithms.search
 
 object ShortestPath {
   def searchPaths[T](start: T, graph: Map[T, Seq[T]]): Map[T, List[T]] = {
