@@ -14,6 +14,8 @@ Show below are some of the examples you can find in this repository:
 
 #### Sorting
 - [MergeSort](app/src/main/scala/io/wcygan/algorithms/sort/MergeSort.scala)
+- [Binary Search](app/src/main/scala/io/wcygan/algorithms/search/BinarySearch.scala)
+- [Breadth-First Search](app/src/main/scala/io/wcygan/algorithms/search/BreadthFirstSearch.scala)
 
 ## Directory Tree
 
@@ -31,12 +33,17 @@ You will find the source code in the [app/src/main/scala/io/wcygan](app/src/main
 │       │           └── wcygan
 │       │               ├── App.scala
 │       │               ├── algorithms
+│       │               │   ├── search
+│       │               │   │   ├── BinarySearch.scala
+│       │               │   │   ├── BreadthFirstSearch.scala
+│       │               │   │   └── ShortestPath.scala
 │       │               │   └── sort
 │       │               │       ├── HeapSort.scala
 │       │               │       ├── MergeSort.scala
 │       │               │       └── Sorter.scala
 │       │               └── collections
 │       │                   └── tree
+│       │                       ├── ImmutableTrie.scala
 │       │                       └── Trie.scala
 │       └── test
 │           ├── resources
@@ -45,11 +52,16 @@ You will find the source code in the [app/src/main/scala/io/wcygan](app/src/main
 │                   └── wcygan
 │                       ├── AppTest.scala
 │                       ├── algorithms
+│                       │   ├── search
+│                       │   │   ├── BinarySearchTest.scala
+│                       │   │   ├── BreadthFirstSearchTest.scala
+│                       │   │   └── ShortestPathTest.scala
 │                       │   └── sort
 │                       │       └── SorterTest.scala
 │                       └── collections
 │                           └── tree
-│                               └── TrieSuite.scala
+│                               ├── ImmutableTrieTest.scala
+│                               └── TrieTest.scala
 ├── gradle
 │   └── wrapper
 │       ├── gradle-wrapper.jar
