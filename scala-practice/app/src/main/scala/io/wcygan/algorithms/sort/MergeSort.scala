@@ -13,6 +13,7 @@ object MergeSort extends Sorter {
           case (true, false) => true
           case (false, true) => false
           case (true, true) => Ordering[T].lt(sortedLeft(leftIdx), sortedRight(rightIdx))
+          case (_, _) => ???
         }
         if (takeLeft) {
           output += sortedLeft(leftIdx)
