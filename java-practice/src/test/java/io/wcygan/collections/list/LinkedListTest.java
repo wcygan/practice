@@ -61,7 +61,7 @@ public class LinkedListTest {
     public void add() throws Exception {
         LinkedList<Integer> list = new LinkedList<>();
         int maxVal = 10 + rnd.nextInt(10);
-        IntStream.range(0, maxVal).forEach(i -> assertTrue(i == list.add(i).getValue()));
+        IntStream.range(0, maxVal).forEach(i -> assertEquals(i, (int) list.add(i).getValue()));
         IntStream.range(0, maxVal).forEach(i -> assertTrue(list.contains(i)));
     }
 
@@ -112,7 +112,7 @@ public class LinkedListTest {
                 Arrays.asList("prova", "sul", "funzionamento", "di", "una", "cache+", "condivisa", "in", "ambiente",
                         "multi-threaded"));
 
-        Function<List<String>, Runnable> heapFillerGen = (words) -> () ->
+        Function<java.util.List<String>, Runnable> heapFillerGen = (words) -> () ->
                 words.forEach(w -> {
                     try {
                         list.add(w);

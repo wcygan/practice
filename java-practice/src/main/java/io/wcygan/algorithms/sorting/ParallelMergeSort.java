@@ -7,7 +7,7 @@ import java.util.concurrent.RecursiveAction;
 
 public class ParallelMergeSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
 
-    private static final Integer PARALLELISM = 50;
+    private static final Integer PARALLELISM = Thread.activeCount();
 
     @Override
     public void sort(List<T> lst) {
