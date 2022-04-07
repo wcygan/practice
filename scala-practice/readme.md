@@ -39,54 +39,45 @@ You will find the source code in the [lib/src/io/wcygan](lib/src/io/wcygan) fold
 
 ```
 .
-├── app
-│   ├── build.gradle
-│   └── src
-│       ├── main
-│       │   ├── resources
-│       │   └── scala
-│       │       └── io
-│       │           └── wcygan
-│       │               ├── App.scala
-│       │               ├── algorithms
-│       │               │   ├── search
-│       │               │   │   ├── BinarySearch.scala
-│       │               │   │   ├── BreadthFirstSearch.scala
-│       │               │   │   └── ShortestPath.scala
-│       │               │   └── sort
-│       │               │       ├── HeapSort.scala
-│       │               │       ├── MergeSort.scala
-│       │               │       └── Sorter.scala
-│       │               └── collections
-│       │                   └── tree
-│       │                       ├── ImmutableTrie.scala
-│       │                       └── Trie.scala
-│       └── test
-│           ├── resources
-│           └── scala
-│               └── io
-│                   └── wcygan
-│                       ├── AppTest.scala
-│                       ├── algorithms
-│                       │   ├── search
-│                       │   │   ├── BinarySearchTest.scala
-│                       │   │   ├── BreadthFirstSearchTest.scala
-│                       │   │   └── ShortestPathTest.scala
-│                       │   └── sort
-│                       │       └── SorterTest.scala
-│                       └── collections
-│                           └── tree
-│                               ├── ImmutableTrieTest.scala
-│                               └── TrieTest.scala
-├── gradle
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── gradlew
-├── gradlew.bat
-├── project
-│   └── build.properties
+├── build.sc
+├── lib
+│   ├── src
+│   │   └── io
+│   │       └── wcygan
+│   │           ├── algorithms
+│   │           │   ├── search
+│   │           │   │   ├── BinarySearch.scala
+│   │           │   │   ├── BreadthFirstSearch.scala
+│   │           │   │   └── ShortestPath.scala
+│   │           │   └── sort
+│   │           │       ├── HeapSort.scala
+│   │           │       ├── MergeSort.scala
+│   │           │       └── Sorter.scala
+│   │           └── collections
+│   │               └── tree
+│   │                   ├── ImmutableTrie.scala
+│   │                   └── Trie.scala
+│   └── test
+│       └── src
+│           └── io
+│               └── wcygan
+│                   ├── algorithms
+│                   │   ├── search
+│                   │   │   ├── BinarySearchTest.scala
+│                   │   │   ├── BreadthFirstSearchTest.scala
+│                   │   │   └── ShortestPathTest.scala
+│                   │   └── sort
+│                   │       └── SorterTest.scala
+│                   └── collections
+│                       └── tree
+│                           ├── ImmutableTrieTest.scala
+│                           └── TrieTest.scala
+├── mill
 ├── readme.md
-└── settings.gradle
+└── scripts
+    ├── Hello.sc
+    ├── NLargestFiles.sc
+    └── scripts.md
+
 
 ```
