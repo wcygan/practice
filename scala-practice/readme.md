@@ -15,6 +15,11 @@ $ brew install mill
 $ mill mill.scalalib.GenIdea/idea
 ```
 
+## Running the tests
+
+```
+$ mill lib.test
+```
 
 ## Examples
 
