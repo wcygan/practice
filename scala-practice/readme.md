@@ -1,5 +1,21 @@
 # Scala Practice
 
+## Installations
+
+Install [Ammonite](http://ammonite.io/) [Mill](https://com-lihaoyi.github.io/mill/mill/Intro_to_Mill.html):
+
+```bash
+$ brew install ammonite-repl
+$ brew install mill
+```
+
+## Generate IntelliJ IDEA project files
+
+```bash
+$ mill mill.scalalib.GenIdea/idea
+```
+
+
 ## Examples
 
 Show below are some of the examples you can find in this repository:
@@ -8,18 +24,18 @@ Show below are some of the examples you can find in this repository:
 
 #### Trees
 
-- [Trie](app/src/main/scala/io/wcygan/collections/tree/Trie.scala)
+- [Trie](lib/src/io/wcygan/collections/tree/Trie.scala)
 
 ### Algorithms
 
 #### Sorting
-- [MergeSort](app/src/main/scala/io/wcygan/algorithms/sort/MergeSort.scala)
-- [Binary Search](app/src/main/scala/io/wcygan/algorithms/search/BinarySearch.scala)
-- [Breadth-First Search](app/src/main/scala/io/wcygan/algorithms/search/BreadthFirstSearch.scala)
+- [MergeSort](lib/src/io/wcygan/algorithms/sort/MergeSort.scala)
+- [Binary Search](lib/src/io/wcygan/algorithms/search/BinarySearch.scala)
+- [Breadth-First Search](lib/src/io/wcygan/algorithms/search/BreadthFirstSearch.scala)
 
 ## Directory Tree
 
-You will find the source code in the [app/src/main/scala/io/wcygan](app/src/main/scala/io/wcygan) folder.
+You will find the source code in the [lib/src/io/wcygan](lib/src/io/wcygan) folder.
 
 ```
 .
