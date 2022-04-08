@@ -1,9 +1,10 @@
-package io.wcygan.concurrent.nonblocking;
+package io.wcygan.concurrent.collections;
 
 import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
+import io.wcygan.collections.queue.Queue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,20 +14,20 @@ import java.util.List;
 import java.util.stream.LongStream;
 
 @RunWith(JUnitQuickcheck.class)
-public class KoganPetrankQueueTest {
+public class NonBlockingQueueTest {
 
     private static final Integer ONE_HUNDRED = 100;
 
     @Property(trials = 25)
     public void sequentialAddAndRemove(@Size(max = 50) List<Integer> expected) {
-        KoganPetrankQueue<Integer> queue = new KoganPetrankQueue<>();
-        expected.forEach(queue::enq);
-        expected.forEach(element -> Assertions.assertEquals(element, queue.deq()));
+        Queue<Integer> queue = new NonblockingQueue<>();
+        expected.forEach(queue::add);
+        expected.forEach(element -> Assertions.assertEquals(element, queue.remove()));
     }
 
     @Property(trials = 25)
     public void concurrentAddAndRemove(@InRange(minInt = 2, maxInt = 100) Integer numThreads) {
-        KoganPetrankQueue<Long> queue = new KoganPetrankQueue<>();
+        Queue<Long> queue = new NonblockingQueue<>();
         NonblockingRandom random = new NonblockingRandom(System.nanoTime());
 
         List<Thread> workers = new ArrayList<>();
@@ -49,33 +50,33 @@ public class KoganPetrankQueueTest {
                 });
 
         List<Long> queueContents = new ArrayList<>();
-        Long next = queue.deq();
+        Long next = queue.remove();
         while (next != null) {
             queueContents.add(next);
-            next = queue.deq();
+            next = queue.remove();
         }
 
         Assertions.assertEquals(numThreads, queueContents.size());
     }
 
-    private Runnable addTwo(KoganPetrankQueue<Long> queue, NonblockingRandom random) {
+    private Runnable addTwo(Queue<Long> queue, NonblockingRandom random) {
         return () -> {
             for (int i = 0; i < 2; i++) {
-                queue.enq(random.nextLong(System.nanoTime()));
+                queue.add(random.nextLong(System.nanoTime()));
             }
         };
     }
 
-    private Runnable removeOne(KoganPetrankQueue<Long> queue) {
+    private Runnable removeOne(Queue<Long> queue) {
         return () -> {
-            while (queue.deq() == null) {
+            while (queue.remove() == null) {
             }
         };
     }
 
     @Test
     public void testOneHundredThousandAdds() {
-        KoganPetrankQueue<Long> queue = new KoganPetrankQueue<>();
+        Queue<Long> queue = new NonblockingQueue<>();
 
         int numThreads = ONE_HUNDRED;
         List<Thread> workers = new ArrayList<>();
@@ -95,16 +96,16 @@ public class KoganPetrankQueueTest {
                 });
 
         List<Long> queueContents = new ArrayList<>();
-        Long next = queue.deq();
+        Long next = queue.remove();
         while (next != null) {
             queueContents.add(next);
-            next = queue.deq();
+            next = queue.remove();
         }
 
         Assertions.assertEquals(100000, queueContents.size());
     }
 
-    private Runnable addOneThousandTimes(KoganPetrankQueue<Long> queue) {
-        return () -> LongStream.range(0, 1000).forEach(queue::enq);
+    private Runnable addOneThousandTimes(Queue<Long> queue) {
+        return () -> LongStream.range(0, 1000).forEach(queue::add);
     }
 }

@@ -5,8 +5,8 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 ## Table of Contents
 
 - **[Cool Stuff](#cool-stuff)**<br>
-  - **[Data Structures](#data-structures)**<br>
-  - **[Algorithms](#algorithms)**<br>
+    - **[Data Structures](#data-structures)**<br>
+    - **[Algorithms](#algorithms)**<br>
 - **[Build and Run](#build-and-run)**<br>
 - **[Property-Based Testing with JUnit-Quickcheck](#property-based-testing-with-junit-quickcheck)**<br>
 - **[References](#references)**<br>
@@ -44,9 +44,9 @@ To execute the benchmarks in `src/jmh`, run the following command:
 $ gradle jmh
 ```
 
-For example, you can see this in action in 
-[CacheLinesBenchmark.java](src/jmh/java/io/wcygan/algorithms/gotchas/CacheLinesBenchmark.java) where we obtain
-the following results:
+For example, you can see this in action in
+[CacheLinesBenchmark.java](src/jmh/java/io/wcygan/algorithms/gotchas/CacheLinesBenchmark.java) where we obtain the
+following results:
 
 ```
 (Run on 2021 M1 Max Macbook Pro)
@@ -55,7 +55,7 @@ i.w.a.gotchas.CacheLinesBenchmark.touchEveryItem     ss  100  0.171 ± 0.004  ms
 i.w.a.gotchas.CacheLinesBenchmark.touchEveryLine     ss  100  0.143 ± 0.006  ms/op
 ```
 
-Another example is [SortingBenchmark.java](src/jmh/java/io/wcygan/algorithms/sorting/SortingBenchmark.java) where we 
+Another example is [SortingBenchmark.java](src/jmh/java/io/wcygan/algorithms/sorting/SortingBenchmark.java) where we
 compare the benchmark running time of different sorting algorithms:
 
 ```
@@ -104,12 +104,6 @@ Further, we can a **single** test by specifying its fully qualified path like so
 $ ./gradlew test --tests io.wcygan.algorithms.graph.pathfinding.WeightedShortestPathTest.testWeightedShortestPath
 ```
 
-Running any type of test should generate a [JaCoCo](https://github.com/jacoco/jacoco) report file
-at `build/jacocoHtml/index.html`
-which indicates various types of
-[Program Coverage properties](https://www.eclemma.org/userdoc/coverageproperties.html) for the execution of the test
-your ran.
-
 ### Building a jar file
 
 Builds a jar containing **all dependencies** of the project
@@ -137,9 +131,6 @@ you can execute it in isolation just as we did before:
 ```
 $ ./gradlew test --tests io.wcygan.algorithms.sorting.SortingQuickCheck.testSortingAlgorithms
 ```
-
-Additionally, this will generate a [JaCoCo](https://github.com/jacoco/jacoco) report file which represents the coverage
-observed during the execution of the property-based test.
 
 You can configure the execution of your property-based test using the elements of
 the [@Property annotation](https://pholser.github.io/junit-quickcheck/site/1.0/junit-quickcheck-core/apidocs/com/pholser/junit/quickcheck/Property.html)

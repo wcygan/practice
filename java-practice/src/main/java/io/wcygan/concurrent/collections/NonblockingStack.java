@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.nonblocking;
+package io.wcygan.concurrent.collections;
 
 import io.wcygan.collections.stack.Stack;
 

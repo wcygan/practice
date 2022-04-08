@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.nonblocking;
+package io.wcygan.concurrent.collections;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicInteger;

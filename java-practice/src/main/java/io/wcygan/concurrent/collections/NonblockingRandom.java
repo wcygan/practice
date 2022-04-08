@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.nonblocking;
+package io.wcygan.concurrent.collections;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicLong;
