@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayBlockingQueueTest {
-    private static final Integer ITERATIONS = 25;
 
     @Test
     public void capacityLessThanZero_throwsException() {
@@ -18,8 +17,10 @@ public class ArrayBlockingQueueTest {
     @Test
     public void singleThreadedExecution_capacityOne() {
         Queue<Integer> queue = new ArrayBlockingQueue<>(1);
-        for (int i = 0; i < ITERATIONS; i++) {
+        for (int i = 0; i < 1; i++) {
             Assertions.assertTrue(queue.add(i));
+        }
+        for (int i = 0; i < 1; i++) {
             Assertions.assertEquals(i, queue.remove());
         }
     }
@@ -27,17 +28,33 @@ public class ArrayBlockingQueueTest {
     @Test
     public void singleThreadedExecution_capacityTwo() {
         Queue<Integer> queue = new ArrayBlockingQueue<>(2);
-        for (int i = 0; i < ITERATIONS; i++) {
+        for (int i = 0; i < 2; i++) {
             Assertions.assertTrue(queue.add(i));
+        }
+        for (int i = 0; i < 2; i++) {
             Assertions.assertEquals(i, queue.remove());
         }
     }
 
     @Test
-    public void singleThreadedExecution_capacityTree() {
+    public void singleThreadedExecution_capacityThree() {
         Queue<Integer> queue = new ArrayBlockingQueue<>(3);
-        for (int i = 0; i < ITERATIONS; i++) {
+        for (int i = 0; i < 3; i++) {
             Assertions.assertTrue(queue.add(i));
+        }
+        for (int i = 0; i < 3; i++) {
+            Assertions.assertEquals(i, queue.remove());
+        }
+    }
+
+    @Test
+    public void singleThreadedExecution_capacityOneHundred() {
+        int cap = 100;
+        Queue<Integer> queue = new ArrayBlockingQueue<>(cap);
+        for (int i = 0; i < cap; i++) {
+            Assertions.assertTrue(queue.add(i));
+        }
+        for (int i = 0; i < cap; i++) {
             Assertions.assertEquals(i, queue.remove());
         }
     }
