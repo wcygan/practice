@@ -128,4 +128,87 @@ public class ArrayBlockingQueueTest {
         Assertions.assertTrue(queue.isEmpty());
         Assertions.assertNull(queue.peek());
     }
+
+
+    @Test
+    public void multiThreadedContention_capacityTwo() throws InterruptedException {
+        int n = 50;
+        Queue<Integer> queue = new ArrayBlockingQueue<>(2);
+
+        Thread producer = new Thread(() -> {
+            for (int i = 0; i < n; i++) {
+                Assertions.assertTrue(queue.add(i));
+            }
+        });
+
+        Thread consumer = new Thread(() -> {
+            int maxSoFar = -1;
+            for (int i = 0; i < n; i++) {
+                Integer got = queue.remove();
+                Assertions.assertNotNull(got);
+                Assertions.assertTrue(got > maxSoFar);
+                maxSoFar = got;
+            }
+        });
+
+        // Start producing & consumer
+        producer.start();
+        consumer.start();
+
+        // Wait until finish
+        producer.join();
+        consumer.join();
+
+        // the queue should be empty at the end...
+        Assertions.assertTrue(queue.isEmpty());
+        Assertions.assertNull(queue.peek());
+    }
+
+    @Test
+    public void multiThreadedContention_multipleProducersAndConsumers_capacityTen() throws InterruptedException {
+        int t = 20;
+        int n = 100;
+        Queue<Integer> queue = new ArrayBlockingQueue<>(10);
+
+        // PUT "t * n" items
+        // into the queue
+        List<Thread> producers = new ArrayList<>();
+        for (int i = 0; i < t; i++) {
+            final int toAdd = i + 1;
+            Thread producer = new Thread(() -> {
+                for (int j = 0; j < n; j++) {
+                    Assertions.assertTrue(queue.add(toAdd));
+                }
+            });
+            producers.add(producer);
+            producer.start();
+        }
+
+        // TAKE "t * n" items
+        // from the queue
+        List<Thread> consumers = new ArrayList<>();
+        for (int i = 0; i < t; i++) {
+            Thread consumer = new Thread(() -> {
+                for (int j = 0; j < n; j++) {
+                    Integer got = queue.remove();
+                    Assertions.assertNotNull(got);
+                }
+            });
+            consumers.add(consumer);
+            consumer.start();
+        }
+
+        // wait for all the producers to finish
+        for (Thread producer : producers) {
+            producer.join();
+        }
+
+        // wait for all the producers to finish
+        for (Thread consumer : consumers) {
+            consumer.join();
+        }
+
+        Assertions.assertTrue(queue.isEmpty());
+        Assertions.assertNull(queue.peek());
+    }
 }

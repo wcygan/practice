@@ -34,8 +34,12 @@ public class ArrayBlockingQueue<T> implements Queue<T> {
     public boolean add(T data) {
         lock.lock();
         try {
-            if (size == arr.length) {
-                notFull.await();
+            while (size == arr.length) {
+                try {
+                    notFull.await();
+                } catch (InterruptedException ignored) {
+                    // ignored
+                }
             }
 
             arr[addIndex] = data;
@@ -49,8 +53,6 @@ public class ArrayBlockingQueue<T> implements Queue<T> {
 
             notEmpty.signal();
             return true;
-        } catch (InterruptedException e) {
-            return false;
         } finally {
             lock.unlock();
         }
@@ -60,8 +62,12 @@ public class ArrayBlockingQueue<T> implements Queue<T> {
     public T remove() {
         lock.lock();
         try {
-            if (size == 0) {
-                notEmpty.await();
+            while (size == 0) {
+                try {
+                    notEmpty.await();
+                } catch (InterruptedException ignored) {
+                    // ignored
+                }
             }
 
             T data = itemAt(removeIndex);
@@ -75,8 +81,6 @@ public class ArrayBlockingQueue<T> implements Queue<T> {
 
             notFull.signal();
             return data;
-        } catch (InterruptedException e) {
-            return null;
         } finally {
             lock.unlock();
         }
