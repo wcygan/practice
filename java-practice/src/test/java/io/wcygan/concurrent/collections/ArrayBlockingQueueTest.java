@@ -129,7 +129,6 @@ public class ArrayBlockingQueueTest {
         Assertions.assertNull(queue.peek());
     }
 
-
     @Test
     public void multiThreadedContention_capacityTwo() throws InterruptedException {
         int n = 50;

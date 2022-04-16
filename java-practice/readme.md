@@ -155,5 +155,5 @@ I'm using the following material as a reference:
 5. Submit a **Pull request** for your work
 
 Further, I recommend you use [IntelliJ](https://www.jetbrains.com/idea/) with the
-[google-java-format](https://plugins.jetbrains.com/plugin/8527-google-java-format)
+[palantir-java-format](https://plugins.jetbrains.com/plugin/13180-palantir-java-format/)
 plugin to format the code you submit.

@@ -22,13 +22,10 @@ public class ShortestPath {
     }
 
     private static <T> void initializeSingleSource(Graph<T> graph, Vertex<T> source) {
-        graph
-                .vertexSet()
-                .forEach(
-                        v -> {
-                            v.setCost(Double.POSITIVE_INFINITY);
-                            v.setPred(null);
-                        });
+        graph.vertexSet().forEach(v -> {
+            v.setCost(Double.POSITIVE_INFINITY);
+            v.setPred(null);
+        });
         source.setCost(0.0);
     }
 
@@ -46,16 +43,15 @@ public class ShortestPath {
         }
     }
 
-    private static <T> Graph<T> extractPredecessors(
-            Graph<T> parent, Vertex<T> source, Vertex<T> destination) {
+    private static <T> Graph<T> extractPredecessors(Graph<T> parent, Vertex<T> source, Vertex<T> destination) {
         Graph<T> shortestPath = new SimpleGraph<>();
         Vertex<T> curr = destination;
 
         while (!curr.equals(source)) {
             Vertex<T> u = shortestPath.addVertex(curr.getPred());
             Vertex<T> v = shortestPath.addVertex(curr);
-            double weight =
-                    parent.getEdge(parent.getVertex(u.getName()), parent.getVertex(v.getName())).weight();
+            double weight = parent.getEdge(parent.getVertex(u.getName()), parent.getVertex(v.getName()))
+                    .weight();
             shortestPath.addWeightedEdge(u, v, weight);
             curr = curr.getPred();
         }

@@ -15,39 +15,33 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @RunWith(JUnitQuickcheck.class)
 public class PriorityQueueTest {
     Comparator<Event> compareByInstant = Comparator.comparing(e -> e.date);
 
     private List<Queue<Integer>> intPriorityQueueProvider() {
-        return List.of(
-                new DWayHeap<>(Integer::compare),
-                new BinaryHeap<>(Integer::compare)
-        );
+        return List.of(new DWayHeap<>(Integer::compare), new BinaryHeap<>(Integer::compare));
     }
 
     @Test
     public void priorityByInstant() {
-        List.of(
-                new BinaryHeap<>(compareByInstant),
-                new DWayHeap<>(compareByInstant)
-        ).forEach(q -> {
-            var now = Instant.now();
-            var e1 = new Event(Date.from(now.minusSeconds(100)), 1);
-            var e2 = new Event(Date.from(now.minusSeconds(200)), 2);
-            var e3 = new Event(Date.from(now.minusSeconds(300)), 3);
-            var e4 = new Event(Date.from(now.minusSeconds(50)), 4);
-            var e5 = new Event(Date.from(now.minusSeconds(5000)), 5);
-            List.of(e3, e1, e2).forEach(q::add);
-            assertEquals(e3, q.remove());
-            assertEquals(e2, q.remove());
-            q.add(e4);
-            q.add(e5);
-            assertEquals(e5, q.remove());
-            assertEquals(e1, q.remove());
-            assertEquals(e4, q.remove());
-        });
+        List.of(new BinaryHeap<>(compareByInstant), new DWayHeap<>(compareByInstant))
+                .forEach(q -> {
+                    var now = Instant.now();
+                    var e1 = new Event(Date.from(now.minusSeconds(100)), 1);
+                    var e2 = new Event(Date.from(now.minusSeconds(200)), 2);
+                    var e3 = new Event(Date.from(now.minusSeconds(300)), 3);
+                    var e4 = new Event(Date.from(now.minusSeconds(50)), 4);
+                    var e5 = new Event(Date.from(now.minusSeconds(5000)), 5);
+                    List.of(e3, e1, e2).forEach(q::add);
+                    assertEquals(e3, q.remove());
+                    assertEquals(e2, q.remove());
+                    q.add(e4);
+                    q.add(e5);
+                    assertEquals(e5, q.remove());
+                    assertEquals(e1, q.remove());
+                    assertEquals(e4, q.remove());
+                });
     }
 
     @Property(trials = 25)

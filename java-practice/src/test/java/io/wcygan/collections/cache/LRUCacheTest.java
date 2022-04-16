@@ -16,7 +16,6 @@ import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
-
 public class LRUCacheTest {
     private static final Random rnd = new Random();
 
@@ -51,18 +50,21 @@ public class LRUCacheTest {
 
         cache.set("test", "prova");
         assertEquals(1, cache.size());
-        assertEquals("Should set the correct values in cache", "prova", cache.get("test").get());
+        assertEquals(
+                "Should set the correct values in cache",
+                "prova",
+                cache.get("test").get());
 
         cache.set("test", "prueba");
-        assertEquals("Should override values in cache", "prueba", cache.get("test").get());
+        assertEquals(
+                "Should override values in cache", "prueba", cache.get("test").get());
 
         ImmutableMap<String, String> items = ImmutableMap.of(
                 "this", "questo",
                 "is", "e'",
                 "a", "un",
                 "cache", "cache",
-                "test", "esperimento"
-        );
+                "test", "esperimento");
 
         for (ImmutableMap.Entry<String, String> entry : items.entrySet()) {
             cache.set(entry.getKey(), entry.getValue());
@@ -79,7 +81,10 @@ public class LRUCacheTest {
         assertEquals(0, cache.size());
 
         cache.set("test", "prova");
-        assertEquals("Should retrieve the correct values in cache", "prova", cache.get("test").get());
+        assertEquals(
+                "Should retrieve the correct values in cache",
+                "prova",
+                cache.get("test").get());
 
         assertEquals("Should return empty() if the key is not in cache", Optional.empty(), cache.get("bogus"));
     }
@@ -104,15 +109,14 @@ public class LRUCacheTest {
                 "is", "e'",
                 "a", "un",
                 "cache", "cache",
-                "test", "esperimento"
-        );
+                "test", "esperimento");
 
         for (ImmutableMap.Entry<String, String> entry : items.entrySet()) {
             cache.set(entry.getKey(), entry.getValue());
         }
 
-        assertEquals("evictOneEntry (called from set) should remove elements when cache is full",
-                maxSize, cache.size());
+        assertEquals(
+                "evictOneEntry (called from set) should remove elements when cache is full", maxSize, cache.size());
 
         cache.evictOneEntry();
         assertEquals("evictOneEntry should decrease cache's size", maxSize - 1, cache.size());
@@ -127,8 +131,7 @@ public class LRUCacheTest {
                 "is", "e'",
                 "a", "un",
                 "cache", "cache",
-                "test", "prova"
-        );
+                "test", "prova");
 
         for (ImmutableMap.Entry<String, String> entry : items.entrySet()) {
             cache.set(entry.getKey(), entry.getValue());
@@ -161,14 +164,18 @@ public class LRUCacheTest {
         assertTrue(cache.evictOneEntry());
         assertEquals(maxSize - 2, cache.size());
 
-        assertEquals("evictOneEntry should remove the entry requested more in the past", Optional.empty(), cache.get("a"));
+        assertEquals(
+                "evictOneEntry should remove the entry requested more in the past", Optional.empty(), cache.get("a"));
 
         assertTrue(cache.set("new test", "nuovo test"));
         assertEquals(maxSize - 1, cache.size());
         assertEquals(Optional.of("nuovo test"), cache.get("new test"));
         assertTrue(cache.evictOneEntry());
         assertEquals(maxSize - 2, cache.size());
-        assertEquals("evictOneEntry should not remove the last requested entry", Optional.of("nuovo test"), cache.get("new test"));
+        assertEquals(
+                "evictOneEntry should not remove the last requested entry",
+                Optional.of("nuovo test"),
+                cache.get("new test"));
     }
 
     @Test
@@ -199,16 +206,23 @@ public class LRUCacheTest {
 
         ExecutorService executor = Executors.newFixedThreadPool(10);
 
-        List<String> englishWords = new ArrayList<>(
-                Arrays.asList("this", "is", "just", "to", "test", "concurrent", "access", "for", "synchronized",
-                        "cache"));
+        List<String> englishWords = new ArrayList<>(Arrays.asList(
+                "this", "is", "just", "to", "test", "concurrent", "access", "for", "synchronized", "cache"));
 
-        List<String> italianWords = new ArrayList<>(
-                Arrays.asList("prova", "sul", "funzionamento", "di", "una", "cache+", "condivisa", "in", "ambiente",
-                        "multi-threaded"));
+        List<String> italianWords = new ArrayList<>(Arrays.asList(
+                "prova",
+                "sul",
+                "funzionamento",
+                "di",
+                "una",
+                "cache+",
+                "condivisa",
+                "in",
+                "ambiente",
+                "multi-threaded"));
 
-        Function<List<String>, Runnable> entrySetterGen = (words) -> () ->
-                IntStream.range(0, words.size()).forEach(i -> {
+        Function<List<String>, Runnable> entrySetterGen =
+                (words) -> () -> IntStream.range(0, words.size()).forEach(i -> {
                     try {
                         String w = words.get(i);
                         cache.set(w, i);
@@ -222,8 +236,8 @@ public class LRUCacheTest {
         Runnable englishWordsSetter = entrySetterGen.apply(englishWords);
         Runnable italianWordsSetter = entrySetterGen.apply(italianWords);
 
-        BiFunction<List<String>, Integer, Runnable> entryGetterGen = (words, runs) -> () ->
-                IntStream.range(0, words.size()).forEach(i -> {
+        BiFunction<List<String>, Integer, Runnable> entryGetterGen =
+                (words, runs) -> () -> IntStream.range(0, words.size()).forEach(i -> {
                     try {
                         String w = words.get(i);
                         IntStream.range(0, runs).forEach(j -> {
@@ -251,7 +265,6 @@ public class LRUCacheTest {
         Thread.sleep(5 * maxWait);
         executor.execute(italianWordsGetter);
 
-
         // Wait till we are sure all threads are done
         try {
             executor.awaitTermination(50 * maxWait + (2 * maxSize) * (1 + maxWait), TimeUnit.MILLISECONDS);
@@ -261,7 +274,8 @@ public class LRUCacheTest {
         ;
 
         // Now only the words with counters[word] > 0 should still be in the cache
-        Predicate<String> isEntryIn = word -> counters.get(word).get() > 0 == cache.get(word).isPresent();
+        Predicate<String> isEntryIn =
+                word -> counters.get(word).get() > 0 == cache.get(word).isPresent();
         englishWords.forEach(word -> assertTrue(isEntryIn.test(word)));
         italianWords.forEach(word -> assertTrue(isEntryIn.test(word)));
     }

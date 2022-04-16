@@ -24,10 +24,8 @@ public class CachedFibonacciSpeedTest {
     @Test
     public void cachedFibIsFaster() {
         AtomicReference<Long> finishLine = new AtomicReference<>(null);
-        Thread fast =
-                new Thread(fib(() -> new FibonacciSequence().getFibonacciNumberCached(NUMBER), finishLine));
-        Thread slow =
-                new Thread(fib(() -> new FibonacciSequence().getFibonacciNumber(NUMBER), finishLine));
+        Thread fast = new Thread(fib(() -> new FibonacciSequence().getFibonacciNumberCached(NUMBER), finishLine));
+        Thread slow = new Thread(fib(() -> new FibonacciSequence().getFibonacciNumber(NUMBER), finishLine));
 
         slow.start();
         fast.start();

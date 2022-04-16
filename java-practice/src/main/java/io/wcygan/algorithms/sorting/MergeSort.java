@@ -18,8 +18,7 @@ public class MergeSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
         merge(lst, left, right);
     }
 
-    protected static <T extends Comparable<T>> void merge(
-            List<T> original, List<T> left, List<T> right) {
+    protected static <T extends Comparable<T>> void merge(List<T> original, List<T> left, List<T> right) {
         int i = 0;
         int j = 0;
         int k = 0;

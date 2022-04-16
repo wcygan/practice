@@ -22,8 +22,8 @@ public class CacheLinesBenchmark {
      *
      * </pre>
      */
-
     private final int ARR_SIZE = 2 * 1024 * 1024;
+
     private final int[] testData = new int[ARR_SIZE];
 
     @Benchmark

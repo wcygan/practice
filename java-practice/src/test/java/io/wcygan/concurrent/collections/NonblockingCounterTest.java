@@ -21,9 +21,7 @@ public class NonblockingCounterTest {
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
         Callable<List<Integer>> incrementThreeTimes =
-                () ->
-                        List.of(
-                                counter.getAndIncrement(), counter.getAndIncrement(), counter.getAndIncrement());
+                () -> List.of(counter.getAndIncrement(), counter.getAndIncrement(), counter.getAndIncrement());
 
         List<Future<List<Integer>>> tasks = new ArrayList<>();
         for (int i = 0; i < NUM_THREADS; i++) {
@@ -31,17 +29,17 @@ public class NonblockingCounterTest {
         }
 
         Set<Integer> values = new HashSet<>();
-        tasks.forEach(
-                t -> {
-                    try {
-                        values.addAll(t.get());
-                    } catch (InterruptedException | ExecutionException e) {
-                        Assertions.fail("Couldn't add to the computed values set");
-                    }
-                });
+        tasks.forEach(t -> {
+            try {
+                values.addAll(t.get());
+            } catch (InterruptedException | ExecutionException e) {
+                Assertions.fail("Couldn't add to the computed values set");
+            }
+        });
 
         int max = 3 * NUM_THREADS;
-        Assertions.assertEquals(max, IntStream.range(0, max).filter(values::contains).count());
+        Assertions.assertEquals(
+                max, IntStream.range(0, max).filter(values::contains).count());
     }
 
     @Test

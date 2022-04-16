@@ -39,14 +39,13 @@ public class KoganPetrankQueueTest {
             workers.add(remover);
         }
 
-        workers.forEach(
-                t -> {
-                    try {
-                        t.join();
-                    } catch (InterruptedException e) {
-                        Assertions.fail("Couldn't join" + t.getName());
-                    }
-                });
+        workers.forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                Assertions.fail("Couldn't join" + t.getName());
+            }
+        });
 
         List<Long> queueContents = new ArrayList<>();
         Long next = queue.deq();
@@ -68,8 +67,7 @@ public class KoganPetrankQueueTest {
 
     private Runnable removeOne(KoganPetrankQueue<Long> queue) {
         return () -> {
-            while (queue.deq() == null) {
-            }
+            while (queue.deq() == null) {}
         };
     }
 
@@ -85,14 +83,13 @@ public class KoganPetrankQueueTest {
             workers.add(adder);
         }
 
-        workers.forEach(
-                t -> {
-                    try {
-                        t.join();
-                    } catch (InterruptedException e) {
-                        Assertions.fail("Couldn't join" + t.getName());
-                    }
-                });
+        workers.forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                Assertions.fail("Couldn't join" + t.getName());
+            }
+        });
 
         List<Long> queueContents = new ArrayList<>();
         Long next = queue.deq();

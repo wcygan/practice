@@ -40,14 +40,13 @@ public class NonBlockingQueueTest {
             workers.add(remover);
         }
 
-        workers.forEach(
-                t -> {
-                    try {
-                        t.join();
-                    } catch (InterruptedException e) {
-                        Assertions.fail("Couldn't join" + t.getName());
-                    }
-                });
+        workers.forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                Assertions.fail("Couldn't join" + t.getName());
+            }
+        });
 
         List<Long> queueContents = new ArrayList<>();
         Long next = queue.remove();
@@ -69,8 +68,7 @@ public class NonBlockingQueueTest {
 
     private Runnable removeOne(Queue<Long> queue) {
         return () -> {
-            while (queue.remove() == null) {
-            }
+            while (queue.remove() == null) {}
         };
     }
 
@@ -86,14 +84,13 @@ public class NonBlockingQueueTest {
             workers.add(adder);
         }
 
-        workers.forEach(
-                t -> {
-                    try {
-                        t.join();
-                    } catch (InterruptedException e) {
-                        Assertions.fail("Couldn't join" + t.getName());
-                    }
-                });
+        workers.forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                Assertions.fail("Couldn't join" + t.getName());
+            }
+        });
 
         List<Long> queueContents = new ArrayList<>();
         Long next = queue.remove();

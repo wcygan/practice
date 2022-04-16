@@ -19,10 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DictionaryTest {
 
     private static Stream<Arguments> mapProvider() {
-        return Stream.of(
-            Arguments.of(new TreeMap<String, String>()),
-            Arguments.of(new HashMap<String, String>())
-        );
+        return Stream.of(Arguments.of(new TreeMap<String, String>()), Arguments.of(new HashMap<String, String>()));
     }
 
     @ParameterizedTest

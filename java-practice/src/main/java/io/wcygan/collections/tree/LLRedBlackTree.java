@@ -9,9 +9,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K, V> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
-    private Node root;
     private final ReentrantReadWriteLock.ReadLock readLock;
     private final ReentrantReadWriteLock.WriteLock writeLock;
+    private Node root;
 
     public LLRedBlackTree() {
         var lock = new ReentrantReadWriteLock();
@@ -150,7 +150,6 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
         return null;
     }
 
-
     private K min(Node x) {
         if (x == null) return null;
         if (x.left == null) return x.key;
@@ -169,34 +168,25 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
     }
 
     private Node insert(Node h, K key, V value) {
-        if (h == null)
-            return new Node(key, value);
+        if (h == null) return new Node(key, value);
 
-        if (eq(key, h.key))
-            h.value = value;
-        else if (less(key, h.key))
-            h.left = insert(h.left, key, value);
-        else
-            h.right = insert(h.right, key, value);
+        if (eq(key, h.key)) h.value = value;
+        else if (less(key, h.key)) h.left = insert(h.left, key, value);
+        else h.right = insert(h.right, key, value);
 
-        if (isRed(h.right))
-            h = rotateLeft(h);
+        if (isRed(h.right)) h = rotateLeft(h);
 
-        if (isRed(h.left) && isRed(h.left.left))
-            h = rotateRight(h);
+        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
 
-        if (isRed(h.left) && isRed(h.right))
-            colorFlip(h);
+        if (isRed(h.left) && isRed(h.right)) colorFlip(h);
 
         return h;
     }
 
     private Node deleteMin(Node h) {
-        if (h.left == null)
-            return null;
+        if (h.left == null) return null;
 
-        if (!isRed(h.left) && !isRed(h.left.left))
-            h = moveRedLeft(h);
+        if (!isRed(h.left) && !isRed(h.left.left)) h = moveRedLeft(h);
 
         h.left = deleteMin(h.left);
 
@@ -212,19 +202,16 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
 
     private Node delete(Node h, K key) {
         if (less(key, h.key)) {
-            if (!isRed(h.left) && !isRed(h.left.left))
-                h = moveRedLeft(h);
+            if (!isRed(h.left) && !isRed(h.left.left)) h = moveRedLeft(h);
             h.left = delete(h.left, key);
         } else {
             if (isRed(h.left)) {
                 h = rotateRight(h);
             }
 
-
             if (eq(key, h.key) && (h.right == null)) {
                 return null;
             }
-
 
             if (!isRed(h.right) && !isRed(h.right.left)) {
                 // offender
@@ -298,14 +285,11 @@ public class LLRedBlackTree<K extends Comparable<K>, V> implements SearchTree<K,
     }
 
     private Node fixUp(Node h) {
-        if (isRed(h.right))
-            h = rotateLeft(h);
+        if (isRed(h.right)) h = rotateLeft(h);
 
-        if (isRed(h.left) && isRed(h.left.left))
-            h = rotateRight(h);
+        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
 
-        if (isRed(h.left) && isRed(h.right))
-            colorFlip(h);
+        if (isRed(h.left) && isRed(h.right)) colorFlip(h);
 
         return h;
     }

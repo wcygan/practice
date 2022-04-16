@@ -30,8 +30,10 @@ public class Helpers {
             assertNotNull(a);
             assertNotNull(b);
             assertEquals(a.getData(), b.getData());
-            Optional<Edge<Integer>> nextA = actualPath.outgoingEdgesOf(a).stream().findFirst();
-            Optional<Edge<Integer>> nextB = expectedPath.outgoingEdgesOf(b).stream().findFirst();
+            Optional<Edge<Integer>> nextA =
+                    actualPath.outgoingEdgesOf(a).stream().findFirst();
+            Optional<Edge<Integer>> nextB =
+                    expectedPath.outgoingEdgesOf(b).stream().findFirst();
 
             if (nextA.isPresent() && nextB.isPresent()) {
                 a = nextA.get().target();
@@ -48,8 +50,10 @@ public class Helpers {
             }
         }
 
-        double actualPathCost = actualPath.edgeSet().stream().mapToDouble(Edge::weight).sum();
-        double expectedPathCost = expectedPath.edgeSet().stream().mapToDouble(Edge::weight).sum();
+        double actualPathCost =
+                actualPath.edgeSet().stream().mapToDouble(Edge::weight).sum();
+        double expectedPathCost =
+                expectedPath.edgeSet().stream().mapToDouble(Edge::weight).sum();
 
         /* make sure the paths have the same cost */
         assertTrue(Math.abs(actualPathCost - expectedPathCost) < THRESHOLD);

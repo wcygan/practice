@@ -17,11 +17,6 @@ public class FibonacciSequence {
         }
     }
 
-    private LoadingCache<Integer, BigInteger> memo =
-            CacheBuilder.newBuilder()
-                    .maximumSize(1000)
-                    .build(CacheLoader.from(this::getFibonacciNumberCached));
-
     public BigInteger getFibonacciNumber(int n) {
         if (n == 0) {
             return BigInteger.ZERO;
@@ -32,5 +27,6 @@ public class FibonacciSequence {
         }
     }
 
-
+    private LoadingCache<Integer, BigInteger> memo =
+            CacheBuilder.newBuilder().maximumSize(1000).build(CacheLoader.from(this::getFibonacciNumberCached));
 }

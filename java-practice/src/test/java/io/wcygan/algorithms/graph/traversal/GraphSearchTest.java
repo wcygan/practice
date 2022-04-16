@@ -21,62 +21,56 @@ public class GraphSearchTest {
                         // The ending vertex
                         3,
                         // The edges in the graph
-                        new Integer[][]{
-                                {1, 2}, {2, 3},
+                        new Integer[][] {
+                            {1, 2}, {2, 3},
                         },
                         // Is the ending vertex reachable from the starting vertex
-                        true
-                ),
+                        true),
                 Arguments.of(
                         // The starting vertex
                         1,
                         // The ending vertex
                         10,
                         // The edges in the graph
-                        new Integer[][]{
-                                {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
+                        new Integer[][] {
+                            {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
                         },
                         // Is the ending vertex reachable from the starting vertex
-                        true
-                ),
+                        true),
                 Arguments.of(
                         // The starting vertex
                         1,
                         // The ending vertex
                         5,
                         // The edges in the graph
-                        new Integer[][]{
-                                {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
-                                {1, 3}, {2, 5}, {4, 7}, {6, 4}, {7, 4}, {10, 2}, {8, 5}, {8, 1},
+                        new Integer[][] {
+                            {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
+                            {1, 3}, {2, 5}, {4, 7}, {6, 4}, {7, 4}, {10, 2}, {8, 5}, {8, 1},
                         },
                         // Is the ending vertex reachable from the starting vertex
-                        true
-                ),
+                        true),
                 Arguments.of(
                         // The starting vertex
                         1,
                         // The ending vertex
                         25,
                         // The edges in the graph
-                        new Integer[][]{
-                                {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
+                        new Integer[][] {
+                            {1, 2}, {2, 4}, {4, 6}, {6, 2}, {6, 3}, {3, 7}, {3, 8}, {8, 10},
                         },
                         // Is the ending vertex reachable from the starting vertex
-                        false
-                ),
+                        false),
                 Arguments.of(
                         // The starting vertex
                         1,
                         // The ending vertex
                         3,
                         // The edges in the graph
-                        new Integer[][]{
-                                {1, 2}, {2, 4},
+                        new Integer[][] {
+                            {1, 2}, {2, 4},
                         },
                         // Is the ending vertex reachable from the starting vertex
-                        false
-                )
-        );
+                        false));
     }
 
     @ParameterizedTest
@@ -87,8 +81,10 @@ public class GraphSearchTest {
                     var graph = GraphBuilder.unweightedGraph(edges);
                     var entrypoint = graph.getVertex(Integer.toString(start));
                     assertNotNull(entrypoint);
-                    assertEquals(reachable, search.isReachable(graph, entrypoint, end), " during " + search.getClass().getName());
+                    assertEquals(
+                            reachable,
+                            search.isReachable(graph, entrypoint, end),
+                            " during " + search.getClass().getName());
                 });
     }
-
 }

@@ -1,6 +1,5 @@
 package io.wcygan.collections.tree;
 
-
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -16,6 +15,7 @@ public class Trie {
      * without blocking other reads. Only writes block all other operations.
      */
     private final ReentrantReadWriteLock.ReadLock readLock;
+
     private final ReentrantReadWriteLock.WriteLock writeLock;
     TrieNode root;
 
@@ -97,7 +97,6 @@ public class Trie {
         }
     }
 
-
     public int size() {
         readLock.lock();
         try {
@@ -106,7 +105,6 @@ public class Trie {
             readLock.unlock();
         }
     }
-
 
     public int height() {
         readLock.lock();
@@ -117,7 +115,6 @@ public class Trie {
         }
     }
 
-
     public Optional<String> longestPrefixOf(String prefix) {
         readLock.lock();
         try {
@@ -127,7 +124,6 @@ public class Trie {
         }
     }
 
-
     public Iterable<String> keysWithPrefix(String prefix) {
         readLock.lock();
         try {
@@ -136,7 +132,6 @@ public class Trie {
             readLock.unlock();
         }
     }
-
 
     public Iterable<String> keys() {
         readLock.lock();
@@ -276,17 +271,14 @@ public class Trie {
 
         public int size() {
             // Finds out the number of keys in each sub-tree
-            int keysInSubTree = children.values()
-                    .parallelStream()
-                    .map(TrieNode::size)
-                    .reduce(0, Integer::sum);
+            int keysInSubTree =
+                    children.values().parallelStream().map(TrieNode::size).reduce(0, Integer::sum);
             return (storesKey ? 1 : 0) + keysInSubTree;
         }
 
         public int height() {
             // Retrieves the maximum height among all children, or returns 0 for a leaf
-            return children.values()
-                    .parallelStream()
+            return children.values().parallelStream()
                     .map(node -> node.height() + 1)
                     .reduce(0, Math::max);
         }
@@ -302,8 +294,7 @@ public class Trie {
                 keys.add(currentPath);
             }
             // For each children, we need to start the search, keeping track of the path
-            children.entrySet()
-                    .parallelStream()
+            children.entrySet().parallelStream()
                     .forEach(entry -> entry.getValue().keys(currentPath + entry.getKey(), keys));
         }
 
@@ -317,7 +308,8 @@ public class Trie {
                 return Optional.of(path);
             } else {
                 // Assumes that we do purge the trie when we remove a key
-                return children.keySet().stream().min(Character::compareTo).flatMap(c -> children.get(c).min(path + c));
+                return children.keySet().stream().min(Character::compareTo).flatMap(c -> children.get(c)
+                        .min(path + c));
             }
         }
 
@@ -327,7 +319,8 @@ public class Trie {
 
         private Optional<String> max(String path) {
             // Assumes that we do purge the trie when we remove a key
-            Optional<String> maxInSubtree = children.keySet().stream().max(Character::compareTo)
+            Optional<String> maxInSubtree = children.keySet().stream()
+                    .max(Character::compareTo)
                     .flatMap(c -> children.get(c).max(path + c));
 
             // longer strings are always lexicographically larger (so if we found something in the sub-tree...)

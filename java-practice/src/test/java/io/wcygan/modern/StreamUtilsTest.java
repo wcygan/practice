@@ -19,8 +19,7 @@ public class StreamUtilsTest {
 
     @ParameterizedTest
     @MethodSource("listDataProvider")
-    public void testFilter(
-            List<Integer> given, List<Integer> expected, Predicate<Integer> predicate) {
+    public void testFilter(List<Integer> given, List<Integer> expected, Predicate<Integer> predicate) {
         List<Integer> result = StreamUtils.filter(given, predicate);
         Assertions.assertEquals(expected, result);
     }

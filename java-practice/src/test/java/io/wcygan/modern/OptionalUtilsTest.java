@@ -19,8 +19,7 @@ public class OptionalUtilsTest {
 
     @ParameterizedTest
     @MethodSource("optionalDataProvider")
-    public void testFilter(
-            Optional<Integer> given, Optional<Integer> expected, Predicate<Integer> predicate) {
+    public void testFilter(Optional<Integer> given, Optional<Integer> expected, Predicate<Integer> predicate) {
         Optional<Integer> result = OptionalUtils.filter(given, predicate);
         Assertions.assertEquals(expected, result);
     }

@@ -16,7 +16,6 @@ public interface Map<K, V> {
      */
     int size();
 
-
     /**
      * Returns {@code true} if this map contains no key-value mappings.
      *

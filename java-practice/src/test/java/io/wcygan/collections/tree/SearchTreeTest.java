@@ -15,10 +15,7 @@ public class SearchTreeTest {
     private static final String V = "World";
 
     private static Stream<Arguments> treeProvider() {
-        return Stream.of(
-                Arguments.of(new LLRedBlackTree<>()),
-                Arguments.of(new BST<>())
-        );
+        return Stream.of(Arguments.of(new LLRedBlackTree<>()), Arguments.of(new BST<>()));
     }
 
     @ParameterizedTest

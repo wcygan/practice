@@ -18,11 +18,7 @@ public class BSTTest {
 
     @Test
     public void ofPairs() {
-        BST<Integer, String> bst = BST.of(
-                Pair.of(1, "Hello"),
-                Pair.of(2, "Goodbye"),
-                Pair.of(3, "World")
-        );
+        BST<Integer, String> bst = BST.of(Pair.of(1, "Hello"), Pair.of(2, "Goodbye"), Pair.of(3, "World"));
 
         assertNotNull(bst.root());
         assertNull(bst.root().left());

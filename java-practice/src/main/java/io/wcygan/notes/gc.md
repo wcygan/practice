@@ -161,7 +161,8 @@ use as allocation regions for new objects. The advantage of this approach is tha
 have to consider the possibility that other threads are allocating within that buffer. These regions are called *
 thread-local allocation buffers* (TLABs).
 
-> HotSpot dynamically sizes the TLABs that it gives to application threads, so if a thread is burning through memory it can be given larger TLABs to
+> HotSpot dynamically sizes the TLABs that it gives to application threads, so if a thread is burning through memory it
+> can be given larger TLABs to
 > reduce the overhead in providing buffers to the thread.
 
 The exclusive control that an application thread has over its TLABs means that allocation is **O(1)** for JVM threads.

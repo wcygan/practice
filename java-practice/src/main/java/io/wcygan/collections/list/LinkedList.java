@@ -15,7 +15,6 @@ public class LinkedList<T> {
     private InternalLinkedListNode<T> tail;
     private AtomicInteger size;
 
-
     public LinkedList() {
         this.guard = new Guard(this);
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
@@ -230,7 +229,6 @@ public class LinkedList<T> {
         InternalLinkedListNode<S> setNext(InternalLinkedListNode<S> next);
 
         InternalLinkedListNode<S> search(S value);
-
     }
 
     public class Guard implements InternalLinkedListNode<T> {

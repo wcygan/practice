@@ -11,7 +11,6 @@ public class Waiter {
 
     public static void spinMs(long ms) {
         long start = System.nanoTime();
-        while (System.nanoTime() - start < ms) {
-        }
+        while (System.nanoTime() - start < ms) {}
     }
 }

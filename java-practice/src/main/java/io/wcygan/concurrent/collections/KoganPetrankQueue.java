@@ -186,8 +186,7 @@ public class KoganPetrankQueue<T> {
         if (tid != -1 && next != first) {
             final OpDesc<T> curDesc = state.get(tid);
             if (first == head && next != null) {
-                final OpDesc<T> newDesc =
-                        new OpDesc<T>(state.get(tid).phase, false, false, state.get(tid).node);
+                final OpDesc<T> newDesc = new OpDesc<T>(state.get(tid).phase, false, false, state.get(tid).node);
                 state.compareAndSet(tid, curDesc, newDesc);
                 casHead(first, next);
             }

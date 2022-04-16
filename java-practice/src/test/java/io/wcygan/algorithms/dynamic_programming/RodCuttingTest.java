@@ -11,8 +11,8 @@ public class RodCuttingTest {
 
     private static Stream<Arguments> rodCuttingData() {
         return Stream.of(
-                Arguments.of(new int[]{1, 5, 8, 9, 10, 17, 17, 20}, 22),
-                Arguments.of(new int[]{1, 5, 8, 9, 10, 17, 17, 20}, 22));
+                Arguments.of(new int[] {1, 5, 8, 9, 10, 17, 17, 20}, 22),
+                Arguments.of(new int[] {1, 5, 8, 9, 10, 17, 17, 20}, 22));
     }
 
     @ParameterizedTest

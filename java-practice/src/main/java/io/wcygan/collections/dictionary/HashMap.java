@@ -27,6 +27,10 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
+    private static int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : Math.abs(((h = key.hashCode()) ^ (h >>> 16)) % BUCKET_COUNT);
+    }
 
     @Override
     public int size() {
@@ -158,10 +162,5 @@ public class HashMap<K extends Comparable<K>, V> implements Map<K, V> {
         } finally {
             readLock.unlock();
         }
-    }
-
-    private static int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : Math.abs(((h = key.hashCode()) ^ (h >>> 16)) % BUCKET_COUNT);
     }
 }

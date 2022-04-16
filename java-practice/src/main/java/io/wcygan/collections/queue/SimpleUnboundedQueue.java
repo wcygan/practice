@@ -1,6 +1,5 @@
 package io.wcygan.collections.queue;
 
-
 import java.util.LinkedList;
 
 public class SimpleUnboundedQueue<T> implements Queue<T> {

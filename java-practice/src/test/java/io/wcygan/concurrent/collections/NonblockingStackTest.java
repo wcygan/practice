@@ -34,10 +34,9 @@ public class NonblockingStackTest {
         int range = 25;
         Stack<Integer> stack = new NonblockingStack<>();
 
-        Runnable pushRange =
-                () -> {
-                    IntStream.range(0, range).forEach(stack::push);
-                };
+        Runnable pushRange = () -> {
+            IntStream.range(0, range).forEach(stack::push);
+        };
 
         List<Thread> threads = new ArrayList<>();
         for (int i = 0; i < NUM_THREADS; i++) {

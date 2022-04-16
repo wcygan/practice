@@ -196,7 +196,6 @@ public class DoublyLinkedList<T> implements List<T> {
         return Optional.empty();
     }
 
-
     public Iterator<Node> nodes() {
         return new LinkedListNodeIterator(head);
     }

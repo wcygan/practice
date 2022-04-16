@@ -12,12 +12,8 @@ import java.util.List;
 @RunWith(JUnitQuickcheck.class)
 public class SortingQuickCheck {
 
-    private static final List<SortingAlgorithm<Integer>> ALGORITHMS = List.of(
-            new QuickSort<>(),
-            new MergeSort<>(),
-            new ParallelMergeSort<>(),
-            new HeapSort<>()
-    );
+    private static final List<SortingAlgorithm<Integer>> ALGORITHMS =
+            List.of(new QuickSort<>(), new MergeSort<>(), new ParallelMergeSort<>(), new HeapSort<>());
 
     @Property(trials = 50)
     public void testSortingAlgorithms(@Size(max = 100) List<Integer> actual) {
@@ -28,6 +24,7 @@ public class SortingQuickCheck {
     private void verifySort(SortingAlgorithm<Integer> algorithm, List<Integer> expected, List<Integer> actual) {
         Collections.shuffle(actual);
         algorithm.sort(actual);
-        Assertions.assertEquals(expected, actual, "Testing " + algorithm.getClass().getName());
+        Assertions.assertEquals(
+                expected, actual, "Testing " + algorithm.getClass().getName());
     }
 }

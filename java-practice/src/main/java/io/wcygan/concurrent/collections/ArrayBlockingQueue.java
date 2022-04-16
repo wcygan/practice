@@ -50,7 +50,6 @@ public class ArrayBlockingQueue<T> implements Queue<T> {
                 addIndex = 0;
             }
 
-
             notEmpty.signal();
             return true;
         } finally {

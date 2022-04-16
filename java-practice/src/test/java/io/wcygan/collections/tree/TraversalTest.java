@@ -35,10 +35,7 @@ public class TraversalTest {
         Assertions.assertNotNull(tree);
         var lst = new ArrayList<Integer>();
         inOrder(lst, tree.root());
-        Assertions.assertEquals(
-                List.of(1, 2, 3, 4, 5, 6, 7),
-                lst
-        );
+        Assertions.assertEquals(List.of(1, 2, 3, 4, 5, 6, 7), lst);
     }
 
     @Test
@@ -46,10 +43,7 @@ public class TraversalTest {
         Assertions.assertNotNull(tree);
         var lst = new ArrayList<Integer>();
         preOrder(lst, tree.root());
-        Assertions.assertEquals(
-                List.of(4, 2, 1, 3, 6, 5, 7),
-                lst
-        );
+        Assertions.assertEquals(List.of(4, 2, 1, 3, 6, 5, 7), lst);
     }
 
     @Test
@@ -57,10 +51,7 @@ public class TraversalTest {
         Assertions.assertNotNull(tree);
         var lst = new ArrayList<Integer>();
         postOrder(lst, tree.root());
-        Assertions.assertEquals(
-                List.of(1, 3, 2, 5, 7, 6, 4),
-                lst
-        );
+        Assertions.assertEquals(List.of(1, 3, 2, 5, 7, 6, 4), lst);
     }
 
     private void preOrder(List<Integer> results, BST<Integer, Object>.Node node) {

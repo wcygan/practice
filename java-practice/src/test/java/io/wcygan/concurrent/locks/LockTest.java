@@ -18,11 +18,7 @@ public class LockTest {
     private static final Integer ITERATIONS = NUM_THREADS * 2;
 
     private static Stream<Arguments> lockProvider() {
-        return Stream.of(
-                Arguments.of(new ReentrantLock()),
-                Arguments.of(new TTASLock()),
-                Arguments.of(new TIDLock())
-        );
+        return Stream.of(Arguments.of(new ReentrantLock()), Arguments.of(new TTASLock()), Arguments.of(new TIDLock()));
     }
 
     @ParameterizedTest
@@ -37,8 +33,7 @@ public class LockTest {
         }
 
         executor.shutdown();
-        while (!executor.isTerminated()) {
-        }
+        while (!executor.isTerminated()) {}
 
         for (var future : futures) {
             try {
