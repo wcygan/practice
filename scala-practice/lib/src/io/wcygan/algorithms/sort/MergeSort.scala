@@ -9,12 +9,14 @@ object MergeSort extends Sorter {
       var (leftIdx, rightIdx) = (0, 0)
       val output = IndexedSeq.newBuilder[T]
       while (leftIdx < sortedLeft.length || rightIdx < sortedRight.length) {
-        val takeLeft = (leftIdx < sortedLeft.length, rightIdx < sortedRight.length) match {
-          case (true, false) => true
-          case (false, true) => false
-          case (true, true) => Ordering[T].lt(sortedLeft(leftIdx), sortedRight(rightIdx))
-          case (_, _) => ???
-        }
+        val takeLeft =
+          (leftIdx < sortedLeft.length, rightIdx < sortedRight.length) match {
+            case (true, false) => true
+            case (false, true) => false
+            case (true, true) =>
+              Ordering[T].lt(sortedLeft(leftIdx), sortedRight(rightIdx))
+            case (_, _) => ???
+          }
         if (takeLeft) {
           output += sortedLeft(leftIdx)
           leftIdx += 1

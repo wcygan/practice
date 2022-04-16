@@ -1,4 +1,3 @@
-
 package io.wcygan.collections.tree
 
 import munit.Assertions._
@@ -45,7 +44,9 @@ class ImmutableTrieTest extends munit.FunSuite {
   }
 
   test("Immutable Trie strings matching prefix example 2") {
-    val t = new ImmutableTrie(List("Hello World!", "Hello!", "Hello Wally!", "Hello Will!"))
+    val t = new ImmutableTrie(
+      List("Hello World!", "Hello!", "Hello Wally!", "Hello Will!")
+    )
     val s1 = t.stringsMatchingPrefix("H")
     assert(s1.contains("Hello!"))
     assert(s1.contains("Hello World!"))

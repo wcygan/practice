@@ -1,39 +1,41 @@
 package io.wcygan.collections.tree
 
-/**
- * A trie acts as an efficient set for strings
- */
+/** A trie acts as an efficient set for strings
+  */
 class Trie {
-  class Node(var hasValue: Boolean,
-             var children: collection.mutable.Map[Char, Node] = collection.mutable.Map())
   val root = new Node(false)
 
-  /**
-   * Add a string to the Trie
-   * @param s the string to add
-   */
+  /** Add a string to the Trie
+    * @param s the string to add
+    */
   def add(s: String): Unit = {
     var curr = root
     for (c <- s) curr = curr.children.getOrElseUpdate(c, new Node(false))
     curr.hasValue = true
   }
 
-  /**
-   * Check if a string is in the Trie
-   * @param s the string to check
-   * @return true if the string is in the Trie, else false
-   */
+  /** Check if a string is in the Trie
+    * @param s the string to check
+    * @return true if the string is in the Trie, else false
+    */
   def contains(s: String): Boolean = {
     var curr = Option(root)
     for (c <- s if curr.nonEmpty) curr = curr.get.children.get(c)
     curr.exists(_.hasValue)
   }
 
-  /**
-   * Finds all ending indices of strings which are a prefix of s
-   * @param s the string to match
-   * @return all ending indices of strings which are a prefix of s
-   */
+  /** Finds all strings in the Trie which are a prefix of s
+    * @param s the string to match
+    * @return all strings in the Trie which are a prefix of s
+    */
+  def prefixMatchingStrings(s: String): Set[String] = {
+    prefixMatchingIndices(s).map(s.substring(0, _))
+  }
+
+  /** Finds all ending indices of strings which are a prefix of s
+    * @param s the string to match
+    * @return all ending indices of strings which are a prefix of s
+    */
   def prefixMatchingIndices(s: String): Set[Int] = {
     var curr = Option(root)
     val out = Set.newBuilder[Int]
@@ -47,20 +49,10 @@ class Trie {
     out.result()
   }
 
-  /**
-   * Finds all strings in the Trie which are a prefix of s
-   * @param s the string to match
-   * @return all strings in the Trie which are a prefix of s
-   */
-  def prefixMatchingStrings(s: String): Set[String] = {
-    prefixMatchingIndices(s).map(s.substring(0, _))
-  }
-
-  /**
-   * Finds all strings in the Trie which match the prefix s
-   * @param s the prefix to match strings with
-   * @return all strings in the Trie which match the prefix s
-   */
+  /** Finds all strings in the Trie which match the prefix s
+    * @param s the prefix to match strings with
+    * @return all strings in the Trie which match the prefix s
+    */
   def stringsMatchingPrefix(s: String): Set[String] = {
     var curr = Option(root)
     for (c <- s if curr.nonEmpty) curr = curr.get.children.get(c)
@@ -77,4 +69,10 @@ class Trie {
       out.result()
     }
   }
+
+  class Node(
+      var hasValue: Boolean,
+      var children: collection.mutable.Map[Char, Node] =
+        collection.mutable.Map()
+  )
 }

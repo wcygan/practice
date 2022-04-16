@@ -1,6 +1,11 @@
 package io.wcygan.algorithms.search
 
 object ShortestPath {
+  def shortestPath[T](start: T, dest: T, graph: Map[T, Seq[T]]): Seq[T] = {
+    val shortestReversedPaths = searchPaths(start, graph)
+    shortestReversedPaths.getOrElse(dest, List.empty).reverse
+  }
+
   def searchPaths[T](start: T, graph: Map[T, Seq[T]]): Map[T, List[T]] = {
     val seen = collection.mutable.Map(start -> List(start))
     val queue = collection.mutable.ArrayDeque(start -> List(start))
@@ -15,10 +20,5 @@ object ShortestPath {
     }
 
     seen.toMap
-  }
-
-  def shortestPath[T](start: T, dest: T, graph: Map[T, Seq[T]]): Seq[T] = {
-    val shortestReversedPaths = searchPaths(start, graph)
-    shortestReversedPaths.getOrElse(dest, List.empty).reverse
   }
 }
