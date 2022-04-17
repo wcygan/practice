@@ -11,11 +11,11 @@ import scala.concurrent.{
 }
 
 object FuturesAndGlobalContext {
-  val USE_GLOBAL_CONTEXT = false
+  final val USE_GLOBAL_CONTEXT = false
 
   val singleThreaded: ExecutionContextExecutorService =
     ExecutionContext.fromExecutorService(
-      Executors.newWorkStealingPool(1)
+      Executors.newFixedThreadPool(1)
     )
 
   def main(args: Array[String]): Unit = {
