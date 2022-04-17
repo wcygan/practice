@@ -17,7 +17,6 @@ object lib extends ScalaModule {
   override def ivyDeps = Agg(
     ivy"org.typelevel::cats-core::2.7.0",
     ivy"org.asynchttpclient:async-http-client:2.5.2",
-//    ivy"com.lihaoyi:scalatags_3::0.9.1",
     ivy"com.atlassian.commonmark:commonmark:0.13.1"
   )
 
