@@ -4,7 +4,7 @@ import munit.Assertions._
 import org.scalacheck.Prop._
 
 class SorterTest extends munit.ScalaCheckSuite {
-  val sorters: Array[Sorter] = Array(MergeSort, HeapSort)
+  val sorters: Array[Sorter] = Array(MergeSort, HeapSort, ParallelMergeSort)
 
   property("Lists should be sorted") {
     forAll { (list: IndexedSeq[Int]) =>
