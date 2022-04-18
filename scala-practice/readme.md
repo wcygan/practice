@@ -34,9 +34,18 @@ Show below are some of the examples you can find in this repository:
 ### Algorithms
 
 #### Sorting
+
 - [MergeSort](lib/src/io/wcygan/algorithms/sort/MergeSort.scala)
 - [Binary Search](lib/src/io/wcygan/algorithms/search/BinarySearch.scala)
 - [Breadth-First Search](lib/src/io/wcygan/algorithms/search/BreadthFirstSearch.scala)
+
+## Ivy Dependency Issues
+
+Sometimes the ivy dependencies won't automatically be indexed for a scala script for Ammonite
+
+I can sometimes fix this by running `mill mill.scalalib.GenIdea/idea` and then also I can
+also click on the highlighted error and choose `create library from jar...`
+-> `Fix all 'Ammonite unresolved import' problems in file`
 
 ## Directory Tree
 
