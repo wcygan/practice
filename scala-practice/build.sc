@@ -17,7 +17,11 @@ object lib extends ScalaModule {
   override def ivyDeps = Agg(
     ivy"org.typelevel::cats-core::2.7.0",
     ivy"org.asynchttpclient:async-http-client:2.5.2",
-    ivy"com.atlassian.commonmark:commonmark:0.13.1"
+    ivy"com.atlassian.commonmark:commonmark:0.13.1",
+    ivy"com.lihaoyi::castor:0.2.1",
+    ivy"com.lihaoyi::scalatags:0.11.1",
+    ivy"com.lihaoyi::cask:0.8.0",
+    ivy"com.lihaoyi::requests:0.7.0"
   )
 
   object test extends Tests with TestModule.Munit {
