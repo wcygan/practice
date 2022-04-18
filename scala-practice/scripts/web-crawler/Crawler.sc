@@ -15,7 +15,7 @@ val asyncHttpClient = org.asynchttpclient.Dsl.asyncHttpClient()
  * @param depth the maximum distance to crawl to from the initial page
  */
 @main def main(title: String, depth: Int): Unit = {
-  println(Await.result(fetchAllLinksAsync(title, depth), Inf))
+  println(Await.result(fetchAllLinksAsync(title, depth, 20), Inf))
 }
 
 def fetchLinksAsync(title: String)(implicit ec: ExecutionContext): Future[Seq[String]] = {
@@ -36,17 +36,26 @@ def fetchLinksAsync(title: String)(implicit ec: ExecutionContext): Future[Seq[St
   }(global)
 }
 
-def fetchAllLinksAsync(startTitle: String, depth: Int): Future[Set[String]] = {
-  def rec(current: Set[String], seen: Set[String], recDepth: Int): Future[Set[String]] = {
-    if (recDepth >= depth) Future.successful(seen)
+def fetchAllLinksAsync(startTitle: String, maxDepth: Int, maxConcurrency: Int): Future[Set[String]] = {
+  def rec(current: Seq[(String, Int)], seen: Set[String]): Future[Set[String]] = {
+    pprint.log((maxDepth, current.size, seen.size))
+    if (current.isEmpty) Future.successful(seen)
     else {
-      val futures = for (title <- current) yield fetchLinksAsync(title)
-      Future.sequence(futures).map { nextTitleLists =>
-        val nextTitles = nextTitleLists.flatten
-        rec(nextTitles.filter(!seen.contains(_)), seen ++ nextTitles, recDepth + 1)
+      val (throttled, remaining) = current.splitAt(maxConcurrency)
+      val futures =
+        for ((title, depth) <- throttled)
+          yield fetchLinksAsync(title).map((_, depth))
+
+      Future.sequence(futures).map{nextTitleLists =>
+        val flattened = for{
+          (titles, depth) <- nextTitleLists
+          title <- titles
+          if !seen.contains(title) && depth < maxDepth
+        } yield (title, depth + 1)
+        rec(remaining ++ flattened, seen ++ flattened.map(_._1))
       }.flatten
     }
   }
-
-  rec(Set(startTitle), Set(startTitle), 0)
+  rec(Seq(startTitle -> 0), Set(startTitle))
 }
+
