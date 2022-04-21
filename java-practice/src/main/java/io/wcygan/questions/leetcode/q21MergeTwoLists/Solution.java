@@ -1,4 +1,4 @@
-package io.wcygan.questions.leetcode.q21;
+package io.wcygan.questions.leetcode.q21MergeTwoLists;
 
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {

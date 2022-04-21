@@ -1,4 +1,4 @@
-package io.wcygan.questions.leetcode.q23;
+package io.wcygan.questions.leetcode.q23MergeKSortedLists;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
