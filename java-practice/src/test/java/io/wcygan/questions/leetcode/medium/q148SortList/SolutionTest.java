@@ -1,4 +1,4 @@
-package io.wcygan.questions.leetcode.q148SortList;
+package io.wcygan.questions.leetcode.medium.q148SortList;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

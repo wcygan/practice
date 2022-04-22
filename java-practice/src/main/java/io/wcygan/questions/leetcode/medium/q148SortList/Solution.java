@@ -1,8 +1,9 @@
-package io.wcygan.questions.leetcode.q148SortList;
+package io.wcygan.questions.leetcode.medium.q148SortList;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+// https://leetcode.com/problems/sort-list/
 class Solution {
     public ListNode sortList(ListNode head) {
         PriorityQueue<ListNode> q = new PriorityQueue<>(Comparator.comparing(a -> a.val));

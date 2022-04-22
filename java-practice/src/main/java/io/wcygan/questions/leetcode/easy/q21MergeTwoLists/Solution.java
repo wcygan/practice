@@ -1,5 +1,6 @@
-package io.wcygan.questions.leetcode.q21MergeTwoLists;
+package io.wcygan.questions.leetcode.easy.q21MergeTwoLists;
 
+// https://leetcode.com/problems/merge-two-sorted-lists/
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // make sure there are lists to merge

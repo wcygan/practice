@@ -1,8 +1,9 @@
-package io.wcygan.questions.leetcode.q23MergeKSortedLists;
+package io.wcygan.questions.leetcode.hard.q23MergeKSortedLists;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+// https://leetcode.com/problems/merge-k-sorted-lists/
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null) {
