@@ -1,5 +1,7 @@
 package io.wcygan.questions.leetcode.hard.q23MergeKSortedLists;
 
+import io.wcygan.questions.leetcode.ListNode;
+
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -40,21 +42,5 @@ class Solution {
         }
 
         return head;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {}
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }

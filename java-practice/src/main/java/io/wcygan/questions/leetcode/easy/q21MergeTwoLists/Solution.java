@@ -1,5 +1,7 @@
 package io.wcygan.questions.leetcode.easy.q21MergeTwoLists;
 
+import io.wcygan.questions.leetcode.ListNode;
+
 // https://leetcode.com/problems/merge-two-sorted-lists/
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
@@ -28,21 +30,5 @@ class Solution {
 
         // return the head of the list
         return dummy.next;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {}
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, Solution.ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }

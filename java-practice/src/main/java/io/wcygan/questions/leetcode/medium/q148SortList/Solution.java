@@ -1,5 +1,7 @@
 package io.wcygan.questions.leetcode.medium.q148SortList;
 
+import io.wcygan.questions.leetcode.ListNode;
+
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -23,21 +25,5 @@ class Solution {
         }
 
         return dummy.next;
-    }
-
-    public static class ListNode {
-        int val;
-        Solution.ListNode next;
-
-        ListNode() {}
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, Solution.ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }
