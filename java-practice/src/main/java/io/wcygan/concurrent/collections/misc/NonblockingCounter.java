@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.collections;
+package io.wcygan.concurrent.collections.misc;
 
 import io.wcygan.algorithms.numbers.Counter;
 

@@ -1,6 +1,7 @@
 package io.wcygan.concurrent.collections;
 
 import io.wcygan.algorithms.numbers.Counter;
+import io.wcygan.concurrent.collections.misc.NonblockingCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

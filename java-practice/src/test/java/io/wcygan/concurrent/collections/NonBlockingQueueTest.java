@@ -5,6 +5,8 @@ import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 import io.wcygan.collections.queue.Queue;
+import io.wcygan.concurrent.collections.misc.NonblockingRandom;
+import io.wcygan.concurrent.collections.queue.NonblockingQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

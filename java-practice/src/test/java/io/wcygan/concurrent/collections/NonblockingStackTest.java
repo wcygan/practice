@@ -1,6 +1,7 @@
 package io.wcygan.concurrent.collections;
 
 import io.wcygan.collections.stack.Stack;
+import io.wcygan.concurrent.collections.stack.NonblockingStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package io.wcygan.concurrent.collections;
 
+import io.wcygan.concurrent.collections.misc.NonblockingRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

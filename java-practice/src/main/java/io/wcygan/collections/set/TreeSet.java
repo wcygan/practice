@@ -14,7 +14,7 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
     }
 
     @Override
-    public boolean insert(T data) {
+    public boolean add(T data) {
         if (tree.containsKey(data)) {
             return false;
         } else {
@@ -24,16 +24,14 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
     }
 
     @Override
-    public boolean delete(T data) {
+    public boolean remove(T data) {
         return tree.remove(data) != null;
     }
 
-    @Override
     public T minimum() {
         return tree.minimum();
     }
 
-    @Override
     public T maximum() {
         return tree.maximum();
     }

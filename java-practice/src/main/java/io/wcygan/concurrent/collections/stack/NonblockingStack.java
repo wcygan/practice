@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.collections;
+package io.wcygan.concurrent.collections.stack;
 
 import io.wcygan.collections.stack.Stack;
 

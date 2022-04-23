@@ -1,6 +1,6 @@
 package io.wcygan.simulations;
 
-import io.wcygan.concurrent.collections.ArrayBlockingQueue;
+import io.wcygan.concurrent.collections.queue.ArrayBlockingQueue;
 
 public class SingleProducerSingleConsumer {
 

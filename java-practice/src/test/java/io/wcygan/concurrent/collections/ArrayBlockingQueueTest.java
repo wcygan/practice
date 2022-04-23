@@ -1,6 +1,7 @@
 package io.wcygan.concurrent.collections;
 
 import io.wcygan.collections.queue.Queue;
+import io.wcygan.concurrent.collections.queue.ArrayBlockingQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

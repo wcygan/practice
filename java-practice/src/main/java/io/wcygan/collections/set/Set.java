@@ -1,13 +1,9 @@
 package io.wcygan.collections.set;
 
-public interface Set<T extends Comparable<T>> {
+public interface Set<T> {
     boolean contains(T data);
 
-    boolean insert(T data);
+    boolean add(T data);
 
-    boolean delete(T data);
-
-    T minimum();
-
-    T maximum();
+    boolean remove(T data);
 }
