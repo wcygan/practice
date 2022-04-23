@@ -1,7 +1,12 @@
-package io.wcygan.simulations;
+package io.wcygan.concurrent.examples.thread;
 
 import io.wcygan.concurrent.collections.queue.ArrayBlockingQueue;
 
+/**
+ * This example shows two threads cooperating through a shared {@link ArrayBlockingQueue}.
+ *
+ * At the end of the simulation, {@link POISON} is sent into the queue to shut the consumer down.
+ */
 public class SingleProducerSingleConsumer {
 
     private static final Integer PACKETS_TO_SEND = 50;
