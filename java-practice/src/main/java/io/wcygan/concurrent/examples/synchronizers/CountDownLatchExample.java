@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.examples.synchronizer;
+package io.wcygan.concurrent.examples.synchronizers;
 
 import io.wcygan.concurrent.executors.ThreadPoolExecutorFactory;
 
