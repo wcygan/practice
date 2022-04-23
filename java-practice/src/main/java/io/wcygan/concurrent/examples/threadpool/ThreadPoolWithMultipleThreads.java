@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.examples.thread;
+package io.wcygan.concurrent.examples.threadpool;
 
 import java.util.concurrent.*;
 
