@@ -1,7 +1,7 @@
 # Practice
 
 Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://www.oracle.com/java/technologies/)
-, [Go](https://go.dev/), and [Rust](https://www.rust-lang.org/)!
+, [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), and [Scala](https://www.scala-lang.org/)!
 
 <p float="left">
   <img src="https://1000logos.net/wp-content/uploads/2020/09/Java-Logo-500x313.png" width="100" /> 
