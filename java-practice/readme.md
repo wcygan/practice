@@ -21,9 +21,9 @@ Practicing Data Structures, Algorithms, Concurrency, and more in [Java](https://
 3. [Disjoint Set](src/main/java/io/wcygan/collections/set/DisjointSet.java)
 4. [D-Way Heap](src/main/java/io/wcygan/collections/queue/DWayHeap.java)
 5. [Graph](src/main/java/io/wcygan/collections/graph/SimpleGraph.java)
-6. [ArrayBlockingQueue](src/main/java/io/wcygan/concurrent/collections/ArrayBlockingQueue.java)
-7. [Non-blocking Queue](src/main/java/io/wcygan/concurrent/collections/NonblockingQueue.java)
-8. [Non-blocking Stack](src/main/java/io/wcygan/concurrent/collections/NonblockingStack.java)
+6. [ArrayBlockingQueue](src/main/java/io/wcygan/concurrent/collections/queue/ArrayBlockingQueue.java)
+7. [Non-blocking Queue](src/main/java/io/wcygan/concurrent/collections/queue/NonblockingQueue.java)
+8. [Non-blocking Stack](src/main/java/io/wcygan/concurrent/collections/stack/NonblockingStack.java)
 9. [Thread-ID based Lock](src/main/java/io/wcygan/concurrent/locks/TIDLock.java)
 
 ### Algorithms
