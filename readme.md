@@ -59,35 +59,35 @@ Find examples in these folders:
 
 ### General
 
-- [The Algorithm Design Manual](https://www.algorist.com/)
-- [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)
+- [The Algorithm Design Manual](https://www.algorist.com/) (highly recommended, it has pretty pictures)
+- [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition) 
 - [Guide to Competitive Programming](https://link.springer.com/book/10.1007/978-3-030-39357-1)
 - [Advanced Algorithms and Data Structures](https://www.oreilly.com/library/view/advanced-algorithms-and/9781617295485VE/)
-- [The Art of Multiprocessor Programming](https://www.oreilly.com/library/view/the-art-of/9780123705914/)
+- [The Art of Multiprocessor Programming](https://www.oreilly.com/library/view/the-art-of/9780123705914/) (highly recommended)
 - [Modern Operating Systems](https://www.pearson.com/us/higher-education/program/Tanenbaum-Modern-Operating-Systems-4th-Edition/PGM80736.html)
 - [Cracking the Coding Interview](https://www.crackingthecodinginterview.com/)
 
 ### Java
 
-- [Java Concurrency in Practice](https://jcip.net/)
+- [Java Concurrency in Practice](https://jcip.net/) (highly recommended)
 - [Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)
-- [Java Coding Problems](https://www.packtpub.com/product/java-coding-problems/9781789801415)
 - [Java Performance](https://www.oreilly.com/library/view/java-performance-2nd/9781492056102/)
-- [Optimizing Java](https://www.oreilly.com/library/view/optimizing-java/9781492039259/)
-- [Java: The Complete Reference](https://www.oreilly.com/library/view/java-the-complete/9781260463422/)
+- [Optimizing Java](https://www.oreilly.com/library/view/optimizing-java/9781492039259/) (I recommend it if you want to learn about the JVM and its internals)
+- [Java: The Complete Reference](https://www.oreilly.com/library/view/java-the-complete/9781260463422/) 
+- [Java Coding Problems](https://www.packtpub.com/product/java-coding-problems/9781789801415)
 
 ### Go
 
-- [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/)
+- [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/) (highly recommended)
 - [The Go Programming Language](https://www.gopl.io/)
-- [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/)
+- [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) (highly recommended)
 - [Powerful Command-Line Applications in Go](https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/)
 - [Network Programming with Go](https://nostarch.com/networkprogrammingwithgo)
 - [Distributed Services with Go](https://pragprog.com/titles/tjgo/distributed-services-with-go/)
 
 ### Rust
 
-- [The Rust Programming Language](https://nostarch.com/Rust2018)
+- [The Rust Programming Language](https://nostarch.com/Rust2018) (highly recommended)
 - [Rust in Action](https://www.manning.com/books/rust-in-action)
 - [Rust for Rustaceans](https://nostarch.com/rust-rustaceans)
 - [Creative Projects for Rust Programmers](https://www.oreilly.com/library/view/creative-projects-for/9781789346220/)
