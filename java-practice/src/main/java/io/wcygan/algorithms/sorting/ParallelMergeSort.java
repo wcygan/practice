@@ -7,11 +7,9 @@ import java.util.concurrent.RecursiveAction;
 
 public class ParallelMergeSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
 
-    private static final Integer PARALLELISM = Thread.activeCount();
-
     @Override
     public void sort(List<T> lst) {
-        ForkJoinPool pool = new ForkJoinPool(PARALLELISM);
+        ForkJoinPool pool = ForkJoinPool.commonPool();
         var task = new ParallelMergeSortTask<>(lst);
         pool.invoke(task);
     }

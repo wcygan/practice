@@ -14,31 +14,32 @@ public class QuickSort<T extends Comparable<T>> implements SortingAlgorithm<T> {
         quicksort(lst, 0, lst.size() - 1);
     }
 
-    private void quicksort(List<T> lst, int p, int r) {
-        if (p < r) {
-            int q = partition(lst, p, r);
-            quicksort(lst, p, q - 1);
-            quicksort(lst, q + 1, r);
+    private void quicksort(List<T> lst, int lo, int hi) {
+        if (lo < hi) {
+            int mid = partition(lst, lo, hi);
+            quicksort(lst, lo, mid - 1);
+            quicksort(lst, mid + 1, hi);
         }
     }
 
-    private int partition(List<T> lst, int p, int r) {
-        T x = lst.get(r);
-        int i = p - 1;
-        for (int j = p; j < r; j++) {
+    private int partition(List<T> lst, int lo, int hi) {
+        T x = lst.get(hi);
 
+        int i = lo - 1;
+        for (int j = lo; j < hi; j++) {
             if (lst.get(j).compareTo(x) <= 0) {
                 i = i + 1;
                 swap(lst, i, j);
             }
         }
-        swap(lst, i + 1, r);
+
+        swap(lst, i + 1, hi);
         return i + 1;
     }
 
     private void swap(List<T> lst, int first, int second) {
-        T a = lst.get(first);
+        T temp = lst.get(first);
         lst.set(first, lst.get(second));
-        lst.set(second, a);
+        lst.set(second, temp);
     }
 }
