@@ -62,6 +62,7 @@ test {
 
 
 jmh {
+//    includes = ['parallelMergesort']
     timeOnIteration = '250ms'
     warmup = '250ms'
     warmupIterations = 50

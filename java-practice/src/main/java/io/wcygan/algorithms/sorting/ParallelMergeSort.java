@@ -24,7 +24,7 @@ public class ParallelMergeSort<T extends Comparable<T>> implements SortingAlgori
 
         @Override
         protected void compute() {
-            if (lst.size() <= 10) {
+            if (lst.size() <= 64) {
                 MergeSort.mergeSort(lst);
                 return;
             }
