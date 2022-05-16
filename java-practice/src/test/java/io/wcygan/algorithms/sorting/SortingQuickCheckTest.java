@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(JUnitQuickcheck.class)
-public class SortingQuickCheck {
+public class SortingQuickCheckTest {
 
     private static final List<SortingAlgorithm<Integer>> ALGORITHMS =
             List.of(new QuickSort<>(), new MergeSort<>(), new ParallelMergeSort<>(), new HeapSort<>());

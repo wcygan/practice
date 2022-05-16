@@ -129,7 +129,7 @@ Once you've written a property-based test (like
 you can execute it in isolation just as we did before:
 
 ```
-$ ./gradlew test --tests io.wcygan.algorithms.sorting.SortingQuickCheck.testSortingAlgorithms
+$ ./gradlew test --tests io.wcygan.algorithms.sorting.SortingQuickCheckTest.testSortingAlgorithms
 ```
 
 You can configure the execution of your property-based test using the elements of
