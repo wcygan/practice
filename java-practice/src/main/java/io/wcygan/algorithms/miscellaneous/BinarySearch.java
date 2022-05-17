@@ -1,15 +1,9 @@
 package io.wcygan.algorithms.miscellaneous;
 
-import io.wcygan.algorithms.sorting.SortingAlgorithm;
-
 import java.util.List;
 
 public class BinarySearch {
     public static <T extends Comparable<T>> int search(List<T> list, T toFind) {
-        if (!SortingAlgorithm.isSorted(list, true)) {
-            return -1;
-        }
-
         int lo = 0;
         int hi = list.size() - 1;
 
