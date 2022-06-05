@@ -27,6 +27,14 @@ public class BST<K extends Comparable<K>, V> implements SearchTree<K, V> {
         return bst;
     }
 
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        return (node == null) ? 0 : 1 + Math.max(height(node.left), height(node.right));
+    }
+
     @Override
     public int size() {
         return size(this.root);
