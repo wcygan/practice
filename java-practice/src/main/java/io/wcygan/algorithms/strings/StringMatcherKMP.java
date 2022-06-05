@@ -30,7 +30,7 @@ public class StringMatcherKMP implements StringMatcher {
     }
 
     @Override
-    public int search(char[] txt) {
+    public int firstIndex(char[] txt) {
         int n = txt.length;
 
         int i, j;

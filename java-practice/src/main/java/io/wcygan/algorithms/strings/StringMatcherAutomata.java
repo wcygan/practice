@@ -4,7 +4,7 @@ package io.wcygan.algorithms.strings;
 public class StringMatcherAutomata implements StringMatcher {
 
     @Override
-    public int search(char[] txt) {
+    public int firstIndex(char[] txt) {
         throw new Error("Not implemented");
     }
 }
