@@ -11,4 +11,8 @@ public interface StringMatcher {
     static StringMatcher kmp(String txt) {
         return new StringMatcherKMP(txt);
     }
+
+    static StringMatcher bruteforce(String txt) {
+        return new StringMatcherBruteForce(txt);
+    }
 }
