@@ -8,8 +8,8 @@ public class StringMatcherKMP implements StringMatcher {
     private final int m;
     private final int[][] dfa;
 
-    public StringMatcherKMP(String txt) {
-        this(txt.toCharArray(), 256);
+    public StringMatcherKMP(String pattern) {
+        this(pattern.toCharArray(), 256);
     }
 
     public StringMatcherKMP(char[] pattern, int radix) {

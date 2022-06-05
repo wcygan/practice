@@ -8,8 +8,8 @@ public class TestStringMatcherKMP {
     public void itWorks() {
         String text = "Hello, World!";
         String pattern = "World!";
-        StringMatcher matcher = StringMatcher.kmp(text);
-        int index = matcher.search(pattern);
+        StringMatcher matcher = StringMatcher.kmp(pattern);
+        int index = matcher.search(text);
 
         assertThat(index).isPositive();
         assertThat(index).isEqualTo(text.indexOf("World!"));
