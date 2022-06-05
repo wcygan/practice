@@ -1,9 +1,7 @@
 package io.wcygan.concurrent.examples.synchronizers;
 
-import io.wcygan.concurrent.executors.ThreadPoolExecutorFactory;
-
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -57,7 +55,8 @@ public class SemaphoreExample {
          */
         Semaphore semaphore = new Semaphore(BATHROOM_COUNT);
 
-        ThreadPoolExecutor e = ThreadPoolExecutorFactory.create(3);
+        var e = ForkJoinPool.commonPool();
+
         for (int i = 0; i < 20; i++) {
             e.execute(occupyTheBathroom(semaphore, i));
         }

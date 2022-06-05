@@ -1,8 +1,7 @@
 package io.wcygan.concurrent.examples.synchronizers;
 
-import io.wcygan.concurrent.executors.ThreadPoolExecutorFactory;
-
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * We can imagine that there are race cars waiting for a race to begin...
@@ -33,7 +32,7 @@ public class CountDownLatchExample {
         */
         CountDownLatch signal = new CountDownLatch(NUM_RACE_CARS);
 
-        var tp = ThreadPoolExecutorFactory.create(NUM_RACE_CARS);
+        var tp = ForkJoinPool.commonPool();
 
         for (int i = 0; i < NUM_RACE_CARS; i++) {
             tp.execute(prepareRaceCar(i, signal));
