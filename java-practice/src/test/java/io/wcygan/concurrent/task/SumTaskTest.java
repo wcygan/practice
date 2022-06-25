@@ -1,6 +1,5 @@
-package io.wcygan.concurrent.executors.task;
+package io.wcygan.concurrent.task;
 
-import io.wcygan.concurrent.task.SumTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
