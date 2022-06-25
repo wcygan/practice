@@ -1,4 +1,4 @@
-package io.wcygan.concurrent.executors.task;
+package io.wcygan.concurrent.task;
 
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
