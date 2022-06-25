@@ -21,43 +21,44 @@ public class ExecutorRaceTest {
 
     @Test
     public void multiThreadedExecutorIsFasterThanSingleThreadedExecutor() {
-        CountDownLatch latch = new CountDownLatch(1);
-        AtomicReference<ExecutorType> winner = new AtomicReference<>(ExecutorType.NONE);
+        // Spawn the executors
         MultiThreadedExecutor multiThreadedExecutor = MultiThreadedExecutor.create(8);
         SingleThreadedExecutor singleThreadedExecutor = SingleThreadedExecutor.create();
 
+        // Set up the race
+        CountDownLatch latch = new CountDownLatch(1);
+        AtomicReference<ExecutorType> winner = new AtomicReference<>(ExecutorType.NONE);
         int sleepTime = 20;
         int count = 10;
+
+        // Run waiting tasks on both executors
         for (int i = 0; i < count; i++) {
-            multiThreadedExecutor.execute(() -> {
-                try {
-                    latch.await();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Waiter.sleepMs(sleepTime);
-            });
-
-            singleThreadedExecutor.execute(() -> {
-                try {
-                    latch.await();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Waiter.sleepMs(sleepTime);
-            });
+            multiThreadedExecutor.execute(wait(sleepTime));
+            singleThreadedExecutor.execute(wait(sleepTime));
         }
 
+        // Use compareAndExchange to determine the winner
         multiThreadedExecutor.execute(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.MULTI_THREADED));
         singleThreadedExecutor.execute(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.SINGLE_THREADED));
 
+        // Start the race
         latch.countDown();
 
+        // Wait for both executors to finish
         multiThreadedExecutor.shutdown();
         singleThreadedExecutor.shutdown();
 
+        // Assert that the multithreaded executor is faster
         assertThat(winner.get()).isEqualTo(ExecutorType.MULTI_THREADED);
+    }
+
+    /**
+     * Simulate work by waiting
+     *
+     * @param ms the amount of milliseconds to wait
+     * @return a runnable that waits
+     */
+    static Runnable wait(int ms) {
+        return () -> Waiter.sleepMs(ms);
     }
 }

@@ -5,6 +5,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * A simple executor that runs tasks in parallel.
+ */
 public class MultiThreadedExecutor implements Executor {
 
     private static final Runnable POISON = () -> {
@@ -66,8 +69,9 @@ public class MultiThreadedExecutor implements Executor {
         }
     }
 
+
     /**
-     *
+     * Stop accepting new work and wait for all tasks to finish
      */
     @Override
     public void shutdown() {
@@ -82,6 +86,9 @@ public class MultiThreadedExecutor implements Executor {
         }
     }
 
+    /**
+     * Worker class for the thread pool
+     */
     static class Worker extends Thread {
 
         BlockingQueue<Runnable> work;
