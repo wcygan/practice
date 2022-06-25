@@ -97,6 +97,9 @@ public class MultiThreadedExecutor implements Executor {
             this.work = work;
         }
 
+        /**
+         * Run the worker and execute tasks until the poison pill is received
+         */
         @Override
         public void run() {
             super.run();
