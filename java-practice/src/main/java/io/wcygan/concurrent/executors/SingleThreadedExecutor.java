@@ -16,7 +16,7 @@ public class SingleThreadedExecutor implements Executor {
     private SingleThreadedExecutor(BlockingQueue<Runnable> work) {
         this.work = work;
         this.acceptingNewWork = new AtomicBoolean(true);
-        this.worker = new Thread(worker());
+        this.worker = new Thread(singleThreadedWorker());
         this.worker.start();
     }
 
@@ -42,7 +42,7 @@ public class SingleThreadedExecutor implements Executor {
         }
     }
 
-    Runnable worker() {
+    Runnable singleThreadedWorker() {
         return () -> {
             while (true) {
                 try {

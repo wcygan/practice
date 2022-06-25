@@ -3,15 +3,9 @@ package io.wcygan.collections.cache;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
@@ -196,87 +190,87 @@ public class LRUCacheTest {
         });
     }
 
-    @Test
-    public void testMultiThreading() throws Exception {
-        int maxWait = 5;
-        int maxSize = 10;
-        LRUCache<String, Integer> cache = new LRUCache<>(maxSize);
-
-        ConcurrentHashMap<String, AtomicInteger> counters = new ConcurrentHashMap<>();
-
-        ExecutorService executor = Executors.newFixedThreadPool(10);
-
-        List<String> englishWords = new ArrayList<>(Arrays.asList(
-                "this", "is", "just", "to", "test", "concurrent", "access", "for", "synchronized", "cache"));
-
-        List<String> italianWords = new ArrayList<>(Arrays.asList(
-                "prova",
-                "sul",
-                "funzionamento",
-                "di",
-                "una",
-                "cache+",
-                "condivisa",
-                "in",
-                "ambiente",
-                "multi-threaded"));
-
-        Function<List<String>, Runnable> entrySetterGen =
-                (words) -> () -> IntStream.range(0, words.size()).forEach(i -> {
-                    try {
-                        String w = words.get(i);
-                        cache.set(w, i);
-                        counters.put(w, new AtomicInteger(1));
-                        Thread.sleep(1 + rnd.nextInt(maxWait / 2));
-                    } catch (InterruptedException e) {
-                        throw new IllegalStateException(e);
-                    }
-                });
-
-        Runnable englishWordsSetter = entrySetterGen.apply(englishWords);
-        Runnable italianWordsSetter = entrySetterGen.apply(italianWords);
-
-        BiFunction<List<String>, Integer, Runnable> entryGetterGen =
-                (words, runs) -> () -> IntStream.range(0, words.size()).forEach(i -> {
-                    try {
-                        String w = words.get(i);
-                        IntStream.range(0, runs).forEach(j -> {
-                            if (cache.get(w).isPresent()) {
-                                counters.get(w).incrementAndGet();
-                            } else {
-                                counters.put(w, new AtomicInteger(0));
-                            }
-                        });
-                        Thread.sleep(1 + rnd.nextInt(maxWait));
-                    } catch (InterruptedException e) {
-                        throw new IllegalStateException(e);
-                    }
-                });
-
-        Runnable italianWordsGetter = entryGetterGen.apply(italianWords, 1);
-        Runnable englishWordsGetter = entryGetterGen.apply(englishWords, 3);
-
-        executor.execute(englishWordsSetter);
-        // Make sure the first few words have been added;
-        Thread.sleep(5 * maxWait);
-
-        executor.execute(englishWordsGetter);
-        executor.execute(italianWordsSetter);
-        Thread.sleep(5 * maxWait);
-        executor.execute(italianWordsGetter);
-
-        // Wait till we are sure all threads are done
-        try {
-            executor.awaitTermination(50 * maxWait + (2 * maxSize) * (1 + maxWait), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            throw new AssertionError("Computation was stuck");
-        }
-        ;
-
-        // Now only the words with counters[word] > 0 should still be in the cache
-        Predicate<String> isEntryIn =
-                word -> counters.get(word).get() > 0 == cache.get(word).isPresent();
-        englishWords.forEach(word -> assertTrue(isEntryIn.test(word)));
-        italianWords.forEach(word -> assertTrue(isEntryIn.test(word)));
-    }
+//    @Test
+//    public void testMultiThreading() throws Exception {
+//        int maxWait = 5;
+//        int maxSize = 10;
+//        LRUCache<String, Integer> cache = new LRUCache<>(maxSize);
+//
+//        ConcurrentHashMap<String, AtomicInteger> counters = new ConcurrentHashMap<>();
+//
+//        ExecutorService executor = Executors.newFixedThreadPool(10);
+//
+//        List<String> englishWords = new ArrayList<>(Arrays.asList(
+//                "this", "is", "just", "to", "test", "concurrent", "access", "for", "synchronized", "cache"));
+//
+//        List<String> italianWords = new ArrayList<>(Arrays.asList(
+//                "prova",
+//                "sul",
+//                "funzionamento",
+//                "di",
+//                "una",
+//                "cache+",
+//                "condivisa",
+//                "in",
+//                "ambiente",
+//                "multi-threaded"));
+//
+//        Function<List<String>, Runnable> entrySetterGen =
+//                (words) -> () -> IntStream.range(0, words.size()).forEach(i -> {
+//                    try {
+//                        String w = words.get(i);
+//                        cache.set(w, i);
+//                        counters.put(w, new AtomicInteger(1));
+//                        Thread.sleep(1 + rnd.nextInt(maxWait / 2));
+//                    } catch (InterruptedException e) {
+//                        throw new IllegalStateException(e);
+//                    }
+//                });
+//
+//        Runnable englishWordsSetter = entrySetterGen.apply(englishWords);
+//        Runnable italianWordsSetter = entrySetterGen.apply(italianWords);
+//
+//        BiFunction<List<String>, Integer, Runnable> entryGetterGen =
+//                (words, runs) -> () -> IntStream.range(0, words.size()).forEach(i -> {
+//                    try {
+//                        String w = words.get(i);
+//                        IntStream.range(0, runs).forEach(j -> {
+//                            if (cache.get(w).isPresent()) {
+//                                counters.get(w).incrementAndGet();
+//                            } else {
+//                                counters.put(w, new AtomicInteger(0));
+//                            }
+//                        });
+//                        Thread.sleep(1 + rnd.nextInt(maxWait));
+//                    } catch (InterruptedException e) {
+//                        throw new IllegalStateException(e);
+//                    }
+//                });
+//
+//        Runnable italianWordsGetter = entryGetterGen.apply(italianWords, 1);
+//        Runnable englishWordsGetter = entryGetterGen.apply(englishWords, 3);
+//
+//        executor.execute(englishWordsSetter);
+//        // Make sure the first few words have been added;
+//        Thread.sleep(5 * maxWait);
+//
+//        executor.execute(englishWordsGetter);
+//        executor.execute(italianWordsSetter);
+//        Thread.sleep(5 * maxWait);
+//        executor.execute(italianWordsGetter);
+//
+//        // Wait till we are sure all threads are done
+//        try {
+//            executor.awaitTermination(50 * maxWait + (2 * maxSize) * (1 + maxWait), TimeUnit.MILLISECONDS);
+//        } catch (InterruptedException e) {
+//            throw new AssertionError("Computation was stuck");
+//        }
+//        ;
+//
+//        // Now only the words with counters[word] > 0 should still be in the cache
+//        Predicate<String> isEntryIn =
+//                word -> counters.get(word).get() > 0 == cache.get(word).isPresent();
+//        englishWords.forEach(word -> assertTrue(isEntryIn.test(word)));
+//        italianWords.forEach(word -> assertTrue(isEntryIn.test(word)));
+//    }
 }
