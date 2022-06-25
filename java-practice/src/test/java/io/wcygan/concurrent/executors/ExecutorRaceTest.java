@@ -33,8 +33,8 @@ public class ExecutorRaceTest {
 
         // Run waiting tasks on both executors
         for (int i = 0; i < count; i++) {
-            multiThreadedExecutor.execute(wait(sleepTime));
-            singleThreadedExecutor.execute(wait(sleepTime));
+            multiThreadedExecutor.execute(wait(sleepTime, latch));
+            singleThreadedExecutor.execute(wait(sleepTime, latch));
         }
 
         // Use compareAndExchange to determine the winner
@@ -58,7 +58,14 @@ public class ExecutorRaceTest {
      * @param ms the amount of milliseconds to wait
      * @return a runnable that waits
      */
-    static Runnable wait(int ms) {
-        return () -> Waiter.sleepMs(ms);
+    static Runnable wait(int ms, CountDownLatch latch) {
+        return () -> {
+            try {
+                latch.await();
+                Waiter.sleepMs(ms);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 }
