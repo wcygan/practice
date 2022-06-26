@@ -17,7 +17,7 @@ public class SingleThreadedExecutorTest {
 
         Executor e = SingleThreadedExecutor.create();
 
-        e.execute(() -> {
+        e.submit(() -> {
             Waiter.sleepMs(50);
             flag.set(true);
         });
@@ -38,7 +38,7 @@ public class SingleThreadedExecutorTest {
 
         for (int i = 0; i < max; i++) {
             int index = i;
-            e.execute(() -> {
+            e.submit(() -> {
                 Waiter.sleepMs(25);
                 values.get(index).set(true);
             });

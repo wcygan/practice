@@ -5,9 +5,9 @@ public interface Executor {
     /**
      * Submit a new task to the executor
      *
-     * @param runnable the task to execute
+     * @param work the work to be done
      */
-    void execute(Runnable runnable);
+    void submit(Runnable work);
 
     /**
      * Stop accepting new work. Wait until all remaining tasks are finished.

@@ -11,12 +11,12 @@ public class SingleThreadedExecutor implements Executor {
     };
     BlockingQueue<Runnable> work;
     private final AtomicBoolean acceptingNewWork;
-    private final Thread worker;
+    private final Worker worker;
 
     private SingleThreadedExecutor(BlockingQueue<Runnable> work) {
         this.work = work;
         this.acceptingNewWork = new AtomicBoolean(true);
-        this.worker = new Thread(singleThreadedWorker());
+        this.worker = new Worker();
         this.worker.start();
     }
 
@@ -25,9 +25,9 @@ public class SingleThreadedExecutor implements Executor {
     }
 
     @Override
-    public void execute(Runnable runnable) {
+    public void submit(Runnable work) {
         if (acceptingNewWork.get()) {
-            work.add(runnable);
+            this.work.add(work);
         }
     }
 
@@ -42,12 +42,17 @@ public class SingleThreadedExecutor implements Executor {
         }
     }
 
-    Runnable singleThreadedWorker() {
-        return () -> {
+    class Worker extends Thread {
+
+        @Override
+        public void run() {
+            super.run();
+
             while (true) {
                 try {
                     Runnable runnable = work.take();
                     if (runnable == POISON) {
+                        work.put(POISON);
                         break;
                     }
 
@@ -56,6 +61,6 @@ public class SingleThreadedExecutor implements Executor {
                     throw new RuntimeException(e);
                 }
             }
-        };
+        }
     }
 }

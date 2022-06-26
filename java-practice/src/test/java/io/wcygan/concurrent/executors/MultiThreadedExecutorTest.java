@@ -16,7 +16,7 @@ public class MultiThreadedExecutorTest {
         MultiThreadedExecutor executor = MultiThreadedExecutor.create(12);
 
         for (int i = 0; i < count; i++) {
-            executor.execute(() -> {
+            executor.submit(() -> {
                 Waiter.sleepMs(5);
                 counter.incrementAndGet();
             });

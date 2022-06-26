@@ -56,13 +56,13 @@ public class MultiThreadedExecutor implements Executor {
     /**
      * Submit work
      *
-     * @param runnable the task to execute
+     * @param work the task to execute
      */
     @Override
-    public void execute(Runnable runnable) {
+    public void submit(Runnable work) {
         if (acceptingNewWork.get()) {
             try {
-                work.put(runnable);
+                this.work.put(work);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -33,13 +33,13 @@ public class ExecutorRaceTest {
 
         // Run waiting tasks on both executors
         for (int i = 0; i < count; i++) {
-            multiThreadedExecutor.execute(wait(sleepTime, latch));
-            singleThreadedExecutor.execute(wait(sleepTime, latch));
+            multiThreadedExecutor.submit(wait(sleepTime, latch));
+            singleThreadedExecutor.submit(wait(sleepTime, latch));
         }
 
         // Use compareAndExchange to determine the winner
-        multiThreadedExecutor.execute(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.MULTI_THREADED));
-        singleThreadedExecutor.execute(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.SINGLE_THREADED));
+        multiThreadedExecutor.submit(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.MULTI_THREADED));
+        singleThreadedExecutor.submit(() -> winner.compareAndExchange(ExecutorType.NONE, ExecutorType.SINGLE_THREADED));
 
         // Start the race
         latch.countDown();
