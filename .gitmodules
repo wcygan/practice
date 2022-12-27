@@ -1,0 +1,12 @@
+[submodule "lib-wc"]
+	path = lib-wc
+	url = git@github.com:wcygan/lib-wc.git
+[submodule "scala-practice"]
+	path = scala-practice
+	url = git@github.com:wcygan/scala-practice.git
+[submodule "java-practice"]
+	path = java-practice
+	url = git@github.com:wcygan/java-practice.git
+[submodule "go-practice"]
+	path = go-practice
+	url = git@github.com:wcygan/go-practice.git
