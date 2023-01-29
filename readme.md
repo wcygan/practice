@@ -18,7 +18,6 @@
 
 # Repositories
 
-[(Back to top)](#)
 
 Writing and running code is a great way to learn about a language or topic. Below are some projects that I've created to learn about various things.
 
@@ -41,8 +40,6 @@ I typically setup a project as a git repository that is hosted on GitHub. I like
 [scala-practice](https://github.com/wcygan/scala-practice)
 
 # References
-
-[(Back to top)](#)
 
 Here are books that I've found useful. I've read through most of them & highlight the ones which have been most impactful to me.
 
@@ -91,8 +88,6 @@ I recommend [teachyourselfcs.com](https://teachyourselfcs.com/) if you are strug
 
 
 # Community
-
-[(Back to top)](#)
 
 Learning from others is a good strategy! Here are resources from people in various communities that I look at every now and then
 
