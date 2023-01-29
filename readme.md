@@ -1,6 +1,6 @@
 # Practice
 
- How I am learning about [Rust](https://www.rust-lang.org/), [Go](https://go.dev/), [Java](https://www.oracle.com/java/technologies/)
+ How I am learning about [Rust](https://www.rust-lang.org/), [Go](https://go.dev/), [Java](https://dev.java/)
 , and [Scala](https://www.scala-lang.org/) (and other things)
 
 <p float="left">
