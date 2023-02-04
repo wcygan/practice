@@ -15,6 +15,7 @@
 - **[Repositories](#repositories)**<br>
 - **[References](#references)**<br>
 - **[Community](#community)**<br>
+- **[Miscellaneous](#miscellaneous)**<br>
 
 # Repositories
 
@@ -44,6 +45,8 @@ I typically setup a project as a git repository that is hosted on GitHub. I like
 Here are books that I've found useful. I've read through most of them & highlight the ones which have been most impactful to me.
 
 I recommend [teachyourselfcs.com](https://teachyourselfcs.com/) if you are struggling to find a way to learn a certain topic in Computer Science.
+
+[O'Reilly](https://www.oreilly.com/) and [Manning](https://www.manning.com/) are great resources to find books and projects!
 
 ### General
 
@@ -96,3 +99,22 @@ Learning from others is a good strategy! Here are resources from people in vario
 - [Jon Gjengset](https://www.youtube.com/@JonGjengset?themeRefresh=1)
 - [matklad](https://matklad.github.io/)
 - [fasterthanlime](https://fasterthanli.me/)
+
+# Miscellaneous
+
+## Obsidian
+
+[Obsidian](https://obsidian.md/) acts as a powerful note taking app. It markets itself as:
+
+>a powerful and extensible knowledge base
+that works on top of your local folder of plain text files
+
+I'd have to agree with that; it's pretty freaking good...
+
+I use it as my own personal wiki & write notes on topics that I'm interested in.
+
+You can see how other people set their vaults up by looking at ["Digital Gardens"](https://github.com/MaggieAppleton/digital-gardeners).
+
+### Obsidian + Git
+
+Since Obsidian uses plain text files in a folder, you can naturally model your vault as a git repository. This allows you to treat your notes similar to code.
