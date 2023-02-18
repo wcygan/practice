@@ -26,7 +26,11 @@ I typically setup a project as a git repository that is hosted on GitHub. I like
 
 
 ## Rust
-[lib-wc](https://github.com/wcygan/lib-wc)
+[lib-wc](https://github.com/wcygan/lib-wc) 
+
+I put random crap in here [when I am trying to learn Rust](https://www.wcygan.io/post/learning-rust-in-2023/).
+
+> [view the lib-wc crate on docs.rs](https://docs.rs/lib-wc)
 
 ## Go
 
@@ -35,6 +39,8 @@ I typically setup a project as a git repository that is hosted on GitHub. I like
 ## Java
 
 [java-practice](https://github.com/wcygan/java-practice)
+
+Before I got into Rust, I liked Java for a little bit. This repository contains some remnants of that.
 
 ## Scala
 
