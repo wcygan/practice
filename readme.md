@@ -26,11 +26,28 @@ I typically setup a project as a git repository that is hosted on GitHub. I like
 
 
 ## Rust
-[lib-wc](https://github.com/wcygan/lib-wc) 
+ 
+[I am trying to learn Rust](https://www.wcygan.io/post/learning-rust-in-2023/) better.
+Here are some projects that I've created to learn about Rust:
 
-I put random crap in here [when I am trying to learn Rust](https://www.wcygan.io/post/learning-rust-in-2023/).
+### Network Programming
+- [Crawler](https://github.com/wcygan/crawler) - Web Crawler
+- [Chat](https://github.com/wcygan/chat) - TCP Chat Server
+- [Yeet](https://github.com/wcygan/yeet) - UDP Chat Server
+- [Dns](https://github.com/wcygan/dns) - DNS Server
+- [Load-Generator](https://github.com/wcygan/load-generator) - Load Generator for Load Testing
 
-> [view the lib-wc crate on docs.rs](https://docs.rs/lib-wc)
+### Asynchronous Programming
+
+- [Tokio-Utils](https://github.com/wcygan/tokio-utils) - Utilities for Tokio
+  - [Tub](https://github.com/wcygan/tub) - async pool
+  - [Shutdown-Async](https://github.com/wcygan/shutdown-async) - gracefully shutdown async tasks
+  - [Async-Throttle](https://github.com/wcygan/async-throttle) - async rate limiting
+  - [Async-Stdin](https://github.com/wcygan/async-stdin) - read from stdin asynchronously
+  
+### Miscellaneous
+
+- [lib-wc](https://github.com/wcygan/lib-wc) - playground for learning Rust
 
 ## Go
 
